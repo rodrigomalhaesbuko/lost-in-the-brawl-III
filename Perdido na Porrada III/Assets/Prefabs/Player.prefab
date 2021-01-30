@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1653952333227796215}
   - component: {fileID: 1653952333227796202}
   - component: {fileID: 7541045423988743094}
+  - component: {fileID: -4397341728968391736}
   - component: {fileID: 1115800696631731125}
   m_Layer: 0
   m_Name: Player
@@ -149,6 +150,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   rb: {fileID: 1653952333227796215}
+--- !u!114 &-4397341728968391736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653952333227796214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6602b8e91104609b44776ff3ad26e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localHealth: 5
+  hostSlider: {fileID: 0}
+  clientSlider: {fileID: 0}
+  currentSlider: {fileID: 0}
 --- !u!58 &1115800696631731125
 CircleCollider2D:
   m_ObjectHideFlags: 0

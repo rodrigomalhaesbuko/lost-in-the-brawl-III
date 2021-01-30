@@ -5,8 +5,39 @@ ScriptsOnlyBuild:
     - MenuController
     - MultiScenePlayerController
     - PlayerController
+    - PlayerStatus
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
+    - UnityEditor.U2D.Animation.BoneReparentTool
+    - UnityEditor.U2D.Animation.CharacterCache
+    - UnityEditor.U2D.Animation.CharacterPartCache
+    - UnityEditor.U2D.Animation.CopyTool
+    - UnityEditor.U2D.Animation.GenerateGeometryTool
+    - UnityEditor.U2D.Animation.GenerateWeightsTool
+    - UnityEditor.U2D.Animation.MeshCache
+    - UnityEditor.U2D.Animation.MeshPreviewCache
+    - UnityEditor.U2D.Animation.MeshPreviewTool
+    - UnityEditor.U2D.Animation.MeshTool
+    - UnityEditor.U2D.Animation.MeshToolWrapper
+    - UnityEditor.U2D.Animation.SelectionTool
+    - UnityEditor.U2D.Animation.SkeletonCache
+    - UnityEditor.U2D.Animation.SkeletonTool
+    - UnityEditor.U2D.Animation.SkeletonToolWrapper
+    - UnityEditor.U2D.Animation.SkinningCache
+    - UnityEditor.U2D.Animation.SkinningCachePersistentState
+    - UnityEditor.U2D.Animation.SpriteBoneInfluenceTool
+    - UnityEditor.U2D.Animation.SpriteCache
+    - UnityEditor.U2D.Animation.SwitchModeTool
+    - UnityEditor.U2D.Animation.VisibilityTool
+    - UnityEditor.U2D.Animation.WeightPainterTool
+    - UnityEditor.U2D.Animation.WeightPainterToolWrapper
+    Unity.2D.IK.Editor.dll:
+    - UnityEditor.Experimental.U2D.IK.IKEditorManager
+    - UnityEditor.Experimental.U2D.IK.IKGizmos
+    Unity.2D.IK.Runtime.dll:
+    - UnityEditor.Experimental.U2D.IK.IKEditorManagerHelper
+    Unity.2D.Sprite.Editor.dll:
+    - UnityEditor.U2D.Sprites.SpriteEditorWindow
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -27,6 +58,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     bolt.dll:
     - Bolt.PrefabDatabase
@@ -55,12 +87,32 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 11278}
+    - Class: 114
+      Script: {instanceID: 11596}
+    - Class: 114
+      Script: {instanceID: 11654}
+    - Class: 114
+      Script: {instanceID: 12362}
+    - Class: 114
       Script: {instanceID: 12678}
+    - Class: 114
+      Script: {instanceID: 13100}
     - Class: 114
       Script: {instanceID: 13686}
     - Class: 114
+      Script: {instanceID: 13904}
+    - Class: 114
+      Script: {instanceID: 14556}
+    - Class: 114
+      Script: {instanceID: 14600}
+    - Class: 114
       Script: {instanceID: 15320}
+    - Class: 114
+      Script: {instanceID: 70408}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -69,6 +121,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/Scenes/SampleScene.unity:
     - Class: 1
@@ -131,6 +189,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 15356}
     - Class: 114
       Script: {instanceID: 16968}
+    - Class: 114
+      Script: {instanceID: 70408}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -516,7 +576,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: d1f07c9e64b7817e6271f80bb03de25f
+      Hash: 742e94e7669a0248328f34a3cd24151c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameController
@@ -576,7 +636,7 @@ ScriptsOnlyBuild:
     className: TMP_ColorGradient
   - hash:
       serializedVersion: 2
-      Hash: 895c4507182f1cff281ede60c3aaf054
+      Hash: 3c49957944bbd070b1d6a141379e2e70
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuController
@@ -904,6 +964,42 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: Bolt.Samples.Photon.Simple
     className: PhotonServerCallbacks
+  - hash:
+      serializedVersion: 2
+      Hash: 9b2d72155209a515197b0788f9f11a91
+    assemblyName: Unity.2D.IK.Runtime.dll
+    namespaceName: UnityEngine.Experimental.U2D.IK
+    className: LimbSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: cfdd0010efd7b54c2b7512656dbc9119
+    assemblyName: Unity.2D.IK.Runtime.dll
+    namespaceName: UnityEngine.Experimental.U2D.IK
+    className: IKManager2D
+  - hash:
+      serializedVersion: 2
+      Hash: 762a30c8d779b11af16ed9ce1f2d32fa
+    assemblyName: Unity.2D.IK.Runtime.dll
+    namespaceName: UnityEngine.Experimental.U2D.IK
+    className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 95dbd4935e7a36e14acf636e5126726a
+    assemblyName: Unity.2D.IK.Runtime.dll
+    namespaceName: UnityEditor.Experimental.U2D.IK
+    className: IKEditorManagerHelper
+  - hash:
+      serializedVersion: 2
+      Hash: 59ce5902048c1041729c804e2772b2ce
+    assemblyName: Unity.2D.IK.Runtime.dll
+    namespaceName: UnityEngine.Experimental.U2D.IK
+    className: CCDSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 403496792db3485f34b36986c5fb8343
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerStatus
   platform: 2
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
