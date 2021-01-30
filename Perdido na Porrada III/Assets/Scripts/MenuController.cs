@@ -68,6 +68,7 @@ public class MenuController: GlobalEventListener
     {
         BoltLauncher.StartClient();
         Debug.Log(JoinGameInput.text);
+        StartCoroutine(CannotConectWithHost());
     }
 
     public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
@@ -86,15 +87,13 @@ public class MenuController: GlobalEventListener
               
             }
         }
-        StartCoroutine(CannotConectWithHost());
-
 
     }
 
     IEnumerator CannotConectWithHost()
     {
 
-        yield return new WaitForSecondsRealtime(20.0f);
+        yield return new WaitForSecondsRealtime(40.0f);
         if (!foundHost)
         {
             //mostrar que não achou a sala com o nome

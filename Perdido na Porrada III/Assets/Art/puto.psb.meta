@@ -1,0 +1,379 @@
+fileFormatVersion: 2
+guid: f3eaed4e6740d446db7ac79ef7638da4
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: "antebra\xE7o e"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 706
+      y: 4
+      width: 297
+      height: 265
+    spriteID: 2896c5b8290c94d27afbc27ef5492273
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 611, y: -245}
+  - name: "bra\xE7o e"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 409
+      y: 4
+      width: 289
+      height: 425
+    spriteID: 8dabeb3308c1a4f778c7397dce2dc6c6
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 304, y: -248}
+  - name: perna e
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 496
+      y: 564
+      width: 131
+      height: 151
+    spriteID: 6e530bdc6a6e74275be9a320c51cd0f3
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 141, y: 436}
+  - name: coxa e
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 498
+      y: 437
+      width: 87
+      height: 73
+    spriteID: cd2729b46ec09455eb798f8518d4964c
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 149, y: 176}
+  - name: corpo
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 397
+      height: 552
+    spriteID: 7297335c598bf4a0b95d5a1bee108b1c
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -215, y: -300}
+  - name: "antebra\xE7o d"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 706
+      y: 277
+      width: 296
+      height: 228
+    spriteID: f5a5aa156b8364e3f9707109a3a0df1e
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 85, y: -121}
+  - name: "bra\xE7o d"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 564
+      width: 346
+      height: 250
+    spriteID: b99eaca1a013a4d2fa9422afce388273
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -496, y: 152}
+  - name: coxa d
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 409
+      y: 437
+      width: 81
+      height: 99
+    spriteID: a0d8b5b0004c2453bb5b67c0c4a85467
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -51, y: 200}
+  - name: perna d
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 358
+      y: 564
+      width: 130
+      height: 188
+    spriteID: 16ca2768a1e3e43b680c973e7345173f
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -99, y: 418}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 1024
+  documentSize: {x: 1000, y: 1000}
+  paperDollMode: 0
+  keepDupilcateSpriteName: 0
+  spriteCategoryList:
+    categories: []
+  textureActualWidth: 1024
+  textureActualHeight: 1024
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: "antebra\xE7o e"
+    spriteName: "antebra\xE7o e"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2896c5b8290c94d27afbc27ef5492273
+    layerID: 42
+    mosaicPosition: {x: 706, y: 4}
+  - name: "bra\xE7o e"
+    spriteName: "bra\xE7o e"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8dabeb3308c1a4f778c7397dce2dc6c6
+    layerID: 17
+    mosaicPosition: {x: 409, y: 4}
+  - name: perna e
+    spriteName: perna e
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6e530bdc6a6e74275be9a320c51cd0f3
+    layerID: 45
+    mosaicPosition: {x: 496, y: 564}
+  - name: coxa e
+    spriteName: coxa e
+    isGroup: 0
+    parentIndex: -1
+    spriteID: cd2729b46ec09455eb798f8518d4964c
+    layerID: 34
+    mosaicPosition: {x: 498, y: 437}
+  - name: corpo
+    spriteName: corpo
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7297335c598bf4a0b95d5a1bee108b1c
+    layerID: 33
+    mosaicPosition: {x: 4, y: 4}
+  - name: "antebra\xE7o d"
+    spriteName: "antebra\xE7o d"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f5a5aa156b8364e3f9707109a3a0df1e
+    layerID: 54
+    mosaicPosition: {x: 706, y: 277}
+  - name: "bra\xE7o d"
+    spriteName: "bra\xE7o d"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b99eaca1a013a4d2fa9422afce388273
+    layerID: 24
+    mosaicPosition: {x: 4, y: 564}
+  - name: coxa d
+    spriteName: coxa d
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a0d8b5b0004c2453bb5b67c0c4a85467
+    layerID: 49
+    mosaicPosition: {x: 409, y: 437}
+  - name: perna d
+    spriteName: perna d
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 16ca2768a1e3e43b680c973e7345173f
+    layerID: 38
+    mosaicPosition: {x: 358, y: 564}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+  generateGOHierarchy: 0
+  textureAssetName: puto Texture
+  prefabAssetName: puto Prefab
+  spriteLibAssetName: puto Sprite Lib
+  secondarySpriteTextures: []
