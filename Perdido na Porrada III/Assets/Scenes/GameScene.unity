@@ -150,10 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21d9d4b52737468880907f8ea7bcefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 8570831119370104737, guid: c13b139d7ffb248f1b05d4644fd5a52e,
+  playerPrefab: {fileID: 1653952333227796214, guid: 93c4b6680f8c949f280ba1c0ae9a4938,
     type: 3}
-  GameCanvas: {fileID: 0}
-  SceneCamera: {fileID: 1846920735}
 --- !u!4 &1740422666
 Transform:
   m_ObjectHideFlags: 0
