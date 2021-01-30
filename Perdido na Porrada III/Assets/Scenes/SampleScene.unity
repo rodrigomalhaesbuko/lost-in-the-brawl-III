@@ -603,8 +603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b0a27e7ab9c44d6b14939d962c806b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  versionName: 0.1
-  conectPanel: {fileID: 0}
   CreateGameInput: {fileID: 1124712562}
   JoinGameInput: {fileID: 249684550}
 --- !u!4 &739893443

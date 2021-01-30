@@ -11,8 +11,8 @@ public class MenuController: GlobalEventListener
 {
     //    [SerializeField] private string versionName = "0.1";
     //    [SerializeField] private GameObject conectPanel;
-    //    [SerializeField] private InputField CreateGameInput;
-    //    [SerializeField] private InputField JoinGameInput;
+    [SerializeField] private InputField CreateGameInput;
+    [SerializeField] private InputField JoinGameInput;
 
     //    private void Awake()
     //    {
