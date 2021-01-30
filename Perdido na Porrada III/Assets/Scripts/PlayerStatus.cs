@@ -12,6 +12,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject GameController;
 
     public GameObject currentSlider;
+
     // void Start
     public override void Attached()
     {

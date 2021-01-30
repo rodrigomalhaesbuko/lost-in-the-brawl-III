@@ -8,22 +8,23 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public float speed = 10.0f;
     public Rigidbody2D rb;
+
     //void start para o bolt
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, gameObject.transform);
     }
+
     // update para o bolt 
     public override void SimulateOwner()
     {
         CheckInputs();
     }
+
     //    // Start is called before the first frame update
     //    public PhotonView photonView;
     //    public Rigidbody2D rb;
     //    public GameObject PlayerCamera;
-
-
 
     //    private void Awake()
     //    {
@@ -33,7 +34,6 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     //            PlayerCamera.SetActive(true);
     //        }
     //    }
-
 
     private void CheckInputs()
     {
