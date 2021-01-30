@@ -71,10 +71,10 @@ MonoBehaviour:
     y: 0
     width: 811
     height: 470
-  m_MinSize: {x: 362, y: 342}
+  m_MinSize: {x: 202, y: 342}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 66
+  controlID: 69
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -122,10 +122,10 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 741
-  m_MinSize: {x: 941, y: 613}
+  m_MinSize: {x: 781, y: 613}
   m_MaxSize: {x: 16006, y: 18063}
   vertical: 0
-  controlID: 63
+  controlID: 66
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SpriteEditorWindow
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -145,14 +145,14 @@ MonoBehaviour:
     y: 0
     width: 811
     height: 348
-  m_MinSize: {x: 362, y: 221}
+  m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 15}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
   - {fileID: 15}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -241,10 +241,10 @@ MonoBehaviour:
     y: 0
     width: 1242
     height: 741
-  m_MinSize: {x: 665, y: 613}
+  m_MinSize: {x: 505, y: 613}
   m_MaxSize: {x: 12005, y: 18063}
   vertical: 1
-  controlID: 64
+  controlID: 67
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -267,10 +267,10 @@ MonoBehaviour:
     y: 0
     width: 1242
     height: 470
-  m_MinSize: {x: 665, y: 342}
+  m_MinSize: {x: 505, y: 342}
   m_MaxSize: {x: 12005, y: 8042}
   vertical: 0
-  controlID: 65
+  controlID: 68
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -375,8 +375,8 @@ MonoBehaviour:
     height: 327
   m_ViewDataDictionary: {fileID: 0}
   m_ResetOnNextRepaint: 0
-  m_SelectedAssetPath: Assets/Art/carlous.psb
-  m_SelectedSpriteRectGUID: 2495edebcb5b51246bf4abf534eb069f
+  m_SelectedAssetPath: Assets/Art/douglas.psb
+  m_SelectedSpriteRectGUID: c0cb472b43e34294595d783371ba1fe9
   m_LastUsedModuleTypeName: UnityEditor.U2D.Animation.SkinningModule
 --- !u!114 &16
 MonoBehaviour:
@@ -432,10 +432,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 60}
+      scrollPos: {x: 0, y: 32}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: e6d7ffffe8d7ffffead7ffffecd7ffffeed7fffff0d7fffff2d7fffff6d7fffff8d7fffffad7ffff64d8ffff5cfbffff343b0000
+      m_ExpandedIDs: d0faffffd2faffffd6fafffff0fafffff4faffff4afbffff4cfbffff54fbffff58fbffff5cfbffff343b0000c43b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -495,9 +495,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 6.4606495, y: 3.9730873, z: -14.442383}
+    m_Target: {x: 3.4175634, y: 1.948484, z: -18.756811}
     speed: 2
-    m_Value: {x: 6.4606495, y: 3.9730873, z: -14.442383}
+    m_Value: {x: 3.2555852, y: 1.8699801, z: -18.738579}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -547,9 +547,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 2.3054686
+    m_Target: 4.2334285
     speed: 2
-    m_Value: 2.4141033
+    m_Value: 4.051128
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -717,9 +717,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 24}
-    m_SelectedIDs: 9e3d0000
-    m_LastClickedID: 15774
-    m_ExpandedIDs: 000000008e3d0000903d0000923d0000943d0000963d000000ca9a3b
+    m_SelectedIDs: 9c3e0000
+    m_LastClickedID: 16028
+    m_ExpandedIDs: 00000000763e0000783e00007a3e00007c3e00007e3e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -747,7 +747,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008e3d0000903d0000923d0000943d0000963d0000
+    m_ExpandedIDs: 00000000763e0000783e00007a3e00007c3e00007e3e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
