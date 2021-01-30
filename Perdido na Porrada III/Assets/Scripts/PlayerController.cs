@@ -1,0 +1,37 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : Photon.MonoBehaviour
+{
+    // Start is called before the first frame update
+    public PhotonView photonView;
+    public Rigidbody2D rb;
+    public GameObject PlayerCamera;
+
+    public float speed = 10.0f;
+
+    private void Awake()
+    {
+        if (photonView.isMine)
+        {
+            PlayerCamera.SetActive(true);
+        }
+    }
+
+
+    private void CheckInputs()
+    {
+        Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0);
+        transform.position += move * speed * Time.deltaTime;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (photonView.isMine)
+        {
+            CheckInputs();
+        }
+    }
+}
