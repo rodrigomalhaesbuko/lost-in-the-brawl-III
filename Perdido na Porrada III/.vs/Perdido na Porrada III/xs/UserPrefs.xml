@@ -1,0 +1,23 @@
+﻿<Properties StartupConfiguration="{CF28818D-D1C0-D744-1D18-04396B4B9ECF}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MenuController.cs">
+    <Files>
+      <File FileName="Assets/Scripts/MenuController.cs" Line="49" Column="18" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="39" Column="4" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="7" Column="38" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Perdido na Porrada III" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="296ff7a4-ac06-4b50-8375-ef2e8c033a54" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
