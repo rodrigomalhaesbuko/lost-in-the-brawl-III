@@ -18,19 +18,20 @@ public class MenuController : MonoBehaviour
     void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
+        PhotonNetwork.playerName = "rodrigo";
         Debug.Log("connected");
     }
 
     public void CreateGame()
     {
-        PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() { maxPlayers = 2 }, null);
+        PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() { MaxPlayers = 2 }, null);
         Debug.Log("obaaa");
     }
 
     public void JoinGame()
     {
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.maxPlayers = 2;
+        roomOptions.MaxPlayers = 2;
         PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, roomOptions, TypedLobby.Default);
 
     }

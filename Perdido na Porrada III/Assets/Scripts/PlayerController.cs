@@ -24,7 +24,8 @@ public class PlayerController : Photon.MonoBehaviour
     private void CheckInputs()
     {
         Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0);
-        transform.position += move * speed * Time.deltaTime;
+        //rb.apply move * speed * Time.deltaTim
+        rb.AddForce(move * speed);
     }
 
     // Update is called once per frame
