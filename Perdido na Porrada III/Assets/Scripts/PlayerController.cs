@@ -15,6 +15,7 @@ public class PlayerController : Photon.MonoBehaviour
     {
         if (photonView.isMine)
         {
+            Debug.Log("eu tenho photon view");
             PlayerCamera.SetActive(true);
         }
     }

@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     {
         float randomValue = Random.Range(-1.5f, 1.5f);
         PlayerPrefab.GetComponent<PlayerController>().PlayerCamera = SceneCamera;
-
+        SceneCamera.SetActive(false);
         PhotonNetwork.Instantiate(
             PlayerPrefab.name,
             new Vector2(
@@ -27,7 +27,5 @@ public class GameController : MonoBehaviour
             Quaternion.identity,
             0
         );
-
-        SceneCamera.SetActive(false);
     }
 }
