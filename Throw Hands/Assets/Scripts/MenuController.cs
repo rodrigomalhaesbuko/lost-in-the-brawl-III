@@ -17,46 +17,11 @@ public class MenuController: GlobalEventListener
     [SerializeField] private GameObject AlertBox;
     [SerializeField] private GameObject Disclaimer;
 
-    //    private void Awake()
-    //    {
-    //        PhotonNetwork.ConnectUsingSettings(versionName);
-    //    }
 
-    //    void OnConnectedToMaster()
-    //    {
-    //        PhotonNetwork.JoinLobby(TypedLobby.Default);
-    //        PhotonNetwork.playerName = "rodrigo";
-    //        Debug.Log("connected");
-    //    }
-
-    //    public void CreateGame()
-    //    {
-    //        PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() { MaxPlayers = 2 }, null);
-    //        Debug.Log("obaaa");
-    //    }
-
-    //    public void JoinGame()
-    //    {
-    //        RoomOptions roomOptions = new RoomOptions();
-    //        roomOptions.MaxPlayers = 2;
-    //        PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, roomOptions, TypedLobby.Default);
-
-    //    }
-
-    //    private void OnJoinedRoom()
-    //    {
-    //        PhotonNetwork.LoadLevel("GameScene");
-    //        Debug.Log("mudou de scena");
-    //    }
-    //}
-
-    /// <summary>
-    /// USING BOLT
-    /// </summary>
 
     public void CreateGame()
     {
-        if(CreateGameInput.text.Length > 0)
+        if(JoinGameInput.text.Length > 0)
         {
             BoltLauncher.StartServer();
         }
@@ -68,7 +33,7 @@ public class MenuController: GlobalEventListener
     }
     public override void BoltStartDone()
     {
-        BoltMatchmaking.CreateSession(sessionID: CreateGameInput.text, sceneToLoad: "GameScene");
+        BoltMatchmaking.CreateSession(sessionID: JoinGameInput.text, sceneToLoad: "GameScene");
     }
 
 
@@ -84,6 +49,8 @@ public class MenuController: GlobalEventListener
         {
             OpenAlertBox2();
         }
+
+        Debug.Log("foi");
        
     }
 
@@ -126,7 +93,7 @@ public class MenuController: GlobalEventListener
 
     public void OpenAlertBox()
     {
-        Disclaimer.GetComponent<Text>().text = "NAO FOI POSSIVEL ENCONTRAR A SALA COM O NOME" + JoinGameInput.text;
+        Disclaimer.GetComponent<Text>().text = "NAO FOI POSSIVEL ENCONTRAR A SALA COM O NOME " + JoinGameInput.text;
         AlertBox.SetActive(true);
     }
 

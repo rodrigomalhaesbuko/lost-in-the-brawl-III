@@ -20,16 +20,10 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         state.Health = localHealth;
         state.EnemyHealth = localHealth;
-        state.Color = gameObject.GetComponent<SpriteRenderer>().color;
         state.AddCallback("Health", HealthCallBack);
         state.AddCallback("EnemyHealth", EnemyHealthCallBack);
-        state.AddCallback("Color", DamageCallBack);
     }
 
-    private void DamageCallBack()
-    {
-        gameObject.GetComponent<SpriteRenderer>().color = state.Color;
-    }
 
     private void HealthCallBack()
     {
@@ -44,8 +38,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
         if (localHealth <= 0)
         {
-            //Debug.Log("GameOver Player 1 ganhou");
-            state.Color = Color.red;
+            Debug.Log("GameOver Player 1 ganhou");
             GameController.GetComponent<GameController>().OpenRematchBox();
         }
     }
@@ -63,27 +56,28 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
         if (localHealth <= 0)
         {
-            //Debug.Log("GameOver Player 2 ganhou");
-            state.Color = Color.red;
+            Debug.Log("GameOver Player 2 ganhou");
             GameController.GetComponent<GameController>().OpenRematchBox();
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (BoltNetwork.IsClient)
-            {
-                state.EnemyHealth -= 1;
-                
-            }
-            else
-            {
-                state.Health -= 1;
-            }
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        if (BoltNetwork.IsClient)
+    //        {
+    //            state.EnemyHealth -= 1;
+
+    //        }
+    //        else
+    //        {
+    //            state.Health -= 1;
+    //        }
+
+    //    }
+ 
+
 }
 
 public enum PlayerType { 

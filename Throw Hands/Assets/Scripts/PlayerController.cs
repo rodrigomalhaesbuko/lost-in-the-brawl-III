@@ -13,7 +13,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public float jumpForce;
     public float colliderRaySize;
     public Collider2D groundCollider;
-
+    public GameObject Camera;
     public Animator playerAnimator;
 
     InputMaster controls;
@@ -28,26 +28,76 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     }
 
-    private void Start()
-    {
-        playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
-    }
     //void start para o bolt
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, gameObject.transform);
+        state.SetTransforms(state.CameraTransform, Camera.transform);
+        playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
         groundCollider = GameObject.FindGameObjectWithTag("ground").GetComponent<Collider2D>();
+        Camera.GetComponent<CameraHandler>().clientPositionX = gameObject;
+        state.SetAnimator(playerAnimator);
     }
 
     // update para o bolt 
     public override void SimulateOwner()
     {
         CheckInputs();
+
+        if (Camera.transform.position.x > 21.0f || Camera.transform.position.x < -5.5f)
+        {
+            Vector3 position = new Vector3((Camera.transform.position.x), Camera.transform.position.y, Camera.transform.position.z);
+            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
+        }
+        else if (Camera.transform.position.x - Mathf.Abs(transform.position.x) > 10f || Camera.transform.position.x - Mathf.Abs(transform.position.x) < -10f)
+        {
+            Vector3 position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z);
+            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
+        }
+        else
+        {
+            Vector3 position = new Vector3((Camera.transform.position.x + transform.position.x) / 2.0f, Camera.transform.position.y, Camera.transform.position.z);
+            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
+        }
     }
 
     public void Update()
     {
-        //Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
+        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
+        if (state.MoveX == 0.0f)
+        {
+            state.Animator.SetBool("IsWalking", false);
+            Debug.Log("Ta andando");
+        }
+        else
+        {
+            state.Animator.SetBool("IsWalking", true);
+            Debug.Log("Nao Ta andando");
+        }
+
+
+        if (state.MoveY > 0.5f)
+        {
+            if (IsGrounded()) {
+                state.Animator.SetBool("IsJump", true);
+                Jump();
+            }
+        }
+        else
+        {
+            state.Animator.SetBool("IsJump", false);
+        }
+
+        if (state.MoveY < -0.5f)
+        {
+            state.Animator.SetBool("IsDuck", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("IsDuck", false);
+        }
+        
+
     }
 
     //    // Start is called before the first frame update
@@ -71,24 +121,13 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         ////rb.apply move * speed * Time.deltaTim
         //transform.position += move * speed * BoltNetwork.FrameDeltaTime;
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
-        //Debug.Log(move);
-        if(move != Vector2.zero)
-        {
-            playerAnimator.SetBool("IsWalking", true);
-            //Debug.Log("Ta andando");
-        }
-        else
-        {
-            playerAnimator.SetBool("IsWalking", false);
-            //Debug.Log("Nao Ta andando");
-        }
+        state.MoveX = move.x;
+        state.MoveY = move.y;
+        Debug.Log(move);
+
+        //Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
 
         transform.Translate(m, Space.World);
-
-        if(Input.GetKey(KeyCode.Space) && IsGrounded()) 
-        {
-            Jump();
-        }
     }
 
     private void Jump()

@@ -14,7 +14,7 @@ public class GameController : GlobalEventListener
     public GameObject hostSlider;
     public GameObject clientSlider;
     public GameObject RematchBox;
-    
+    public GameObject Camera;
 
     public float battleOffset = 5f;
     [System.Obsolete]
@@ -23,6 +23,7 @@ public class GameController : GlobalEventListener
         playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSlider;
         playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSlider;
         playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
+        playerPrefab.GetComponent<PlayerController>().Camera = Camera;
         if (!BoltNetwork.IsClient)
         {
             battleOffset *= -1;
