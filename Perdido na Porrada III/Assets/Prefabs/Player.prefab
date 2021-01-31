@@ -165,6 +165,7 @@ MonoBehaviour:
   localHealth: 5
   hostSlider: {fileID: 0}
   clientSlider: {fileID: 0}
+  GameController: {fileID: 0}
   currentSlider: {fileID: 0}
 --- !u!58 &1115800696631731125
 CircleCollider2D:

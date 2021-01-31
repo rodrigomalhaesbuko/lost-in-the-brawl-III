@@ -57,7 +57,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     private void CheckInputs()
     {
         //Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0);
-        //rb.apply move * speed * Time.deltaTim
+        ////rb.apply move * speed * Time.deltaTim
         //transform.position += move * speed * BoltNetwork.FrameDeltaTime;
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
         transform.Translate(m, Space.World);
