@@ -10,11 +10,13 @@ public class setaController : MonoBehaviour
     InputMaster controls;
     int pos = 0;
 
-    float posx = -620f;
+    float posx = -790f;
     float posy = 80f;
 
     int dir = 1;
 
+    const int dist = 50;
+    float vel = dist * 1.5f;
 
     void Awake()
     {
@@ -54,37 +56,41 @@ public class setaController : MonoBehaviour
         if(pos == 1)
         {
             //config
+            SceneManager.LoadScene("config");
         }
 
         if(pos == 2)
         {
             //credits
+            SceneManager.LoadScene("credits");
         }
 
         if(pos == 3)
         {
             //quit
             Application.Quit();
-            Debug.Log("bla");
+            
 
         }
+        Debug.Log("bla");
+
     }
 
     public void Update()
     {
         gameObject.GetComponent<RectTransform>().localPosition = new Vector3(posx, posy, 0);
 
-        if(posx < -700)
+        if(posx < -850)
         {
             dir = 1;
         }
 
-        if(posx > -600)
+        if(posx > -800)
         {
             dir = -1;
         }
 
-        posx += dir * 1.5f;
+        posx += dir * Time.deltaTime * vel;
     }
 
     private void OnEnable()

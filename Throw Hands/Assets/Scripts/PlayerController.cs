@@ -57,24 +57,24 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         }
 
 
-            if (state.MoveY > 0.5f)
-            {
-                state.Animator.SetBool("IsJump", true);
-                Jump();
-            }
-            else
-            {
-                state.Animator.SetBool("IsJump", false);
-            }
+        if (state.MoveY > 0.5f)
+        {
+            state.Animator.SetBool("IsJump", true);
+            Jump();
+        }
+        else
+        {
+            state.Animator.SetBool("IsJump", false);
+        }
 
-            if (state.MoveY < -0.5f)
-            {
-                state.Animator.SetBool("IsDuck", true);
-            }
-            else
-            {
-                playerAnimator.SetBool("IsDuck", false);
-            }
+        if (state.MoveY < -0.5f)
+        {
+            state.Animator.SetBool("IsDuck", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("IsDuck", false);
+        }
         
 
     }
