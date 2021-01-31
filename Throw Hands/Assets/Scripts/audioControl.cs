@@ -14,7 +14,7 @@ public class audioControl : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         play = true;
-        audioSource.volume = 0.1f;
+        audioSource.volume = PlayerPrefs.GetFloat("volume");
         audioSource.Play();
     }
 
