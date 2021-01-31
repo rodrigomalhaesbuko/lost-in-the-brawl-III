@@ -6,10 +6,10 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
 {
     public bool hasLeftArm = true;
     public bool hasRightArm = true;
-    public Collider2D limbCollider;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        Debug.Log("NOIA");
         if (Input.GetKey(KeyCode.DownArrow))
         {
             if (entity.IsOwner)
@@ -28,7 +28,6 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
                     gameObject.GetComponent<LimbShooter>().rightForearmSprite.SetActive(true);
                 }
             }
-           
 
             BoltNetwork.Destroy(collision.gameObject);
         }

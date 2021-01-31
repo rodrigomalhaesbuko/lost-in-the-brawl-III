@@ -77,7 +77,7 @@ public class MenuController: GlobalEventListener
         if (JoinGameInput.text.Length > 0)
         {
             BoltLauncher.StartClient();
-            Debug.Log(JoinGameInput.text);
+            //Debug.Log(JoinGameInput.text);
             StartCoroutine(CannotConectWithHost());
         }
         else
@@ -112,7 +112,7 @@ public class MenuController: GlobalEventListener
         if (!foundHost)
         {
             //mostrar que não achou a sala com o nome
-            Debug.Log("NAO ACHOU A SALA COM O NOME" + " " + JoinGameInput.text);
+            //Debug.Log("NAO ACHOU A SALA COM O NOME" + " " + JoinGameInput.text);
             BoltLauncher.Shutdown();
             OpenAlertBox();
         }

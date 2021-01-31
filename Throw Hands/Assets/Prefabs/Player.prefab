@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneGuid: 
   _serializerGuid: 113b8d34-0ca2-48e2-b98e-9f70484068f2
-  _prefabId: 1
+  _prefabId: 6
   _updateRate: 1
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
@@ -358,6 +358,7 @@ MonoBehaviour:
   clientSlider: {fileID: 0}
   GameController: {fileID: 0}
   currentSlider: {fileID: 0}
+  playerType: 1
 --- !u!114 &2334636835849245404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +395,16 @@ MonoBehaviour:
   rightArmSprite: {fileID: 7277522224553671925}
   rightForearmSprite: {fileID: 8218863710552944561}
   limbCollectior: {fileID: 2334636835849245404}
+  carlousRightArm: {fileID: 364566321606910961, guid: 345b2af7b4e2f8d4fb108b5556977db6,
+    type: 3}
+  carlousLeftArm: {fileID: 3030708429721571656, guid: b3419a81313e5f6419dff6b4d9618c8a,
+    type: 3}
+  douglasRightArm: {fileID: 482591445015878545, guid: e89ea827790443e40a01aff2680a754a,
+    type: 3}
+  douglasLeftArm: {fileID: 1595820471432824447, guid: 0574d24f99e2fae44a7cdd83ff0bf3bb,
+    type: 3}
+  playerAnimator: {fileID: 0}
+  animationTime: 0.5
 --- !u!61 &3360263465496857667
 BoxCollider2D:
   m_ObjectHideFlags: 0

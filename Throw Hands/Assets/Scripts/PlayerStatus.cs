@@ -13,6 +13,8 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public GameObject currentSlider;
 
+    public PlayerType playerType;
+
     // void Start
     public override void Attached()
     {
@@ -33,16 +35,16 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         localHealth = state.Health;
 
-        Debug.Log("host");
-        Debug.Log(state.Health);
-        Debug.Log("Client");
-        Debug.Log(state.EnemyHealth);
+        //Debug.Log("host");
+        //Debug.Log(state.Health);
+        //Debug.Log("Client");
+        //Debug.Log(state.EnemyHealth);
 
         hostSlider.GetComponent<Slider>().value = 0.20f * state.Health;
 
         if (localHealth <= 0)
         {
-            Debug.Log("GameOver Player 1 ganhou");
+            //Debug.Log("GameOver Player 1 ganhou");
             state.Color = Color.red;
             GameController.GetComponent<GameController>().OpenRematchBox();
         }
@@ -52,16 +54,16 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         localHealth = state.EnemyHealth;
 
-        Debug.Log("host");
-        Debug.Log(state.Health);
-        Debug.Log("Client");
-        Debug.Log(state.EnemyHealth);
+        //Debug.Log("host");
+        //Debug.Log(state.Health);
+        //Debug.Log("Client");
+        //Debug.Log(state.EnemyHealth);
 
         clientSlider.GetComponent<Slider>().value = 0.20f * state.EnemyHealth;
 
         if (localHealth <= 0)
         {
-            Debug.Log("GameOver Player 2 ganhou");
+            //Debug.Log("GameOver Player 2 ganhou");
             state.Color = Color.red;
             GameController.GetComponent<GameController>().OpenRematchBox();
         }
@@ -80,8 +82,11 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
             {
                 state.Health -= 1;
             }
-                
         }
     }
+}
 
+public enum PlayerType { 
+    Carlous,
+    Douglas
 }

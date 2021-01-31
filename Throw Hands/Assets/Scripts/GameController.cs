@@ -24,7 +24,12 @@ public class GameController : GlobalEventListener
         if (!BoltNetwork.IsClient)
         {
             battleOffset *= -1;
+            playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
         }
+        else {
+            playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
+        }
+
         BoltNetwork.Instantiate(playerPrefab, new Vector2(
                 this.transform.position.x + battleOffset,
                 this.transform.position.y
@@ -43,7 +48,6 @@ public class GameController : GlobalEventListener
 
     public void Update()
     {
-        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
     }
 
     public void OpenRematchBox()
@@ -53,7 +57,6 @@ public class GameController : GlobalEventListener
 
     public void Rematch()
     {
-        Debug.Log("Making Remacth");
     }
 
     public void Leave()

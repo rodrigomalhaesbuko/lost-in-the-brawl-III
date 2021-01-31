@@ -47,7 +47,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void Update()
     {
-        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
+        //Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
     }
 
     //    // Start is called before the first frame update
@@ -71,16 +71,16 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         ////rb.apply move * speed * Time.deltaTim
         //transform.position += move * speed * BoltNetwork.FrameDeltaTime;
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
-        Debug.Log(move);
+        //Debug.Log(move);
         if(move != Vector2.zero)
         {
             playerAnimator.SetBool("IsWalking", true);
-            Debug.Log("Ta andando");
+            //Debug.Log("Ta andando");
         }
         else
         {
             playerAnimator.SetBool("IsWalking", false);
-            Debug.Log("Nao Ta andando");
+            //Debug.Log("Nao Ta andando");
         }
 
         transform.Translate(m, Space.World);
