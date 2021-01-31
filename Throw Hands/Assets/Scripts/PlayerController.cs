@@ -13,7 +13,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public float jumpForce;
     public float colliderRaySize;
     public Collider2D groundCollider;
-
+    public GameObject Camera;
     public Animator playerAnimator;
 
     InputMaster controls;
@@ -32,8 +32,10 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, gameObject.transform);
+        state.SetTransforms(state.CameraTransform, Camera.transform);
         playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
         groundCollider = GameObject.FindGameObjectWithTag("ground").GetComponent<Collider2D>();
+        Camera.GetComponent<CameraHandler>().clientPositionX = gameObject;
         state.SetAnimator(playerAnimator);
     }
 
@@ -41,10 +43,24 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public override void SimulateOwner()
     {
         CheckInputs();
+
+        if (Camera.transform.position.x > 21.0f || Camera.transform.position.x < -5.5f)
+        {
+            Camera.transform.position = new Vector3((Camera.transform.position.x), Camera.transform.position.y, Camera.transform.position.z);
+        }
+        else if (Camera.transform.position.x - Mathf.Abs(transform.position.x) > 10f || Camera.transform.position.x - Mathf.Abs(transform.position.x) < -10f)
+        {
+            Camera.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z);
+        }
+        else
+        {
+            Camera.transform.position = new Vector3((Camera.transform.position.x + transform.position.x) / 2.0f, Camera.transform.position.y, Camera.transform.position.z);
+        }
     }
 
     public void Update()
     {
+        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
         if (state.MoveX == 0.0f)
         {
             state.Animator.SetBool("IsWalking", false);

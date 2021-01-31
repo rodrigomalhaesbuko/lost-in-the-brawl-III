@@ -13,6 +13,7 @@ public class GameController : GlobalEventListener
     public GameObject hostSlider;
     public GameObject clientSlider;
     public GameObject RematchBox;
+    public GameObject Camera;
 
     public float battleOffset = 5f;
     [System.Obsolete]
@@ -21,15 +22,25 @@ public class GameController : GlobalEventListener
         playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSlider;
         playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSlider;
         playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
+        playerPrefab.GetComponent<PlayerController>().Camera = Camera;
         if (!BoltNetwork.IsClient)
         {
             battleOffset *= -1;
+            Camera.GetComponent<CameraHandler>().hostPositionX = playerPrefab;
         }
-        BoltNetwork.Instantiate(playerPrefab, new Vector2(
+       GameObject realPlayer = BoltNetwork.Instantiate(playerPrefab, new Vector2(
                 this.transform.position.x + battleOffset,
                 this.transform.position.y
                 ), Quaternion.identity
         );
+        if (BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1)
+        {
+            Camera.GetComponent<CameraHandler>().hostPositionX = realPlayer;
+        }
+        else if (BoltMatchmaking.CurrentSession.ConnectionsCurrent == 2)
+        {
+            Camera.GetComponent<CameraHandler>().clientPositionX = realPlayer;
+        }
     }
 
     //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
