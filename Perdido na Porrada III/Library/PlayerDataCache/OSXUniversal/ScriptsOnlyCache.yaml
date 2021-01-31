@@ -11,11 +11,15 @@ ScriptsOnlyBuild:
     - PlayerStatus
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
+    Unity.2D.Animation.Runtime.dll:
+    - UnityEngine.U2D.Animation.SpriteSkin
     Unity.2D.IK.Editor.dll:
     - UnityEditor.Experimental.U2D.IK.IKEditorManager
     - UnityEditor.Experimental.U2D.IK.IKGizmos
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.Experimental.U2D.IK.IKEditorManagerHelper
+    - UnityEngine.Experimental.U2D.IK.IKManager2D
+    - UnityEngine.Experimental.U2D.IK.LimbSolver2D
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -29,6 +33,14 @@ ScriptsOnlyBuild:
     - UnityEngine.InputSystem.RemoteInputPlayerConnection
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -63,11 +75,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 50
       Script: {instanceID: 0}
-    - Class: 58
-      Script: {instanceID: 0}
     - Class: 61
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -86,11 +102,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13552}
     - Class: 114
+      Script: {instanceID: 13888}
+    - Class: 114
       Script: {instanceID: 14226}
     - Class: 114
       Script: {instanceID: 14302}
     - Class: 114
+      Script: {instanceID: 14432}
+    - Class: 114
       Script: {instanceID: 14536}
+    - Class: 114
+      Script: {instanceID: 15222}
     - Class: 114
       Script: {instanceID: 15280}
     - Class: 114
@@ -140,13 +162,17 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 50
       Script: {instanceID: 0}
-    - Class: 58
-      Script: {instanceID: 0}
     - Class: 61
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -167,6 +193,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13552}
     - Class: 114
+      Script: {instanceID: 13888}
+    - Class: 114
       Script: {instanceID: 13910}
     - Class: 114
       Script: {instanceID: 14302}
@@ -175,9 +203,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14340}
     - Class: 114
+      Script: {instanceID: 14432}
+    - Class: 114
       Script: {instanceID: 14536}
     - Class: 114
       Script: {instanceID: 15076}
+    - Class: 114
+      Script: {instanceID: 15222}
     - Class: 114
       Script: {instanceID: 15280}
     - Class: 114
@@ -583,7 +615,7 @@ ScriptsOnlyBuild:
     className: PlayerInputEditor
   - hash:
       serializedVersion: 2
-      Hash: abbc2e936a2cb009e9ddfb84108543bd
+      Hash: 6eb981f6aab8998200c914104106ad46
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController

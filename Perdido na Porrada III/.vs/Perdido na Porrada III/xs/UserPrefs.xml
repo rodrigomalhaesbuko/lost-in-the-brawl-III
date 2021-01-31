@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{CF28818D-D1C0-D744-1D18-04396B4B9ECF}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LimbComponent.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LimbCollector.cs">
     <Files>
       <File FileName="Assets/Scripts/MenuController.cs" Line="71" Column="48" />
       <File FileName="Assets/Scripts/PlayerController.cs" Line="32" Column="74" />
@@ -7,6 +7,7 @@
       <File FileName="Assets/Scripts/GameController.cs" Line="28" Column="32" />
       <File FileName="Assets/Scripts/PlayerStatus.cs" Line="7" Column="5" />
       <File FileName="Assets/Scripts/LimbShooter.cs" Line="56" Column="9" />
+      <File FileName="Assets/Scripts/LimbCollector.cs" Line="13" Column="45" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,7 +15,7 @@
           <Node name="Perdido na Porrada III" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="LimbComponent.cs" selected="True" />
+                <Node name="LimbCollector.cs" selected="True" />
               </Node>
             </Node>
           </Node>

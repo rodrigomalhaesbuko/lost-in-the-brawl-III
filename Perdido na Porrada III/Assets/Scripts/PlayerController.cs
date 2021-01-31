@@ -14,6 +14,8 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public float colliderRaySize;
     public Collider2D groundCollider;
 
+    public Animator playerAnimator;
+
     InputMaster controls;
 
     Vector2 move;
@@ -26,6 +28,10 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     }
 
+    private void Start()
+    {
+        playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
+    }
     //void start para o bolt
     public override void Attached()
     {
@@ -65,8 +71,21 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         ////rb.apply move * speed * Time.deltaTim
         //transform.position += move * speed * BoltNetwork.FrameDeltaTime;
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
+        Debug.Log(move);
+        if(move != Vector2.zero)
+        {
+            playerAnimator.SetBool("IsWalking", true);
+            Debug.Log("Ta andando");
+        }
+        else
+        {
+            playerAnimator.SetBool("IsWalking", false);
+            Debug.Log("Nao Ta andando");
+        }
+
         transform.Translate(m, Space.World);
-     if(Input.GetKey(KeyCode.Space) && IsGrounded()) 
+
+        if(Input.GetKey(KeyCode.Space) && IsGrounded()) 
         {
             Jump();
         }
@@ -75,6 +94,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     private void Jump()
     {
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        playerAnimator.SetTrigger("Jump");
     }
 
     public bool IsGrounded()
