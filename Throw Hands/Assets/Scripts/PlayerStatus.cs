@@ -18,16 +18,10 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         state.Health = localHealth;
         state.EnemyHealth = localHealth;
-        state.Color = gameObject.GetComponent<SpriteRenderer>().color;
         state.AddCallback("Health", HealthCallBack);
         state.AddCallback("EnemyHealth", EnemyHealthCallBack);
-        state.AddCallback("Color", DamageCallBack);
     }
 
-    private void DamageCallBack()
-    {
-        gameObject.GetComponent<SpriteRenderer>().color = state.Color;
-    }
 
     private void HealthCallBack()
     {
@@ -43,7 +37,6 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         if (localHealth <= 0)
         {
             Debug.Log("GameOver Player 1 ganhou");
-            state.Color = Color.red;
             GameController.GetComponent<GameController>().OpenRematchBox();
         }
     }
@@ -62,7 +55,6 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         if (localHealth <= 0)
         {
             Debug.Log("GameOver Player 2 ganhou");
-            state.Color = Color.red;
             GameController.GetComponent<GameController>().OpenRematchBox();
         }
     }
