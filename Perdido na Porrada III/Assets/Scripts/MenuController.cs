@@ -89,10 +89,9 @@ public class MenuController: GlobalEventListener
 
     public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
     {
-        foreach(var session in sessionList)
+        foreach (var session in sessionList)
         {
             UdpSession photonSession = session.Value as UdpSession;
-            Debug.Log(photonSession.HostName.ToString());
             if(photonSession.Source == UdpSessionSource.Photon)
             {
                 if (photonSession.HostName.ToString() == JoinGameInput.text)

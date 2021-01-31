@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Bolt;
-
+using Bolt.Matchmaking;
 public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 {
 
@@ -19,6 +19,11 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public override void SimulateOwner()
     {
         CheckInputs();
+    }
+
+    public void Update()
+    {
+        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
     }
 
     //    // Start is called before the first frame update
