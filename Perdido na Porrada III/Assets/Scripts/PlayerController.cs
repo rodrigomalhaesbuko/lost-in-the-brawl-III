@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Bolt;
+using Bolt.Matchmaking;
 using UnityEngine.InputSystem;
 
 public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
@@ -31,12 +32,32 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public override void SimulateOwner()
     {
         CheckInputs();
-    }    
+    }
+
+    public void Update()
+    {
+        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
+    }
+
+    //    // Start is called before the first frame update
+    //    public PhotonView photonView;
+    //    public Rigidbody2D rb;
+    //    public GameObject PlayerCamera;
+
+    //    private void Awake()
+    //    {
+    //        if (photonView.isMine)
+    //        {
+    //            Debug.Log("eu tenho photon view");
+    //            PlayerCamera.SetActive(true);
+    //        }
+    //    } 
+
 
     private void CheckInputs()
     {
         //Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0);
-        //rb.apply move * speed * Time.deltaTim
+        ////rb.apply move * speed * Time.deltaTim
         //transform.position += move * speed * BoltNetwork.FrameDeltaTime;
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
         transform.Translate(m, Space.World);
