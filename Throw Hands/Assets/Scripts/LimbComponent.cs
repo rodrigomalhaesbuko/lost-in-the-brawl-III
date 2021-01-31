@@ -37,6 +37,7 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
     public bool IsGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raySize);
+
         if (hit.collider == groundCollider)
         {
             Debug.Log("NO CHÃO");
