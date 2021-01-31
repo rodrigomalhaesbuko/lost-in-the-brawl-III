@@ -15,6 +15,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public Collider2D groundCollider;
     public GameObject Camera;
     public Animator playerAnimator;
+    public GameObject shoes;
 
     InputMaster controls;
 
@@ -34,7 +35,6 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         state.SetTransforms(state.PlayerTransform, gameObject.transform);
         state.SetTransforms(state.CameraTransform, Camera.transform);
         playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
-        groundCollider = GameObject.FindGameObjectWithTag("ground").GetComponent<Collider2D>();
         Camera.GetComponent<CameraHandler>().clientPositionX = gameObject;
         state.SetAnimator(playerAnimator);
     }
@@ -75,26 +75,25 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             Debug.Log("Nao Ta andando");
         }
 
-
-        if (state.MoveY > 0.5f)
+        if (state.MoveY >= 0.5f)
         {
             if (IsGrounded()) {
-                state.Animator.SetBool("IsJump", true);
+                state.Animator.SetBool("Jump", true);
                 Jump();
             }
         }
         else
         {
-            state.Animator.SetBool("IsJump", false);
+            state.Animator.SetBool("Jump", false);
         }
 
         if (state.MoveY < -0.5f)
         {
-            state.Animator.SetBool("IsDuck", true);
+            state.Animator.SetBool("Duck", true);
         }
         else
         {
-            playerAnimator.SetBool("IsDuck", false);
+            playerAnimator.SetBool("Duck", false);
         }
         
 
@@ -123,23 +122,26 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
         state.MoveX = move.x;
         state.MoveY = move.y;
-        Debug.Log(move);
 
         //Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
 
-        transform.Translate(m, Space.World);
+
+        transform.Translate(new Vector2(m.x, 0f), Space.World);
+
+        //transform.position += new Vector3(m.x, 0f, transform.position.z);
+
     }
 
     private void Jump()
     {
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-        playerAnimator.SetTrigger("Jump");
     }
+
+    public float bola = 10f;
 
     public bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, colliderRaySize);
-        if (hit.collider == groundCollider)
+        if (shoes.GetComponent<ShoeComponent>().onFloor)
         {
             return true;
         }

@@ -9,7 +9,6 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("NOIA");
         if (Input.GetKey(KeyCode.DownArrow))
         {
             if (entity.IsOwner)
