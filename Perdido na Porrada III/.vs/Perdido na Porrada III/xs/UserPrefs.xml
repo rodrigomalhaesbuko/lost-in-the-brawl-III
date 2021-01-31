@@ -3,11 +3,10 @@
     <Files>
       <File FileName="Assets/Scripts/MenuController.cs" Line="71" Column="48" />
       <File FileName="Assets/Scripts/PlayerController.cs" Line="32" Column="74" />
+      <File FileName="Assets/Scripts/LimbComponent.cs" Line="33" Column="63" />
       <File FileName="Assets/Scripts/GameController.cs" Line="28" Column="32" />
       <File FileName="Assets/Scripts/PlayerStatus.cs" Line="7" Column="5" />
-      <File FileName="Assets/Scripts/LimbShooter.cs" Line="52" Column="100" />
-      <File FileName="Assets/Scripts/LimbCollector.cs" Line="21" Column="36" />
-      <File FileName="Assets/Scripts/LimbComponent.cs" Line="5" Column="43" />
+      <File FileName="Assets/Scripts/LimbShooter.cs" Line="56" Column="9" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
