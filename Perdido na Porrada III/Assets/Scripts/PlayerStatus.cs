@@ -59,7 +59,6 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
         clientSlider.GetComponent<Slider>().value = 0.20f * state.EnemyHealth;
 
-
         if (localHealth <= 0)
         {
             Debug.Log("GameOver Player 2 ganhou");
