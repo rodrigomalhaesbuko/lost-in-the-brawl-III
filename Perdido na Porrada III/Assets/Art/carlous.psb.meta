@@ -4546,20 +4546,6 @@ ScriptedImporter:
     spriteID: 2495edebcb5b51246bf4abf534eb069f
     layerID: 42
     mosaicPosition: {x: 4, y: 4}
-  - name: "bra\xE7o d"
-    spriteName: "bra\xE7o d"
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 03746149d608f5146b6402e23ff22cb3
-    layerID: 30
-    mosaicPosition: {x: 749, y: 303}
-  - name: "bra\xE7o d"
-    spriteName: "bra\xE7o d_1"
-    isGroup: 0
-    parentIndex: -1
-    spriteID: ac7f64485ee61564a8798181ec6e47e0
-    layerID: 27
-    mosaicPosition: {x: 749, y: 4}
   - name: coxa d
     spriteName: coxa d
     isGroup: 0
@@ -4588,6 +4574,20 @@ ScriptedImporter:
     spriteID: ad6fb2475da1e6848ad9bcce9ee90d01
     layerID: 6
     mosaicPosition: {x: 649, y: 311}
+  - name: "bra\xE7o d"
+    spriteName: "bra\xE7o d"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 03746149d608f5146b6402e23ff22cb3
+    layerID: 30
+    mosaicPosition: {x: 749, y: 303}
+  - name: "bra\xE7o d"
+    spriteName: "bra\xE7o d_1"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ac7f64485ee61564a8798181ec6e47e0
+    layerID: 27
+    mosaicPosition: {x: 749, y: 4}
   characterData:
     bones:
     - name: bone_1
