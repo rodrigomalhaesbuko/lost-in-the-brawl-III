@@ -340,6 +340,7 @@ MonoBehaviour:
   jumpForce: 10
   colliderRaySize: 1
   groundCollider: {fileID: 0}
+  Camera: {fileID: 0}
   playerAnimator: {fileID: 0}
 --- !u!114 &-4397341728968391736
 MonoBehaviour:
