@@ -373,8 +373,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasLeftArm: 1
   hasRightArm: 1
-  limbCollider: {fileID: 3150208529535956573, guid: 10d46af2ef684de46880f16abed68c05,
-    type: 3}
 --- !u!114 &3354285924472072853
 MonoBehaviour:
   m_ObjectHideFlags: 0

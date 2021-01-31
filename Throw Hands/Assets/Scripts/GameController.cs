@@ -10,9 +10,11 @@ using Bolt.Matchmaking;
 public class GameController : GlobalEventListener
 {
     public GameObject playerPrefab;
+    public GameObject playerPrefab2;
     public GameObject hostSlider;
     public GameObject clientSlider;
     public GameObject RematchBox;
+    
 
     public float battleOffset = 5f;
     [System.Obsolete]
@@ -25,16 +27,21 @@ public class GameController : GlobalEventListener
         {
             battleOffset *= -1;
             playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
-        }
-        else {
-            playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
-        }
-
-        BoltNetwork.Instantiate(playerPrefab, new Vector2(
+            BoltNetwork.Instantiate(playerPrefab, new Vector2(
                 this.transform.position.x + battleOffset,
-                this.transform.position.y
-                ), Quaternion.identity
-        );
+                    this.transform.position.y
+                    ), Quaternion.identity);
+
+        }
+        else
+        {
+            playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
+            BoltNetwork.Instantiate(playerPrefab2, new Vector2(
+            this.transform.position.x + battleOffset,
+            this.transform.position.y
+                ), Quaternion.identity);
+
+        }
     }
 
     //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
