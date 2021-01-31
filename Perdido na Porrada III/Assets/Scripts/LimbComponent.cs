@@ -1,20 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Bolt;
 
-public class LimbComponent : MonoBehaviour
+public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
 {
 
     [SerializeField] private Collider2D groundCollider;
     public float raySize = 0.7f;
     public LimbType limbType;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
         groundCollider = GameObject.FindGameObjectWithTag("ground").GetComponent<Collider2D>();
-
     }
+
+    //public override void Attached()
+    //{
+    //    state.SetTransforms(state.LimbTransform, gameObject.transform);
+    //}
 
     // Update is called once per frame
     void Update()
@@ -23,7 +30,7 @@ public class LimbComponent : MonoBehaviour
         {
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            gameObject.GetComponent<Rigidbody2D>().drag = 10f;
         }
     }
 

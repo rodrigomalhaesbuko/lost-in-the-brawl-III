@@ -14,15 +14,19 @@ public class GameController : GlobalEventListener
     public GameObject clientSlider;
     public GameObject RematchBox;
 
+    public float battleOffset = 5f;
     [System.Obsolete]
     public override void SceneLoadLocalDone(string scene)
     {
         playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSlider;
         playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSlider;
         playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
-        float randomValue = UnityEngine.Random.Range(-3.5f, 3.5f);
+        if (!BoltNetwork.IsClient)
+        {
+            battleOffset *= -1;
+        }
         BoltNetwork.Instantiate(playerPrefab, new Vector2(
-                this.transform.position.x * randomValue,
+                this.transform.position.x + battleOffset,
                 this.transform.position.y
                 ), Quaternion.identity
         );

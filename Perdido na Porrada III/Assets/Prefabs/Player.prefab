@@ -152,8 +152,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jumpForce: 50
   rb: {fileID: 1653952333227796215}
+  jumpForce: 50
+  colliderRaySize: 0.7
+  groundCollider: {fileID: 0}
 --- !u!114 &-4397341728968391736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,8 +173,6 @@ MonoBehaviour:
   clientSlider: {fileID: 0}
   GameController: {fileID: 0}
   currentSlider: {fileID: 0}
-  groundCollider: {fileID: 0}
-  colliderRaySize: 0.7
 --- !u!58 &1115800696631731125
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -220,8 +220,6 @@ MonoBehaviour:
   limb: {fileID: 6858302287848131728, guid: 10d46af2ef684de46880f16abed68c05, type: 3}
   launchForce: 13
   shotPoint: {fileID: 4918645672480658889}
-  hasLeftArm: 1
-  hasRightArm: 1
   leftArmSprite: {fileID: 0}
   rightArmSprite: {fileID: 0}
   limbCollectior: {fileID: 2334636835849245404}

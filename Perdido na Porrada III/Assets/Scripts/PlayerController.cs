@@ -10,6 +10,9 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public float speed = 10.0f;
     public Rigidbody2D rb;
+    public float jumpForce;
+    public float colliderRaySize;
+    public Collider2D groundCollider;
 
     InputMaster controls;
 
@@ -20,12 +23,14 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         controls = new InputMaster();
 
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+
     }
 
     //void start para o bolt
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, gameObject.transform);
+        groundCollider = GameObject.FindGameObjectWithTag("ground").GetComponent<Collider2D>();
     }
 
     // update para o bolt 

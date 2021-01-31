@@ -12,17 +12,22 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.leftArm)
+            if (entity.IsOwner)
             {
-                hasLeftArm = true;
-            }
+                if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.leftArm)
+                {
+                    hasLeftArm = true;
+                }
 
-            if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.rightArm) 
-            {
-                hasRightArm = true;
+                if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.rightArm)
+                {
+                    hasRightArm = true;
+                }
             }
+           
 
-            Destroy(collision.gameObject);
+            BoltNetwork.Destroy(collision.gameObject);
         }
     }
+
 }
