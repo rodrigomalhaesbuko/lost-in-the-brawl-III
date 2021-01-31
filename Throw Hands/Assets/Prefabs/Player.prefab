@@ -389,8 +389,10 @@ MonoBehaviour:
   limb: {fileID: 6858302287848131728, guid: 10d46af2ef684de46880f16abed68c05, type: 3}
   launchForce: 13
   shotPoint: {fileID: 1354810822718345913}
-  leftArmSprite: {fileID: 0}
-  rightArmSprite: {fileID: 0}
+  leftArmSprite: {fileID: 8383232600338365447}
+  leftForearmSprite: {fileID: 5170017346273819747}
+  rightArmSprite: {fileID: 7277522224553671925}
+  rightForearmSprite: {fileID: 8218863710552944561}
   limbCollectior: {fileID: 2334636835849245404}
 --- !u!61 &3360263465496857667
 BoxCollider2D:
@@ -1381,7 +1383,7 @@ GameObject:
   - component: {fileID: 4272298069199454066}
   m_Layer: 0
   m_Name: "antebra\xE7o e"
-  m_TagString: Untagged
+  m_TagString: rightForearm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1609,7 +1611,7 @@ GameObject:
   - component: {fileID: 1909013995199419280}
   m_Layer: 0
   m_Name: "bra\xE7o d"
-  m_TagString: Untagged
+  m_TagString: leftArm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1914,7 +1916,7 @@ GameObject:
   - component: {fileID: 6784163733034650820}
   m_Layer: 0
   m_Name: "antebra\xE7o d"
-  m_TagString: Untagged
+  m_TagString: leftForearm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2018,7 +2020,7 @@ GameObject:
   - component: {fileID: 1027942081543279631}
   m_Layer: 0
   m_Name: "bra\xE7o e"
-  m_TagString: Untagged
+  m_TagString: rightArm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

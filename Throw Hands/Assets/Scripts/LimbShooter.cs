@@ -7,8 +7,10 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject limb;
     public float launchForce; /* Força do lançamento do membro*/
     public Transform shotPoint; /* Ponto onde será instanciado o membro */
-    public Sprite leftArmSprite;
-    public Sprite rightArmSprite;
+    public GameObject leftArmSprite;
+    public GameObject leftForearmSprite;
+    public GameObject rightArmSprite;
+    public GameObject rightForearmSprite;
     public LimbCollector limbCollectior;
 
     private LimbType limbType;
@@ -40,12 +42,16 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if (entity.IsOwner) { 
             if (limbType == LimbType.leftArm) {
+                leftArmSprite.SetActive(false);
+                leftForearmSprite.SetActive(false);
                 //limb.GetComponent<SpriteRenderer>().sprite = leftArmSprite;
                 limb.GetComponent<LimbComponent>().limbType = LimbType.leftArm;
             }
 
             if (limbType == LimbType.rightArm)
             {
+                rightArmSprite.SetActive(false);
+                rightForearmSprite.SetActive(false);
                 // limb.GetComponent<SpriteRenderer>().sprite = rightArmSprite;
                 limb.GetComponent<LimbComponent>().limbType = LimbType.rightArm;
             }
