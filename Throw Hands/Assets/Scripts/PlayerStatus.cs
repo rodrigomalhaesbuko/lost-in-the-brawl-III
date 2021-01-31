@@ -67,21 +67,21 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (BoltNetwork.IsClient)
-            {
-                state.EnemyHealth -= 1;
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        if (BoltNetwork.IsClient)
+    //        {
+    //            state.EnemyHealth -= 1;
                 
-            }
-            else
-            {
-                state.Health -= 1;
-            }
+    //        }
+    //        else
+    //        {
+    //            state.Health -= 1;
+    //        }
                 
-        }
-    }
+    //    }
+    //}
 
 }

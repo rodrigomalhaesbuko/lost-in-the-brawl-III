@@ -28,15 +28,13 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     }
 
-    private void Start()
-    {
-        playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
-    }
     //void start para o bolt
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, gameObject.transform);
+        playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
         groundCollider = GameObject.FindGameObjectWithTag("ground").GetComponent<Collider2D>();
+        state.SetAnimator(playerAnimator);
     }
 
     // update para o bolt 
@@ -47,7 +45,38 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void Update()
     {
-        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
+        if (state.MoveX == 0.0f)
+        {
+            state.Animator.SetBool("IsWalking", false);
+            Debug.Log("Ta andando");
+        }
+        else
+        {
+            state.Animator.SetBool("IsWalking", true);
+            Debug.Log("Nao Ta andando");
+        }
+
+
+            if (state.MoveY > 0.5f)
+            {
+                state.Animator.SetBool("IsJump", true);
+                Jump();
+            }
+            else
+            {
+                state.Animator.SetBool("IsJump", false);
+            }
+
+            if (state.MoveY < -0.5f)
+            {
+                state.Animator.SetBool("IsDuck", true);
+            }
+            else
+            {
+                playerAnimator.SetBool("IsDuck", false);
+            }
+        
+
     }
 
     //    // Start is called before the first frame update
@@ -71,24 +100,13 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         ////rb.apply move * speed * Time.deltaTim
         //transform.position += move * speed * BoltNetwork.FrameDeltaTime;
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
+        state.MoveX = move.x;
+        state.MoveY = move.y;
         Debug.Log(move);
-        if(move != Vector2.zero)
-        {
-            playerAnimator.SetBool("IsWalking", true);
-            Debug.Log("Ta andando");
-        }
-        else
-        {
-            playerAnimator.SetBool("IsWalking", false);
-            Debug.Log("Nao Ta andando");
-        }
+
+        //Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
 
         transform.Translate(m, Space.World);
-
-        if(Input.GetKey(KeyCode.Space) && IsGrounded()) 
-        {
-            Jump();
-        }
     }
 
     private void Jump()
