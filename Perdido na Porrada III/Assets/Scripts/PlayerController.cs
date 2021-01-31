@@ -61,6 +61,28 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         //transform.position += move * speed * BoltNetwork.FrameDeltaTime;
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
         transform.Translate(m, Space.World);
+     if(Input.GetKey(KeyCode.Space) && IsGrounded()) 
+        {
+            Jump();
+        }
+    }
+
+    private void Jump()
+    {
+        rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+    }
+
+    public bool IsGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, colliderRaySize);
+        if (hit.collider == groundCollider)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void OnEnable()
