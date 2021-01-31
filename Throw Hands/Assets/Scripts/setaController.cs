@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class setaController : MonoBehaviour
 {
@@ -20,6 +20,8 @@ public class setaController : MonoBehaviour
     {
         controls = new InputMaster();
         controls.MainMenu.Move.performed += ctx => Move( ctx.ReadValueAsButton() );
+
+        controls.MainMenu.Select.performed += _ => go();
 
         //controls.MainMenu.Move.performed += _ => Debug.Log("Mexeu");
     }
@@ -39,6 +41,33 @@ public class setaController : MonoBehaviour
 
         posy = 80 - 155 * pos;
         
+    }
+
+    void go()
+    {
+        if(pos == 0)
+        {
+            //create/join room
+            SceneManager.LoadScene("SampleScene");
+        }
+
+        if(pos == 1)
+        {
+            //config
+        }
+
+        if(pos == 2)
+        {
+            //credits
+        }
+
+        if(pos == 3)
+        {
+            //quit
+            Application.Quit();
+            Debug.Log("bla");
+
+        }
     }
 
     public void Update()
