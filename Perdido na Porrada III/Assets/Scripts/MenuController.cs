@@ -56,7 +56,15 @@ public class MenuController: GlobalEventListener
 
     public void CreateGame()
     {
-        BoltLauncher.StartServer();
+        if(CreateGameInput.text.Length > 0)
+        {
+            BoltLauncher.StartServer();
+        }
+        else
+        {
+            OpenAlertBox2();
+        }
+        
     }
     public override void BoltStartDone()
     {
@@ -66,17 +74,24 @@ public class MenuController: GlobalEventListener
 
     public void JoinGame()
     {
-        BoltLauncher.StartClient();
-        Debug.Log(JoinGameInput.text);
-        StartCoroutine(CannotConectWithHost());
+        if (JoinGameInput.text.Length > 0)
+        {
+            BoltLauncher.StartClient();
+            Debug.Log(JoinGameInput.text);
+            StartCoroutine(CannotConectWithHost());
+        }
+        else
+        {
+            OpenAlertBox2();
+        }
+       
     }
 
     public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
     {
-        foreach(var session in sessionList)
+        foreach (var session in sessionList)
         {
             UdpSession photonSession = session.Value as UdpSession;
-            Debug.Log(photonSession.HostName.ToString());
             if(photonSession.Source == UdpSessionSource.Photon)
             {
                 if (photonSession.HostName.ToString() == JoinGameInput.text)
@@ -114,4 +129,11 @@ public class MenuController: GlobalEventListener
         Disclaimer.GetComponent<Text>().text = "NAO FOI POSSIVEL ENCONTRAR A SALA COM O NOME" + JoinGameInput.text;
         AlertBox.SetActive(true);
     }
+
+    public void OpenAlertBox2()
+    {
+        Disclaimer.GetComponent<Text>().text = "You need to type a valid room name!";
+        AlertBox.SetActive(true);
+    }
+
 }

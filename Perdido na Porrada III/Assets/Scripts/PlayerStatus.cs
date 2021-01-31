@@ -12,6 +12,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject GameController;
 
     public GameObject currentSlider;
+
     // void Start
     public override void Attached()
     {
@@ -57,7 +58,6 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         Debug.Log(state.EnemyHealth);
 
         clientSlider.GetComponent<Slider>().value = 0.20f * state.EnemyHealth;
-
 
         if (localHealth <= 0)
         {

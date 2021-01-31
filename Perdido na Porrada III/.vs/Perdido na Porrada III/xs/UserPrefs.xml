@@ -1,22 +1,31 @@
 ﻿<Properties StartupConfiguration="{CF28818D-D1C0-D744-1D18-04396B4B9ECF}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerStatus.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LimbComponent.cs">
     <Files>
       <File FileName="Assets/Scripts/MenuController.cs" Line="71" Column="48" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="44" Column="1" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="19" Column="6" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="32" Column="74" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="28" Column="32" />
       <File FileName="Assets/Scripts/PlayerStatus.cs" Line="7" Column="5" />
+      <File FileName="Assets/Scripts/LimbShooter.cs" Line="52" Column="100" />
+      <File FileName="Assets/Scripts/LimbCollector.cs" Line="21" Column="36" />
+      <File FileName="Assets/Scripts/LimbComponent.cs" Line="5" Column="43" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Perdido na Porrada III" expanded="True" selected="True" />
+          <Node name="Perdido na Porrada III" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="LimbComponent.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="296ff7a4-ac06-4b50-8375-ef2e8c033a54" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="91b51e77-3f85-46d6-9083-ec1b8cae0bb6" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

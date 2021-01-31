@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Bolt;
+using UdpKit;
+using System;
+using Bolt.Matchmaking;
 
 public class GameController : GlobalEventListener
 {
@@ -11,18 +14,36 @@ public class GameController : GlobalEventListener
     public GameObject clientSlider;
     public GameObject RematchBox;
 
+    public float battleOffset = 5f;
     [System.Obsolete]
     public override void SceneLoadLocalDone(string scene)
     {
         playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSlider;
         playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSlider;
         playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
-        float randomValue = Random.Range(-3.5f, 3.5f);
+        if (!BoltNetwork.IsClient)
+        {
+            battleOffset *= -1;
+        }
         BoltNetwork.Instantiate(playerPrefab, new Vector2(
-                this.transform.position.x * randomValue,
+                this.transform.position.x + battleOffset,
                 this.transform.position.y
                 ), Quaternion.identity
         );
+    }
+
+    //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
+    //{
+    //    foreach (var session in sessionList)
+    //    {
+    //        UdpSession photonSession = session.Value as UdpSession;
+    //        Debug.Log(photonSession.ConnectionsCurrent);
+    //    }
+    //}
+
+    public void Update()
+    {
+        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
     }
 
     public void OpenRematchBox()
