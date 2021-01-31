@@ -46,15 +46,18 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
         if (Camera.transform.position.x > 21.0f || Camera.transform.position.x < -5.5f)
         {
-            Camera.transform.position = new Vector3((Camera.transform.position.x), Camera.transform.position.y, Camera.transform.position.z);
+            Vector3 position = new Vector3((Camera.transform.position.x), Camera.transform.position.y, Camera.transform.position.z);
+            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
         }
         else if (Camera.transform.position.x - Mathf.Abs(transform.position.x) > 10f || Camera.transform.position.x - Mathf.Abs(transform.position.x) < -10f)
         {
-            Camera.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z);
+            Vector3 position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z);
+            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
         }
         else
         {
-            Camera.transform.position = new Vector3((Camera.transform.position.x + transform.position.x) / 2.0f, Camera.transform.position.y, Camera.transform.position.z);
+            Vector3 position = new Vector3((Camera.transform.position.x + transform.position.x) / 2.0f, Camera.transform.position.y, Camera.transform.position.z);
+            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
         }
     }
 
