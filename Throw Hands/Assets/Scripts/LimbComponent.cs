@@ -9,7 +9,9 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
     [SerializeField] private Collider2D groundCollider;
     public float raySize = 0.7f;
     public LimbType limbType;
-
+    public GameObject shoes;
+    public GameObject limbHitbox;
+    public PlayerType playerType;
 
 
     // Start is called before the first frame update
@@ -18,10 +20,10 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
         groundCollider = GameObject.FindGameObjectWithTag("ground").GetComponent<Collider2D>();
     }
 
-    //public override void Attached()
-    //{
-    //    state.SetTransforms(state.LimbTransform, gameObject.transform);
-    //}
+    public override void Attached()
+    {
+        state.SetTransforms(state.LimbTransform, gameObject.transform);
+    }
 
     // Update is called once per frame
     void Update()
@@ -36,9 +38,8 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
 
     public bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raySize);
 
-        if (hit.collider == groundCollider)
+        if (shoes.GetComponent<ShoeComponent>().onFloor)
         {
             Debug.Log("NO CHÃO");
             return true;

@@ -29,10 +29,11 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         localHealth = state.Health;
 
-        //Debug.Log("host");
-        //Debug.Log(state.Health);
-        //Debug.Log("Client");
-        //Debug.Log(state.EnemyHealth);
+        Debug.Log("FROM Host");
+        Debug.Log("host");
+        Debug.Log(state.Health);
+        Debug.Log("Client");
+        Debug.Log(state.EnemyHealth);
 
         hostSlider.GetComponent<Slider>().value = 0.20f * state.Health;
 
@@ -46,11 +47,14 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     private void EnemyHealthCallBack()
     {
         localHealth = state.EnemyHealth;
-
-        //Debug.Log("host");
         //Debug.Log(state.Health);
-        //Debug.Log("Client");
         //Debug.Log(state.EnemyHealth);
+        //Debug.Log(localHealth);
+        Debug.Log("FROM ENEMY");
+        Debug.Log("host");
+        Debug.Log(state.Health);
+        Debug.Log("Client");
+        Debug.Log(state.EnemyHealth);
 
         clientSlider.GetComponent<Slider>().value = 0.20f * state.EnemyHealth;
 
@@ -61,22 +65,36 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        if (BoltNetwork.IsClient)
-    //        {
-    //            state.EnemyHealth -= 1;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (BoltNetwork.IsClient)
+            {
+                state.EnemyHealth -= 1;
+            }
+            else
+            {
+                state.Health -= 1;
+            }
 
-    //        }
-    //        else
-    //        {
-    //            state.Health -= 1;
-    //        }
+        }
+    }
 
-    //    }
- 
+    public void TakeDamage()
+    {
+
+        if (BoltNetwork.IsClient)
+        {
+            state.EnemyHealth -= 1;
+
+        }
+        else
+        {
+            state.Health -= 1;
+        }
+
+    }
 
 }
 

@@ -63,16 +63,15 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void Update()
     {
-        Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
         if (state.MoveX == 0.0f)
         {
             state.Animator.SetBool("IsWalking", false);
-            Debug.Log("Ta andando");
+            //Debug.Log("Ta andando");
         }
         else
         {
             state.Animator.SetBool("IsWalking", true);
-            Debug.Log("Nao Ta andando");
+            //Debug.Log("Nao Ta andando");
         }
 
         if (state.MoveY >= 0.5f)

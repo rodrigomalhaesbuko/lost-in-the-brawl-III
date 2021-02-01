@@ -13,22 +13,29 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             if (entity.IsOwner)
             {
-                if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.leftArm)
+                if (collision.CompareTag("limb"))
                 {
-                    hasLeftArm = true;
-                    gameObject.GetComponent<LimbShooter>().leftArmSprite.SetActive(true);
-                    gameObject.GetComponent<LimbShooter>().leftForearmSprite.SetActive(true);
-                }
 
-                if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.rightArm)
-                {
-                    hasRightArm = true;
-                    gameObject.GetComponent<LimbShooter>().rightArmSprite.SetActive(true);
-                    gameObject.GetComponent<LimbShooter>().rightForearmSprite.SetActive(true);
+                    if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.leftArm)
+                    {
+                        hasLeftArm = true;
+                        gameObject.GetComponent<LimbShooter>().leftArmSprite.SetActive(true);
+                        gameObject.GetComponent<LimbShooter>().leftForearmSprite.SetActive(true);
+                        BoltNetwork.Destroy(collision.gameObject);
+                    }
+
+                    if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.rightArm)
+                    {
+                        hasRightArm = true;
+                        gameObject.GetComponent<LimbShooter>().rightArmSprite.SetActive(true);
+                        gameObject.GetComponent<LimbShooter>().rightForearmSprite.SetActive(true);
+                        BoltNetwork.Destroy(collision.gameObject);
+                    }
+
                 }
             }
 
-            BoltNetwork.Destroy(collision.gameObject);
+            
         }
     }
 

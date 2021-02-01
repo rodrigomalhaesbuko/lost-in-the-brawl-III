@@ -5,12 +5,17 @@ using UnityEngine;
 public class ShoeComponent : MonoBehaviour
 {
     public bool onFloor = false;
+    public GameObject limbHitbox;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("ground"))
         {
             onFloor= true;
+        }
+        if (limbHitbox != null)
+        {
+            limbHitbox.SetActive(false);
         }
     }
 
