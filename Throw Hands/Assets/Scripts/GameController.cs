@@ -39,10 +39,9 @@ public class GameController : GlobalEventListener
         playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
 
         playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
-        battleOffset *= -3;
         playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
         GameObject bola1 = BoltNetwork.Instantiate(playerPrefab, new Vector2(
-            this.transform.position.x + (battleOffset * -2),
+            this.transform.position.x + (battleOffset * -1.5f),
                 this.transform.position.y
                 ), Quaternion.identity);
         playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
@@ -52,7 +51,7 @@ public class GameController : GlobalEventListener
         playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
         playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
         GameObject bola2 = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
-        this.transform.position.x + (battleOffset * 2),
+        this.transform.position.x + (battleOffset * 1.5f),
         this.transform.position.y
             ), Quaternion.identity);
 
