@@ -25,8 +25,12 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     private LimbType limbType;
     public Animator playerAnimator;
     public float animationTime;
+    public float parryAnimationTime;
     private bool rightArmShootTrigger = false ;
     private bool leftArmShootTrigger = false ;
+
+    //parry
+    public GameObject Block;
 
     InputMaster controls;
 
@@ -75,6 +79,8 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         state.AddCallback("RightArmEnable", ChangeRightArm);
     }
 
+
+    //PUNCHES 
     public void ShootLeftArm()
     {
         if (state.LeftArmEnable && entity.IsOwner && !LeftArmShooted)
@@ -96,18 +102,11 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-
-    public void Parry()
-    {
-        Debug.Log("Parry");
-    }
-
-
     private IEnumerator PunchAnimation(string animation)
     {
         playerAnimator.SetTrigger(animation);
         yield return new WaitForSeconds(animationTime);
-        if(animation == "IsRightPunching")
+        if (animation == "IsRightPunching")
         {
             limbType = LimbType.rightArm;
         }
@@ -115,10 +114,29 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             limbType = LimbType.leftArm;
         }
-     
+
 
         state.Shoot();
     }
+
+    //PARRY
+
+    public void Parry()
+    {
+        Debug.Log("Parry");
+        StartCoroutine(ParryAnimation());
+    }
+
+    private IEnumerator ParryAnimation()
+    {
+        playerAnimator.SetTrigger("Parry");
+        Block.SetActive(true);
+        yield return new WaitForSeconds(parryAnimationTime);
+        Block.SetActive(false);
+
+    }
+
+  
 
     private void ChangeRightArm()
     {
