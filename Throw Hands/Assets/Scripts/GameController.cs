@@ -13,40 +13,61 @@ public class GameController : GlobalEventListener
     public GameObject playerPrefab2;
     public GameObject hostSlider;
     public GameObject clientSlider;
+    
     public GameObject RematchBox;
     public GameObject Camera;
 
+    private GameObject CameraPriv;
+    private GameObject hostSliderPriv;
+    private GameObject clientSliderPriv;
+
     public float battleOffset = 5f;
-    [System.Obsolete]
+    [Obsolete]
+
+    private void Start()
+    {
+        CameraPriv = Camera;
+        hostSliderPriv = hostSlider;
+        clientSliderPriv = clientSlider;
+    }
+
+    [Obsolete]
     public override void SceneLoadLocalDone(string scene)
     {
-        if (!BoltNetwork.IsClient)
-        {
-            playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSlider;
-            playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSlider;
-            playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
-            playerPrefab.GetComponent<PlayerController>().Camera = Camera;
-            battleOffset *= -1;
-            playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
-            BoltNetwork.Instantiate(playerPrefab, new Vector2(
-                this.transform.position.x + battleOffset,
-                    this.transform.position.y
-                    ), Quaternion.identity);
+        playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
+        playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+        playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
 
-        }
-        else
-        {
-            playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSlider;
-            playerPrefab2.GetComponent<PlayerStatus>().hostSlider = hostSlider;
-            playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
-            playerPrefab2.GetComponent<PlayerController>().Camera = Camera;
-            playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
-            BoltNetwork.Instantiate(playerPrefab2, new Vector2(
+        playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
+        battleOffset *= -3;
+        playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
+        GameObject bola1 = BoltNetwork.Instantiate(playerPrefab, new Vector2(
             this.transform.position.x + battleOffset,
-            this.transform.position.y
+                this.transform.position.y
                 ), Quaternion.identity);
+        playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
+        playerPrefab2.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+        playerPrefab2.GetComponent<PlayerController>().Camera = CameraPriv;
+
+        playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
+        playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
+        GameObject bola2 = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
+        this.transform.position.x + battleOffset,
+        this.transform.position.y
+            ), Quaternion.identity);
+
+        if (BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1)
+        {
+
+            bola2.SetActive(false);
 
         }
+        else if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 2)
+        {
+            bola1.SetActive(false);
+        }
+
+
     }
 
     //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
@@ -57,8 +78,6 @@ public class GameController : GlobalEventListener
     //        Debug.Log(photonSession.ConnectionsCurrent);
     //    }
     //}
-
-
 
     public void OpenRematchBox()
     {

@@ -76,9 +76,8 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
                 setupLimbSprite(LimbType.rightArm);
             }
 
-            GameObject newLimb = Instantiate(limb, shotPoint.position, shotPoint.rotation);
+            GameObject newLimb = BoltNetwork.Instantiate(limb, shotPoint.position, shotPoint.rotation);
             newLimb.GetComponent<LimbComponent>().limbHitbox.GetComponent<BoxCollider2D>().isTrigger = true;
-            BoltNetwork.Attach(newLimb);
             newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
         }
     }

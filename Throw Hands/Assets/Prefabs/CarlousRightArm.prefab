@@ -565,6 +565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5321530351105265795}
   - component: {fileID: 19506239993943697}
+  - component: {fileID: 6250592433942753686}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: limbHitbox
@@ -612,3 +613,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.9315248, y: 3.3660321}
   m_EdgeRadius: 0
+--- !u!114 &6250592433942753686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8224063597333890747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b08dfd9724f419290debccf1246bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LimbComponent: {fileID: 4643683851853321670}

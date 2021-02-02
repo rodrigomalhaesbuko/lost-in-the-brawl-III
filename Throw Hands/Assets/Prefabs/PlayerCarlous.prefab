@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2625853661889533258}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.03, y: 3.64, z: -3.3710606}
+  m_LocalPosition: {x: -4.24, y: 0.94, z: -3.3710606}
   m_LocalScale: {x: 0.3071852, y: 0.3071852, z: 0.3071852}
   m_Children: []
   m_Father: {fileID: 5524102872281988147}
@@ -791,7 +791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limb: {fileID: 6858302287848131728, guid: 10d46af2ef684de46880f16abed68c05, type: 3}
-  launchForce: 13
+  launchForce: 25
   shotPoint: {fileID: 5228903377246013567}
   leftArmSprite: {fileID: 763931497412162739}
   leftForearmSprite: {fileID: 4609648050701151272}

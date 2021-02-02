@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limb: {fileID: 6858302287848131728, guid: 10d46af2ef684de46880f16abed68c05, type: 3}
-  launchForce: 13
+  launchForce: 25
   shotPoint: {fileID: 1354810822718345913}
   leftArmSprite: {fileID: 8383232600338365447}
   leftForearmSprite: {fileID: 5170017346273819747}
@@ -2293,7 +2293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9092043443990433676}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.96, y: 0.06, z: -3.3710606}
+  m_LocalPosition: {x: 0.64, y: 0.181, z: -3.3710606}
   m_LocalScale: {x: 0.3071852, y: 0.3071852, z: 0.3071852}
   m_Children: []
   m_Father: {fileID: 1653952333227796213}
