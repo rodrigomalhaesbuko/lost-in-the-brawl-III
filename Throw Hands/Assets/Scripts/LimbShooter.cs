@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 {
-    public GameObject limb;
+    public GameObject Limb;
     public float launchForce; /* Força do lançamento do membro*/
     public Transform shotPoint; /* Ponto onde será instanciado o membro */
     public GameObject leftArmSprite;
@@ -19,10 +19,14 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public GameObject douglasRightArm;
     public GameObject douglasLeftArm;
+    public bool LeftArmShooted = false;
+    public bool RightArmShooted = false;
 
     private LimbType limbType;
     public Animator playerAnimator;
     public float animationTime;
+    private bool rightArmShootTrigger = false ;
+    private bool leftArmShootTrigger = false ;
 
     InputMaster controls;
 
@@ -30,8 +34,32 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         controls = new InputMaster();
 
-        controls.Gameplay.LeftArmShoot.performed += ctx => ShootLeftArm();
-        controls.Gameplay.RightArmShoot.performed += ctx => ShootRightArm();
+        controls.Gameplay.LeftArmShoot.performed += ctx => {
+            if (!rightArmShootTrigger) {
+                leftArmShootTrigger = true;
+                ShootLeftArm();
+                }
+        };
+        controls.Gameplay.RightArmShoot.performed += ctx => {
+            if (!leftArmShootTrigger)
+            {
+                rightArmShootTrigger = true;
+                ShootRightArm();
+            }
+        };
+
+        controls.Gameplay.LeftArmShoot.canceled += ctx => {
+
+                leftArmShootTrigger = false;
+                
+
+        };
+        controls.Gameplay.RightArmShoot.canceled += ctx => {
+
+                rightArmShootTrigger = false;
+
+        };
+
         controls.Gameplay.Parry.performed += ctx => Parry();
     }
 
@@ -43,20 +71,31 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     public override void Attached()
     {
         state.OnShoot = Shoot;
-        state.AddCallback("LeftArmEnable", ChangeArm);
-        state.AddCallback("RightArmEnable", ChangeArm);
+        state.AddCallback("LeftArmEnable", ChangeLeftArm);
+        state.AddCallback("RightArmEnable", ChangeRightArm);
     }
 
     public void ShootLeftArm()
     {
-        if (state.LeftArmEnable && entity.IsOwner)
+        if (state.LeftArmEnable && entity.IsOwner && !LeftArmShooted)
         {
-
+            LeftArmShooted = true;
             StartCoroutine(PunchAnimation("IsLeftPunching"));
-            limbType = LimbType.leftArm;
+            
 
         }
     }
+
+    public void ShootRightArm()
+    {
+        if (state.RightArmEnable && entity.IsOwner && !RightArmShooted)
+        {
+            RightArmShooted = true;
+            StartCoroutine(PunchAnimation("IsRightPunching"));
+
+        }
+    }
+
 
     public void Parry()
     {
@@ -64,25 +103,24 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     }
 
 
-    public void ShootRightArm()
-    {
-        if (state.RightArmEnable && entity.IsOwner)
-        {
-
-            StartCoroutine(PunchAnimation("IsRightPunching"));
-            limbType = LimbType.rightArm;
-        }
-    }
-
-
     private IEnumerator PunchAnimation(string animation)
     {
         playerAnimator.SetTrigger(animation);
         yield return new WaitForSeconds(animationTime);
+        if(animation == "IsRightPunching")
+        {
+            limbType = LimbType.rightArm;
+        }
+        else
+        {
+            limbType = LimbType.leftArm;
+        }
+     
+
         state.Shoot();
     }
 
-    private void ChangeArm()
+    private void ChangeRightArm()
     {
             leftArmSprite.SetActive(state.LeftArmEnable);
             leftForearmSprite.SetActive(state.LeftArmEnable);
@@ -90,7 +128,20 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
             rightForearmSprite.SetActive(state.RightArmEnable);
     }
 
+    private void ChangeLeftArm()
+    {
+        leftArmSprite.SetActive(state.LeftArmEnable);
+        leftForearmSprite.SetActive(state.LeftArmEnable);
+        rightArmSprite.SetActive(state.RightArmEnable);
+        rightForearmSprite.SetActive(state.RightArmEnable);
+    }
+
     void Shoot()
+    {
+        StartCoroutine(ShootCourotine());
+    }
+
+    public IEnumerator ShootCourotine()
     {
         if (entity.IsOwner)
         {
@@ -100,7 +151,7 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
                 leftArmSprite.SetActive(state.LeftArmEnable);
                 leftForearmSprite.SetActive(state.LeftArmEnable);
                 state.LeftArmEnable = false;
-                setupLimbSprite(LimbType.leftArm);
+                LeftArmShooted = false;
             }
 
             if (limbType == LimbType.rightArm)
@@ -108,12 +159,38 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
                 rightArmSprite.SetActive(state.RightArmEnable);
                 rightForearmSprite.SetActive(state.RightArmEnable);
                 state.RightArmEnable = false;
-                setupLimbSprite(LimbType.rightArm);
+                RightArmShooted = false;
+                
+            }
+            GameObject limb = Limb;
+            switch (playerType)
+            {
+                case PlayerType.Carlous:
+                    if (limbType == LimbType.leftArm)
+                    {
+                        limb = carlousLeftArm;
+                    }
+                    else
+                    {
+                        limb = carlousRightArm;
+                    }
+                    break;
+                case PlayerType.Douglas:
+                    if (limbType == LimbType.leftArm)
+                    {
+                        limb = douglasLeftArm;
+                    }
+                    else
+                    {
+                        limb = douglasRightArm;
+                    }
+                    break;
             }
 
             GameObject newLimb = BoltNetwork.Instantiate(limb, shotPoint.position, shotPoint.rotation);
             newLimb.GetComponent<LimbComponent>().limbHitbox.GetComponent<BoxCollider2D>().isTrigger = true;
-            if(playerType == PlayerType.Carlous)
+
+            if (playerType == PlayerType.Carlous)
             {
                 newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce;
             }
@@ -121,39 +198,40 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
             {
                 newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
             }
-           
+            yield return new WaitForEndOfFrame();
+
         }
     }
 
-    void setupLimbSprite(LimbType type)
-    {
-        PlayerType playerType = gameObject.GetComponent<PlayerStatus>().playerType;
+    //void setupLimbSprite(LimbType type)
+    //{
+    //    PlayerType playerType = gameObject.GetComponent<PlayerStatus>().playerType;
 
-        switch (playerType)
-        {
-            case PlayerType.Carlous:
-                if (limbType == LimbType.leftArm)
-                {
-                    limb = carlousLeftArm;
-                }
-                else
-                {
-                    limb = carlousRightArm;
-                }
-                break;
-            case PlayerType.Douglas:
-                if (limbType == LimbType.leftArm)
-                {
-                    limb = douglasLeftArm;
-                }
-                else
-                {
-                    limb = douglasRightArm;
-                }
-                break;
-        }
+    //    switch (playerType)
+    //    {
+    //        case PlayerType.Carlous:
+    //            if (limbType == LimbType.leftArm)
+    //            {
+    //                limb = carlousLeftArm;
+    //            }
+    //            else
+    //            {
+    //                limb = carlousRightArm;
+    //            }
+    //            break;
+    //        case PlayerType.Douglas:
+    //            if (limbType == LimbType.leftArm)
+    //            {
+    //                limb = douglasLeftArm;
+    //            }
+    //            else
+    //            {
+    //                limb = douglasRightArm;
+    //            }
+    //            break;
+    //    }
 
-    }
+    //}
 
     private void OnEnable()
     {

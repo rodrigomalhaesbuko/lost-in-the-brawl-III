@@ -23,8 +23,6 @@ public class MenuController: GlobalEventListener
     [SerializeField] private GameObject RoomImageClient;
     [SerializeField] private GameObject RoomImageHost;
 
-
-
     public void CreateGame()
     {
         if(JoinGameInput.text.Length > 0)

@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828cceb6cb43f01429c7d500292239cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limb: {fileID: 6858302287848131728, guid: 10d46af2ef684de46880f16abed68c05, type: 3}
+  Limb: {fileID: 6858302287848131728, guid: 10d46af2ef684de46880f16abed68c05, type: 3}
   launchForce: 25
   shotPoint: {fileID: 5228903377246013567}
   leftArmSprite: {fileID: 763931497412162739}
@@ -896,6 +896,8 @@ MonoBehaviour:
     type: 3}
   douglasLeftArm: {fileID: 1595820471432824447, guid: 0574d24f99e2fae44a7cdd83ff0bf3bb,
     type: 3}
+  LeftArmShooted: 0
+  RightArmShooted: 0
   playerAnimator: {fileID: 0}
   animationTime: 0.5
 --- !u!61 &8430605979221251717
