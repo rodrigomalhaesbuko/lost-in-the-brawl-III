@@ -14,6 +14,8 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private bool picked = false;
 
+    public PlayerType myBody;
+
     private void Awake()
     {
         controls = new InputMaster();
@@ -41,24 +43,27 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
             {
                 if (collision.CompareTag("limb"))
                 {
-
-                    if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.leftArm)
+                    if(collision.gameObject.GetComponent<LimbComponent>().playerType == myBody)
                     {
-                        state.LeftArmEnable = true;
-                        gameObject.GetComponent<LimbShooter>().LeftArmShooted = false;
-                        gameObject.GetComponent<LimbShooter>().leftArmSprite.SetActive(state.LeftArmEnable);
-                        gameObject.GetComponent<LimbShooter>().leftForearmSprite.SetActive(state.LeftArmEnable);
-                        BoltNetwork.Destroy(collision.gameObject);
-                    }
+                        if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.leftArm)
+                        {
+                            state.LeftArmEnable = true;
+                            gameObject.GetComponent<LimbShooter>().LeftArmShooted = false;
+                            gameObject.GetComponent<LimbShooter>().leftArmSprite.SetActive(state.LeftArmEnable);
+                            gameObject.GetComponent<LimbShooter>().leftForearmSprite.SetActive(state.LeftArmEnable);
+                            BoltNetwork.Destroy(collision.gameObject);
+                        }
 
-                    if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.rightArm)
-                    {
-                        state.RightArmEnable = true;
-                        gameObject.GetComponent<LimbShooter>().RightArmShooted = false;
-                        gameObject.GetComponent<LimbShooter>().rightArmSprite.SetActive(state.RightArmEnable);
-                        gameObject.GetComponent<LimbShooter>().rightForearmSprite.SetActive(state.RightArmEnable);
-                        BoltNetwork.Destroy(collision.gameObject);
+                        if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.rightArm)
+                        {
+                            state.RightArmEnable = true;
+                            gameObject.GetComponent<LimbShooter>().RightArmShooted = false;
+                            gameObject.GetComponent<LimbShooter>().rightArmSprite.SetActive(state.RightArmEnable);
+                            gameObject.GetComponent<LimbShooter>().rightForearmSprite.SetActive(state.RightArmEnable);
+                            BoltNetwork.Destroy(collision.gameObject);
+                        }
                     }
+                    
 
                 }
             }
