@@ -904,6 +904,7 @@ MonoBehaviour:
   animationTime: 0.5
   parryAnimationTime: 0.5
   Block: {fileID: 8119007275232967522}
+  HitBox: {fileID: 1687778593408439531}
 --- !u!61 &8430605979221251717
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1247,7 +1248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8119007275232967522}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.71507, y: 17.964151, z: 0}
+  m_LocalPosition: {x: -2.76, y: -0.02, z: 0}
   m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 0.3071852}
   m_Children: []
   m_Father: {fileID: 5524102872281988147}
@@ -1266,7 +1267,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04878068, y: -0.14634037}
+  m_Offset: {x: 0.04878068, y: 0.495193}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1277,7 +1278,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0975614, y: 2.8536625}
+  m_Size: {x: 1.0975614, y: 3.2999468}
   m_EdgeRadius: 0
 --- !u!50 &1748359519767088786
 Rigidbody2D:
@@ -1294,7 +1295,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

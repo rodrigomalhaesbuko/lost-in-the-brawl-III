@@ -31,7 +31,7 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 
     //parry
     public GameObject Block;
-
+    public GameObject HitBox;
     InputMaster controls;
 
     private void Awake()
@@ -129,10 +129,13 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private IEnumerator ParryAnimation()
     {
-        playerAnimator.SetTrigger("Parry");
-        Block.SetActive(true);
-        yield return new WaitForSeconds(parryAnimationTime);
-        Block.SetActive(false);
+        if (entity.IsOwner)
+        {
+            playerAnimator.SetTrigger("Parry");
+            HitBox.SetActive(false);
+            yield return new WaitForSeconds(parryAnimationTime);
+            HitBox.SetActive(true);
+        }
 
     }
 
