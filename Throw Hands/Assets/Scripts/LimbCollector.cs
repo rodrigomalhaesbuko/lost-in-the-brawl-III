@@ -18,17 +18,17 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
 
                     if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.leftArm)
                     {
-                        hasLeftArm = true;
-                        gameObject.GetComponent<LimbShooter>().leftArmSprite.SetActive(true);
-                        gameObject.GetComponent<LimbShooter>().leftForearmSprite.SetActive(true);
+                        state.LeftArmEnable = true;
+                        gameObject.GetComponent<LimbShooter>().leftArmSprite.SetActive(state.LeftArmEnable);
+                        gameObject.GetComponent<LimbShooter>().leftForearmSprite.SetActive(state.LeftArmEnable);
                         BoltNetwork.Destroy(collision.gameObject);
                     }
 
                     if (collision.gameObject.GetComponent<LimbComponent>().limbType == LimbType.rightArm)
                     {
-                        hasRightArm = true;
-                        gameObject.GetComponent<LimbShooter>().rightArmSprite.SetActive(true);
-                        gameObject.GetComponent<LimbShooter>().rightForearmSprite.SetActive(true);
+                        state.RightArmEnable = true;
+                        gameObject.GetComponent<LimbShooter>().rightArmSprite.SetActive(state.RightArmEnable);
+                        gameObject.GetComponent<LimbShooter>().rightForearmSprite.SetActive(state.RightArmEnable);
                         BoltNetwork.Destroy(collision.gameObject);
                     }
 

@@ -1395,6 +1395,8 @@ GameObject:
   - component: {fileID: 8340014089749899682}
   - component: {fileID: 6620897105210885938}
   - component: {fileID: 4272298069199454066}
+  - component: {fileID: 5121458109163820014}
+  - component: {fileID: 9153300013739482802}
   m_Layer: 0
   m_Name: "antebra\xE7o e"
   m_TagString: rightForearm
@@ -1488,6 +1490,47 @@ MonoBehaviour:
     m_Extent: {x: 1.7118742, y: 0.9203529, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &5121458109163820014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5170017346273819747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -36112512, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneGuid: 
+  _serializerGuid: a5f0145d-6100-4203-8490-ac12e8081edf
+  _prefabId: -1
+  _updateRate: 1
+  _autoFreezeProxyFrames: 0
+  _clientPredicted: 1
+  _allowInstantiateOnClient: 1
+  _persistThroughSceneLoads: 0
+  _sceneObjectDestroyOnDetach: 1
+  _sceneObjectAutoAttach: 1
+  _alwaysProxy: 0
+  _detachOnDisable: 1
+  _allowFirstReplicationWhenFrozen: 0
+  _autoRemoveChildEntities: 0
+  _entityBehaviourQueryOption: 0
+  _entityPriorityCalculatorQueryOption: 1
+  _entityReplicationFilterQueryOption: 1
+--- !u!114 &9153300013739482802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5170017346273819747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d076701e924574a2a8d496a26c62bb88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5190747391526417558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1810,8 @@ GameObject:
   - component: {fileID: 4959595588606196786}
   - component: {fileID: 6640261092930972383}
   - component: {fileID: 1909013995199419280}
+  - component: {fileID: 6414275703889350434}
+  - component: {fileID: 4579341710597027356}
   m_Layer: 0
   m_Name: "bra\xE7o d"
   m_TagString: leftArm
@@ -1860,6 +1905,47 @@ MonoBehaviour:
     m_Extent: {x: 0.9834261, y: 1.1930854, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &6414275703889350434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277522224553671925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -36112512, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneGuid: 
+  _serializerGuid: a5f0145d-6100-4203-8490-ac12e8081edf
+  _prefabId: -1
+  _updateRate: 1
+  _autoFreezeProxyFrames: 0
+  _clientPredicted: 1
+  _allowInstantiateOnClient: 1
+  _persistThroughSceneLoads: 0
+  _sceneObjectDestroyOnDetach: 1
+  _sceneObjectAutoAttach: 1
+  _alwaysProxy: 0
+  _detachOnDisable: 1
+  _allowFirstReplicationWhenFrozen: 0
+  _autoRemoveChildEntities: 0
+  _entityBehaviourQueryOption: 0
+  _entityPriorityCalculatorQueryOption: 1
+  _entityReplicationFilterQueryOption: 1
+--- !u!114 &4579341710597027356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277522224553671925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d076701e924574a2a8d496a26c62bb88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7778647828348757409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,6 +2158,8 @@ GameObject:
   - component: {fileID: 215013844892415018}
   - component: {fileID: 2109411644999341726}
   - component: {fileID: 6784163733034650820}
+  - component: {fileID: 5634764127193427503}
+  - component: {fileID: 1282935869008574978}
   m_Layer: 0
   m_Name: "antebra\xE7o d"
   m_TagString: leftForearm
@@ -2165,6 +2253,47 @@ MonoBehaviour:
     m_Extent: {x: 1.5298367, y: 1.0388266, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &5634764127193427503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218863710552944561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -36112512, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneGuid: 
+  _serializerGuid: a5f0145d-6100-4203-8490-ac12e8081edf
+  _prefabId: -1
+  _updateRate: 1
+  _autoFreezeProxyFrames: 0
+  _clientPredicted: 1
+  _allowInstantiateOnClient: 1
+  _persistThroughSceneLoads: 0
+  _sceneObjectDestroyOnDetach: 1
+  _sceneObjectAutoAttach: 1
+  _alwaysProxy: 0
+  _detachOnDisable: 1
+  _allowFirstReplicationWhenFrozen: 0
+  _autoRemoveChildEntities: 0
+  _entityBehaviourQueryOption: 0
+  _entityPriorityCalculatorQueryOption: 1
+  _entityReplicationFilterQueryOption: 1
+--- !u!114 &1282935869008574978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218863710552944561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d076701e924574a2a8d496a26c62bb88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8383232600338365447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,6 +2305,8 @@ GameObject:
   - component: {fileID: 933763154898559039}
   - component: {fileID: 4584640769437455893}
   - component: {fileID: 1027942081543279631}
+  - component: {fileID: 8887604222131888270}
+  - component: {fileID: 4210132880039644413}
   m_Layer: 0
   m_Name: "bra\xE7o e"
   m_TagString: rightArm
@@ -2269,6 +2400,47 @@ MonoBehaviour:
     m_Extent: {x: 0.9511964, y: 1.1929797, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &8887604222131888270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383232600338365447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -36112512, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneGuid: 
+  _serializerGuid: a5f0145d-6100-4203-8490-ac12e8081edf
+  _prefabId: -1
+  _updateRate: 1
+  _autoFreezeProxyFrames: 0
+  _clientPredicted: 1
+  _allowInstantiateOnClient: 1
+  _persistThroughSceneLoads: 0
+  _sceneObjectDestroyOnDetach: 1
+  _sceneObjectAutoAttach: 1
+  _alwaysProxy: 0
+  _detachOnDisable: 1
+  _allowFirstReplicationWhenFrozen: 0
+  _autoRemoveChildEntities: 0
+  _entityBehaviourQueryOption: 0
+  _entityPriorityCalculatorQueryOption: 1
+  _entityReplicationFilterQueryOption: 1
+--- !u!114 &4210132880039644413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383232600338365447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d076701e924574a2a8d496a26c62bb88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9092043443990433676
 GameObject:
   m_ObjectHideFlags: 0

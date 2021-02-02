@@ -31,21 +31,23 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     public override void Attached()
     {
         state.OnShoot = Shoot;
+        state.AddCallback("LeftArmEnable", ChangeArm);
+        state.AddCallback("RightArmEnable", ChangeArm);
     }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && limbCollectior.hasLeftArm && entity.IsOwner)
+        if (Input.GetKeyDown(KeyCode.Z) && state.LeftArmEnable && entity.IsOwner)
         {
-            limbCollectior.hasLeftArm = false;
+            
             StartCoroutine(PunchAnimation("IsLeftPunching"));
             limbType = LimbType.leftArm;
 
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && limbCollectior.hasRightArm && entity.IsOwner)
+        if (Input.GetKeyDown(KeyCode.X) && state.RightArmEnable && entity.IsOwner)
         {
-            limbCollectior.hasRightArm = false;
+            
             StartCoroutine(PunchAnimation("IsRightPunching"));
             limbType = LimbType.rightArm;
         }
@@ -58,6 +60,14 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         state.Shoot();
     }
 
+    private void ChangeArm()
+    {
+            leftArmSprite.SetActive(state.LeftArmEnable);
+            leftForearmSprite.SetActive(state.LeftArmEnable);
+            rightArmSprite.SetActive(state.RightArmEnable);
+            rightForearmSprite.SetActive(state.RightArmEnable);
+    }
+
     void Shoot()
     {
         if (entity.IsOwner)
@@ -65,15 +75,17 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
             PlayerType playerType = gameObject.GetComponent<PlayerStatus>().playerType;
             if (limbType == LimbType.leftArm)
             {
-                leftArmSprite.SetActive(false);
-                leftForearmSprite.SetActive(false);
+                leftArmSprite.SetActive(state.LeftArmEnable);
+                leftForearmSprite.SetActive(state.LeftArmEnable);
+                state.LeftArmEnable = false;
                 setupLimbSprite(LimbType.leftArm);
             }
 
             if (limbType == LimbType.rightArm)
             {
-                rightArmSprite.SetActive(false);
-                rightForearmSprite.SetActive(false);
+                rightArmSprite.SetActive(state.RightArmEnable);
+                rightForearmSprite.SetActive(state.RightArmEnable);
+                state.RightArmEnable = false;
                 setupLimbSprite(LimbType.rightArm);
             }
 

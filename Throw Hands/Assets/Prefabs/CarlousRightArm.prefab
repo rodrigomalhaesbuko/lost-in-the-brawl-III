@@ -626,3 +626,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LimbComponent: {fileID: 4643683851853321670}
+  Damaging: 1

@@ -566,6 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LimbComponent: {fileID: 2853595779854578981}
+  Damaging: 1
 --- !u!1 &5657479354491518838
 GameObject:
   m_ObjectHideFlags: 0

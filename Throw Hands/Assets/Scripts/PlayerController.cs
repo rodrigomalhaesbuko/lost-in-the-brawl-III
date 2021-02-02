@@ -37,6 +37,9 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
         Camera.GetComponent<CameraHandler>().clientPositionX = gameObject;
         state.SetAnimator(playerAnimator);
+        state.LeftArmEnable = true;
+        state.RightArmEnable = true;
+        
     }
 
     // update para o bolt 
