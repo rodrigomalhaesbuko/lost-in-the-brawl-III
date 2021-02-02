@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 {
@@ -23,6 +24,17 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     public Animator playerAnimator;
     public float animationTime;
 
+    InputMaster controls;
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+
+        controls.Gameplay.LeftArmShoot.performed += ctx => ShootLeftArm();
+        controls.Gameplay.RightArmShoot.performed += ctx => ShootRightArm();
+        controls.Gameplay.Parry.performed += ctx => Parry();
+    }
+
     private void Start()
     {
         playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
@@ -34,24 +46,34 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         state.AddCallback("LeftArmEnable", ChangeArm);
         state.AddCallback("RightArmEnable", ChangeArm);
     }
-    // Update is called once per frame
-    void Update()
+
+    public void ShootLeftArm()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && state.LeftArmEnable && entity.IsOwner)
+        if (state.LeftArmEnable && entity.IsOwner)
         {
-            
+
             StartCoroutine(PunchAnimation("IsLeftPunching"));
             limbType = LimbType.leftArm;
 
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.X) && state.RightArmEnable && entity.IsOwner)
+    public void Parry()
+    {
+        Debug.Log("Parry");
+    }
+
+
+    public void ShootRightArm()
+    {
+        if (state.RightArmEnable && entity.IsOwner)
         {
-            
+
             StartCoroutine(PunchAnimation("IsRightPunching"));
             limbType = LimbType.rightArm;
         }
     }
+
 
     private IEnumerator PunchAnimation(string animation)
     {
@@ -132,6 +154,17 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         }
 
     }
+
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
+
 }
 
 public enum LimbType 

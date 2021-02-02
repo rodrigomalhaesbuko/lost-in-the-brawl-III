@@ -1,15 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+
 
 public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
 {
     public bool hasLeftArm = true;
     public bool hasRightArm = true;
 
+    InputMaster controls;
+
+    private bool picked = false;
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+        controls.Gameplay.Move.performed += ctx =>
+        {
+            Debug.Log(ctx.ReadValue<Vector2>().y);
+            if (ctx.ReadValue<Vector2>().y <= -0.5)
+            {
+                picked = true;
+            }else
+            {
+                picked = false;
+            }
+        };
+        
+    }
+        
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKey(KeyCode.DownArrow))
+        
+        if (picked)
         {
             if (entity.IsOwner)
             {
@@ -38,5 +64,17 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
             
         }
     }
+
+
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
+
 
 }
