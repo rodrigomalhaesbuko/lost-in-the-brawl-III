@@ -12,8 +12,9 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if (collision.CompareTag("limbHitbox"))
         {
-            if(collision.gameObject.GetComponent<LimbHitComponent>().LimbComponent.playerType != myLimbs)
+            if(collision.gameObject.GetComponent<LimbHitComponent>().LimbComponent.playerType != myLimbs && collision.gameObject.GetComponent<LimbHitComponent>().Damaging )
             {
+                collision.gameObject.GetComponent<LimbHitComponent>().Damaging = false;
                 player.TakeDamage();
             }
             
