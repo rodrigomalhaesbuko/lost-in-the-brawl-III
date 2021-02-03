@@ -34,6 +34,7 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject HitBox;
     InputMaster controls;
 
+
     private void Awake()
     {
         controls = new InputMaster();
@@ -63,13 +64,6 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
                 rightArmShootTrigger = false;
 
         };
-
-        controls.Gameplay.Parry.performed += ctx => Parry();
-    }
-
-    private void Start()
-    {
-        playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     public override void Attached()
@@ -87,8 +81,6 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             LeftArmShooted = true;
             StartCoroutine(PunchAnimation("IsLeftPunching"));
-            
-
         }
     }
 
@@ -98,13 +90,13 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             RightArmShooted = true;
             StartCoroutine(PunchAnimation("IsRightPunching"));
-
         }
     }
 
     private IEnumerator PunchAnimation(string animation)
     {
-        playerAnimator.SetTrigger(animation);
+
+        state.Animator.SetTrigger(animation);
         yield return new WaitForSeconds(animationTime);
         if (animation == "IsRightPunching")
         {
@@ -119,34 +111,12 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         state.Shoot();
     }
 
-    //PARRY
-
-    public void Parry()
-    {
-        Debug.Log("Parry");
-        StartCoroutine(ParryAnimation());
-    }
-
-    private IEnumerator ParryAnimation()
-    {
-        if (entity.IsOwner)
-        {
-            playerAnimator.SetTrigger("Parry");
-            HitBox.SetActive(false);
-            yield return new WaitForSeconds(parryAnimationTime);
-            HitBox.SetActive(true);
-        }
-
-    }
-
-  
-
     private void ChangeRightArm()
     {
-            leftArmSprite.SetActive(state.LeftArmEnable);
-            leftForearmSprite.SetActive(state.LeftArmEnable);
-            rightArmSprite.SetActive(state.RightArmEnable);
-            rightForearmSprite.SetActive(state.RightArmEnable);
+         leftArmSprite.SetActive(state.LeftArmEnable);
+         leftForearmSprite.SetActive(state.LeftArmEnable);
+         rightArmSprite.SetActive(state.RightArmEnable);
+         rightForearmSprite.SetActive(state.RightArmEnable);
     }
 
     private void ChangeLeftArm()

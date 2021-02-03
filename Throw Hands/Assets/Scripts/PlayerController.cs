@@ -16,6 +16,8 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject Camera;
     public Animator playerAnimator;
     public GameObject shoes;
+    private bool parrying;
+    private bool enableParry = true;
 
     InputMaster controls;
 
@@ -26,6 +28,15 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         controls = new InputMaster();
 
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+
+        controls.Gameplay.Parry.performed += ctx => {
+            if (enableParry) {
+                parrying = true;
+                enableParry = false;
+            }
+        };
+
+        controls.Gameplay.Parry.canceled += ctx => { enableParry = true; };
 
     }
 
@@ -95,10 +106,24 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         }
         else
         {
-            playerAnimator.SetBool("Duck", false);
+            state.Animator.SetBool("Duck", false);
         }
-        
 
+        if (state.Parrying)
+        {
+            state.Animator.SetTrigger("Parry");
+            StartCoroutine(ParryAnimation());
+        }
+    }
+
+
+    private IEnumerator ParryAnimation()
+    {
+        
+        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(false);
+        yield return new WaitForSeconds(gameObject.GetComponent<LimbShooter>().parryAnimationTime);
+        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(true);
+        parrying = false; 
     }
 
     //    // Start is called before the first frame update
@@ -124,6 +149,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
         state.MoveX = move.x;
         state.MoveY = move.y;
+        state.Parrying = parrying;
 
         //Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
 
