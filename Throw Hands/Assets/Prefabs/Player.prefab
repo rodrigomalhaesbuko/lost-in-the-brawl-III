@@ -491,7 +491,7 @@ MonoBehaviour:
   RightArmShooted: 0
   playerAnimator: {fileID: 0}
   animationTime: 0.5
-  parryAnimationTime: 0.5
+  parryAnimationTime: 0.6
   Block: {fileID: 464860556945578697}
   HitBox: {fileID: 6316737200646267329}
 --- !u!61 &3360263465496857667

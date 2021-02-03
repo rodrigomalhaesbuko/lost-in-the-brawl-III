@@ -18,6 +18,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject shoes;
     private bool parrying;
     private bool enableParry = true;
+    private bool enableParryAnimation = true;
 
     InputMaster controls;
 
@@ -31,8 +32,9 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
         controls.Gameplay.Parry.performed += ctx => {
             if (enableParry) {
-                parrying = true;
                 enableParry = false;
+                parrying = true;
+                //StartCoroutine(PrepareParry());
             }
         };
 
@@ -52,6 +54,13 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         state.RightArmEnable = true;
         
     }
+
+    //private IEnumerator PrepareParry()
+    //{
+        
+    //    yield return new WaitForEndOfFrame();
+    //    parrying = false;
+    //}
 
     // update para o bolt 
     public override void SimulateOwner()
@@ -111,19 +120,24 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
         if (state.Parrying)
         {
-            state.Animator.SetTrigger("Parry");
-            StartCoroutine(ParryAnimation());
+            if (enableParryAnimation)
+            {
+                enableParryAnimation = false;
+                state.Animator.SetTrigger("ParryT");
+                StartCoroutine(ParryAnimation());
+            }
         }
     }
 
 
     private IEnumerator ParryAnimation()
     {
-        
         gameObject.GetComponent<LimbShooter>().HitBox.SetActive(false);
         yield return new WaitForSeconds(gameObject.GetComponent<LimbShooter>().parryAnimationTime);
         gameObject.GetComponent<LimbShooter>().HitBox.SetActive(true);
-        parrying = false; 
+        enableParry = true;
+        parrying = false;
+        enableParryAnimation = true;
     }
 
     //    // Start is called before the first frame update
