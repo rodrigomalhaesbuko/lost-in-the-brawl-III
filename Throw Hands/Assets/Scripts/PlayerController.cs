@@ -69,7 +69,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     //    parrying = false;
     //}
 
-    // update para o bolt 
+    // update para o bolt
     public override void SimulateOwner()
     {
         CheckInputs();
