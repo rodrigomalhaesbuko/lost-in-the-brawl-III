@@ -28,14 +28,11 @@ public class GameController : GlobalEventListener
 
     private bool gameStarted = false;
 
-    
-
     public float battleOffset = 5f;
- 
 
     public void createGame()
     {
-    
+        Debug.Log("JOGO CRIADO");
         gameStarted = true;
         //StartCoroutine(QuitWait());
         WaitingPlayer.SetActive(false);
