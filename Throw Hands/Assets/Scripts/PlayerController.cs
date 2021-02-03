@@ -122,9 +122,13 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             if (enableParryAnimation)
             {
-                enableParryAnimation = false;
-                state.Animator.SetTrigger("ParryT");
-                StartCoroutine(ParryAnimation());
+                if(state.LeftArmEnable || state.RightArmEnable)
+                {
+                    enableParryAnimation = false;
+                    state.Animator.SetTrigger("ParryT");
+                    StartCoroutine(ParryAnimation());
+                }
+
             }
         }
     }
@@ -133,8 +137,10 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     private IEnumerator ParryAnimation()
     {
         gameObject.GetComponent<LimbShooter>().HitBox.SetActive(false);
+        gameObject.GetComponent<LimbShooter>().Block.SetActive(true);
         yield return new WaitForSeconds(gameObject.GetComponent<LimbShooter>().parryAnimationTime);
         gameObject.GetComponent<LimbShooter>().HitBox.SetActive(true);
+        gameObject.GetComponent<LimbShooter>().Block.SetActive(false);
         enableParry = true;
         parrying = false;
         enableParryAnimation = true;
