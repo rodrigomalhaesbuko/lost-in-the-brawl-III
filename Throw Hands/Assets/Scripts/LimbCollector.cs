@@ -21,7 +21,7 @@ public class LimbCollector : Bolt.EntityBehaviour<ICustomPlayerState>
         controls = new InputMaster();
         controls.Gameplay.Move.performed += ctx =>
         {
-            Debug.Log(ctx.ReadValue<Vector2>().y);
+            //Debug.Log(ctx.ReadValue<Vector2>().y);
             if (ctx.ReadValue<Vector2>().y <= -0.5)
             {
                 picked = true;
