@@ -19,6 +19,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     private bool parrying;
     private bool enableParry = true;
     private bool enableParryAnimation = true;
+    private bool alreadyJumped = false;
 
     InputMaster controls;
 
@@ -39,7 +40,6 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         };
 
         controls.Gameplay.Parry.canceled += ctx => { enableParry = true; };
-
     }
 
     //void start para o bolt
@@ -52,12 +52,21 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         state.SetAnimator(playerAnimator);
         state.LeftArmEnable = true;
         state.RightArmEnable = true;
+
+        if (BoltNetwork.IsClient)
+        {
+            state.MyX = move.x;
+        }
+        else
+        {
+            state.OtherX = move.x;
+        }
+        
         
     }
 
     //private IEnumerator PrepareParry()
     //{
-        
     //    yield return new WaitForEndOfFrame();
     //    parrying = false;
     //}
@@ -66,6 +75,15 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public override void SimulateOwner()
     {
         CheckInputs();
+
+        if (BoltNetwork.IsClient)
+        {
+            state.MyX = move.x;
+        }
+        else
+        {
+            state.OtherX = move.x;
+        }
 
         if (Camera.transform.position.x > 21.0f || Camera.transform.position.x < -5.5f)
         {
@@ -97,18 +115,23 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             //Debug.Log("Nao Ta andando");
         }
 
-        if (state.MoveY >= 0.5f)
+        if (IsGrounded())
         {
-            if (IsGrounded()) {
-                state.Animator.SetBool("Jump", true);
-                Jump();
+            if (state.MoveY >= 0.5f)
+            {
+                if (!alreadyJumped)
+                {
+                    alreadyJumped = true;
+                    state.Animator.SetBool("Jump", true);
+                    Jump();
+                }
+            }
+            else
+            {
+                state.Animator.SetBool("Jump", false);
             }
         }
-        else
-        {
-            state.Animator.SetBool("Jump", false);
-        }
-
+       
         if (state.MoveY < -0.5f)
         {
             state.Animator.SetBool("Duck", true);
@@ -128,11 +151,22 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
                     state.Animator.SetTrigger("ParryT");
                     StartCoroutine(ParryAnimation());
                 }
-
             }
         }
-    }
 
+        //if(state.MyX > state.OtherX)
+        //{
+        //        Vector3 newScale = gameObject.transform.localScale;
+        //        newScale.x *= -1;
+        //        gameObject.transform.localScale = newScale;
+
+        //}else if (state.MyX < state.OtherX)
+        //{
+        //        Vector3 newScale = gameObject.transform.localScale;
+        //        newScale.x *= -1;
+        //        gameObject.transform.localScale = newScale;
+        //}
+    }
 
     private IEnumerator ParryAnimation()
     {
@@ -195,7 +229,8 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         }
         else
         {
-            return false;
+            alreadyJumped = false;
+            return false;  
         }
     }
 
