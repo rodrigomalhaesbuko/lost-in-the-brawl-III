@@ -30,11 +30,11 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         localHealth = state.Health;
 
-        Debug.Log("FROM Host");
-        Debug.Log("host");
-        Debug.Log(state.Health);
-        Debug.Log("Client");
-        Debug.Log(state.EnemyHealth);
+        //Debug.Log("FROM Host");
+        //Debug.Log("host");
+        //Debug.Log(state.Health);
+        //Debug.Log("Client");
+        //Debug.Log(state.EnemyHealth);
 
         hostSlider.GetComponent<Slider>().value = 0.20f * state.Health;
 
@@ -51,11 +51,15 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         //Debug.Log(state.Health);
         //Debug.Log(state.EnemyHealth);
         //Debug.Log(localHealth);
-        Debug.Log("FROM ENEMY");
-        Debug.Log("host");
-        Debug.Log(state.Health);
-        Debug.Log("Client");
-        Debug.Log(state.EnemyHealth);
+
+        if (!BoltNetwork.IsClient)
+        {
+            Debug.Log("FROM ENEMY");
+            Debug.Log("host");
+            Debug.Log(state.Health);
+            Debug.Log("Client");
+            Debug.Log(state.EnemyHealth);
+        }
 
         clientSlider.GetComponent<Slider>().value = 0.20f * state.EnemyHealth;
 

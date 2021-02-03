@@ -80,7 +80,6 @@ public class GameController : GlobalEventListener
     [Obsolete]
     public override void SceneLoadLocalDone(string scene)
     {
-        WaitingPlayer.SetActive(true);
 
         if (BoltNetwork.IsClient)
         {
@@ -90,7 +89,8 @@ public class GameController : GlobalEventListener
 
     public override void OnEvent(ClientLogged evnt)
     {
-        createGame();
+        //createGame();
+        gameStarted = true;
         Debug.Log("client logged");
     }
 
@@ -130,6 +130,9 @@ public class GameController : GlobalEventListener
         {
             Debug.Log("ENTROU INSTANCE DOUGLAS");
             DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
+
+            DouglasInstance.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
+            DouglasInstance.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
         }
 
         if (DouglasInstance != null && CarlousInstance != null)
@@ -149,6 +152,20 @@ public class GameController : GlobalEventListener
                     Flip();
                 }
             }
+        }
+
+        if(DouglasInstance != null)
+        {
+            DouglasInstance.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
+            DouglasInstance.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+
+            Debug.LogWarning(DouglasInstance.GetComponent<PlayerStatus>().clientSlider == null);
+        }
+
+        if (gameStarted)
+        {
+            createGame();
+            gameStarted = false;
         }
     }
 
