@@ -24,12 +24,51 @@ public class GameController : GlobalEventListener
     private GameObject DouglasInstance;
     private GameObject CarlousInstance;
 
-    public GameObject WaintingPlayer;
+    public GameObject WaitingPlayer;
 
     private bool gameStarted = false;
 
+    
+
     public float battleOffset = 5f;
-    [Obsolete]
+ 
+
+    public void createGame()
+    {
+    
+        gameStarted = true;
+        //StartCoroutine(QuitWait());
+        WaitingPlayer.SetActive(false);
+        playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
+        playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+        playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
+
+        playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
+        playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
+        GameObject bola1 = BoltNetwork.Instantiate(playerPrefab, new Vector2(
+            this.transform.position.x + (battleOffset * -1.5f),
+                this.transform.position.y
+                ), Quaternion.identity);
+        playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
+        playerPrefab2.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+        playerPrefab2.GetComponent<PlayerController>().Camera = CameraPriv;
+
+        playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
+        playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
+        GameObject bola2 = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
+        this.transform.position.x + (battleOffset * 1.5f),
+        this.transform.position.y
+            ), Quaternion.identity);
+
+        if (!BoltNetwork.IsClient)
+        {
+            bola2.SetActive(false);
+        }
+        else
+        {
+            bola1.SetActive(false);
+        }
+    }
 
     private void Start()
     {
@@ -41,7 +80,18 @@ public class GameController : GlobalEventListener
     [Obsolete]
     public override void SceneLoadLocalDone(string scene)
     {
-            WaintingPlayer.SetActive(true);
+        WaitingPlayer.SetActive(true);
+
+        if (BoltNetwork.IsClient)
+        {
+            ClientLogged.Create().Send();
+        }
+    }
+
+    public override void OnEvent(ClientLogged evnt)
+    {
+        createGame();
+        Debug.Log("client logged");
     }
 
     //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
@@ -98,44 +148,6 @@ public class GameController : GlobalEventListener
                 {
                     Flip();
                 }
-                
-            }
-        }
-
-        if (BoltMatchmaking.CurrentSession.ConnectionsCurrent == 2 && !gameStarted)
-        {
-            gameStarted = true;
-            StartCoroutine(QuitWait());
-            playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-            playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
-            playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
-
-            playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
-            playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
-            GameObject bola1 = BoltNetwork.Instantiate(playerPrefab, new Vector2(
-                this.transform.position.x + (battleOffset * -1.5f),
-                    this.transform.position.y
-                    ), Quaternion.identity);
-            playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-            playerPrefab2.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
-            playerPrefab2.GetComponent<PlayerController>().Camera = CameraPriv;
-
-            playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
-            playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
-            GameObject bola2 = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
-            this.transform.position.x + (battleOffset * 1.5f),
-            this.transform.position.y
-                ), Quaternion.identity);
-
-            if (!BoltNetwork.IsClient)
-            {
-
-                bola2.SetActive(false);
-
-            }
-            else
-            {
-                bola1.SetActive(false);
             }
         }
     }
@@ -156,7 +168,7 @@ public class GameController : GlobalEventListener
     private IEnumerator QuitWait()
     {
         yield return new WaitForSeconds(2.0f);
-        WaintingPlayer.SetActive(false);
+        WaitingPlayer.SetActive(false);
 
     }
 }

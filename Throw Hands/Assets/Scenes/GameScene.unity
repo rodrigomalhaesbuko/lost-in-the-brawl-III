@@ -2096,7 +2096,7 @@ MonoBehaviour:
   clientSlider: {fileID: 1075740483}
   RematchBox: {fileID: 1582308756}
   Camera: {fileID: 1846920735}
-  WaintingPlayer: {fileID: 831757755}
+  WaitingPlayer: {fileID: 831757755}
   battleOffset: 5
 --- !u!4 &1740422666
 Transform:

@@ -4102,6 +4102,15 @@
       "Groups": [
         "samples"
       ]
+    },
+    {
+      "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
+      "Properties": [],
+      "Name": "ClientLogged",
+      "Guid": "3581a7cf-6899-463c-afcb-d30515de8eae",
+      "Groups": [
+        "samples"
+      ]
     }
   ],
   "ActiveGroup": "samples"

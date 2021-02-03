@@ -61,8 +61,6 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             state.OtherX = move.x;
         }
-        
-        
     }
 
     //private IEnumerator PrepareParry()
