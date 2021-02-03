@@ -21,6 +21,9 @@ public class GameController : GlobalEventListener
     private GameObject hostSliderPriv;
     private GameObject clientSliderPriv;
 
+    private GameObject DouglasInstance;
+    private GameObject CarlousInstance;
+
     public float battleOffset = 5f;
     [Obsolete]
 
@@ -93,7 +96,47 @@ public class GameController : GlobalEventListener
         SceneManager.LoadScene("SampleScene");
     }
 
+    private void Update()
+    {
+        if (GameObject.FindGameObjectWithTag("carlous") != null && CarlousInstance == null)
+        {
+            Debug.Log("ENTROU INSTANCE CARLOUS");
+            CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
+        }
+
+        if (GameObject.FindGameObjectWithTag("douglas") != null && DouglasInstance == null)
+        {
+            Debug.Log("ENTROU INSTANCE DOUGLAS");
+            DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
+        }
+
+        if (DouglasInstance != null && CarlousInstance != null)
+        {
+            if (DouglasInstance.transform.position.x > CarlousInstance.transform.position.x) 
+            {
+                Flip();
+            }
+
+            if (CarlousInstance.transform.position.x > DouglasInstance.transform.position.x)
+            {
+                Flip();
+            }
+        }
+    }
+
+    private void Flip()
+    {
+        Vector3 newScaleDouglas = DouglasInstance.transform.localScale;
+        newScaleDouglas.x *= -1;
+        DouglasInstance.transform.localScale = newScaleDouglas;
+
+        Vector3 newScaleCarlous = CarlousInstance.transform.localScale;
+        newScaleCarlous.x *= -1;
+        CarlousInstance.transform.localScale = newScaleCarlous;
+    }
+
 }
+
 //{
 //    public GameObject PlayerPrefab;
 //    public GameObject GameCanvas;

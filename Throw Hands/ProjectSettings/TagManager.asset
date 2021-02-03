@@ -11,6 +11,8 @@ TagManager:
   - rightArm
   - ground
   - limbHitbox
+  - douglas
+  - carlous
   layers:
   - Default
   - TransparentFX
