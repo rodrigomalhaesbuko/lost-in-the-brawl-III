@@ -114,12 +114,19 @@ public class GameController : GlobalEventListener
         {
             if (DouglasInstance.transform.position.x > CarlousInstance.transform.position.x) 
             {
-                Flip();
+                if (!CarlousInstance.GetComponent<PlayerStatus>().isFlipped && !DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
+                {
+                    Flip();
+                }
             }
 
             if (CarlousInstance.transform.position.x > DouglasInstance.transform.position.x)
             {
-                Flip();
+                if(CarlousInstance.GetComponent<PlayerStatus>().isFlipped && DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
+                {
+                    Flip();
+                }
+                
             }
         }
     }
@@ -129,10 +136,12 @@ public class GameController : GlobalEventListener
         Vector3 newScaleDouglas = DouglasInstance.transform.localScale;
         newScaleDouglas.x *= -1;
         DouglasInstance.transform.localScale = newScaleDouglas;
+        DouglasInstance.GetComponent<PlayerStatus>().isFlipped = !DouglasInstance.GetComponent<PlayerStatus>().isFlipped;
 
         Vector3 newScaleCarlous = CarlousInstance.transform.localScale;
         newScaleCarlous.x *= -1;
         CarlousInstance.transform.localScale = newScaleCarlous;
+        CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
     }
 
 }

@@ -1405,7 +1405,7 @@ GameObject:
   - component: {fileID: 8430605979221251717}
   m_Layer: 0
   m_Name: PlayerCarlous
-  m_TagString: Untagged
+  m_TagString: carlous
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1566,6 +1566,7 @@ MonoBehaviour:
   hostSlider: {fileID: 0}
   clientSlider: {fileID: 0}
   GameController: {fileID: 0}
+  isFlipped: 0
   currentSlider: {fileID: 0}
   playerType: 0
 --- !u!114 &8807846235583776794
@@ -1631,7 +1632,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.18959379, y: 1.3772099}
+  m_Offset: {x: -0.18959379, y: 1.0531712}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1642,7 +1643,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3692327, y: 6.780291}
+  m_Size: {x: 3.3692327, y: 5.6785564}
   m_EdgeRadius: 0
 --- !u!1 &6163102823278672749
 GameObject:

@@ -181,14 +181,33 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
             GameObject newLimb = BoltNetwork.Instantiate(limb, shotPoint.position, shotPoint.rotation);
             newLimb.GetComponent<LimbComponent>().limbHitbox.GetComponent<BoxCollider2D>().isTrigger = true;
 
-            if (playerType == PlayerType.Carlous)
+            if (!gameObject.GetComponent<PlayerStatus>().isFlipped)
             {
-                newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce;
+                if (playerType == PlayerType.Carlous)
+                {
+                    newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce;
+                }
+                else
+                {
+                    newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
+                }
             }
             else
             {
-                newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
+                if (playerType == PlayerType.Carlous)
+                {
+                    newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
+                 }
+                else
+                {
+                    newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce;
+                }
+
+                Vector3 newLimbLocalScale = newLimb.transform.localScale;
+                newLimbLocalScale.x *= -1;
+                newLimb.transform.localScale = newLimbLocalScale;
             }
+            
             yield return new WaitForEndOfFrame();
 
         }

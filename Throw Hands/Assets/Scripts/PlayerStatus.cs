@@ -10,6 +10,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject hostSlider;
     public GameObject clientSlider;
     public GameObject GameController;
+    public bool isFlipped = false;
 
     public GameObject currentSlider;
 
