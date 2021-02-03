@@ -24,6 +24,10 @@ public class GameController : GlobalEventListener
     private GameObject DouglasInstance;
     private GameObject CarlousInstance;
 
+    public GameObject WaintingPlayer;
+
+    private bool gameStarted = false;
+
     public float battleOffset = 5f;
     [Obsolete]
 
@@ -37,39 +41,7 @@ public class GameController : GlobalEventListener
     [Obsolete]
     public override void SceneLoadLocalDone(string scene)
     {
-        playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-        playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
-        playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
-
-        playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
-        playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
-        GameObject bola1 = BoltNetwork.Instantiate(playerPrefab, new Vector2(
-            this.transform.position.x + (battleOffset * -1.5f),
-                this.transform.position.y
-                ), Quaternion.identity);
-        playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-        playerPrefab2.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
-        playerPrefab2.GetComponent<PlayerController>().Camera = CameraPriv;
-
-        playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
-        playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
-        GameObject bola2 = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
-        this.transform.position.x + (battleOffset * 1.5f),
-        this.transform.position.y
-            ), Quaternion.identity);
-
-        if (BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1)
-        {
-
-            bola2.SetActive(false);
-
-        }
-        else if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 2)
-        {
-            bola1.SetActive(false);
-        }
-
-
+            WaintingPlayer.SetActive(true);
     }
 
     //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
@@ -129,6 +101,43 @@ public class GameController : GlobalEventListener
                 
             }
         }
+
+        if (BoltMatchmaking.CurrentSession.ConnectionsCurrent == 2 && !gameStarted)
+        {
+            gameStarted = true;
+            StartCoroutine(QuitWait());
+            playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
+            playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+            playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
+
+            playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
+            playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
+            GameObject bola1 = BoltNetwork.Instantiate(playerPrefab, new Vector2(
+                this.transform.position.x + (battleOffset * -1.5f),
+                    this.transform.position.y
+                    ), Quaternion.identity);
+            playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
+            playerPrefab2.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+            playerPrefab2.GetComponent<PlayerController>().Camera = CameraPriv;
+
+            playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
+            playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
+            GameObject bola2 = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
+            this.transform.position.x + (battleOffset * 1.5f),
+            this.transform.position.y
+                ), Quaternion.identity);
+
+            if (!BoltNetwork.IsClient)
+            {
+
+                bola2.SetActive(false);
+
+            }
+            else
+            {
+                bola1.SetActive(false);
+            }
+        }
     }
 
     private void Flip()
@@ -144,7 +153,15 @@ public class GameController : GlobalEventListener
         CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
     }
 
+    private IEnumerator QuitWait()
+    {
+        yield return new WaitForSeconds(2.0f);
+        WaintingPlayer.SetActive(false);
+
+    }
 }
+
+
 
 //{
 //    public GameObject PlayerPrefab;
