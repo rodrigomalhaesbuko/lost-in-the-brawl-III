@@ -34,6 +34,9 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject HitBox;
     InputMaster controls;
 
+    private bool enableLeftShooting = true;
+    private bool enableRightShooting = true;
+
 
     private void Awake()
     {
@@ -66,11 +69,14 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
         };
     }
 
+    // bolt void start 
     public override void Attached()
     {
         state.OnShoot = Shoot;
         state.AddCallback("LeftArmEnable", ChangeLeftArm);
         state.AddCallback("RightArmEnable", ChangeRightArm);
+        state.IsLeftArmShooting = false;
+        state.IsRightArmShooting = false;
     }
 
 
@@ -95,20 +101,49 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private IEnumerator PunchAnimation(string animation)
     {
+        if (animation == "IsRightPunching")
+        {
+            state.IsRightArmShooting = true;
+        }
+        else
+        { 
+            state.IsLeftArmShooting = true;
+        }
 
-        state.Animator.SetTrigger(animation);
         yield return new WaitForSeconds(animationTime);
+
         if (animation == "IsRightPunching")
         {
             limbType = LimbType.rightArm;
+            state.IsRightArmShooting = false;
+            enableRightShooting = true;
         }
         else
         {
             limbType = LimbType.leftArm;
+            state.IsLeftArmShooting = false;
+            enableLeftShooting = true;
         }
 
 
         state.Shoot();
+    }
+
+
+    private void Update()
+    {
+        if (state.IsRightArmShooting)
+        {
+                enableRightShooting = false;
+                state.Animator.SetTrigger("IsRightPunching");
+        }
+
+        if (state.IsLeftArmShooting)
+        {
+
+                enableLeftShooting = false;
+                state.Animator.SetTrigger("IsLeftPunching");
+        }
     }
 
     private void ChangeRightArm()
