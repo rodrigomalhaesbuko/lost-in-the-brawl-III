@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 3360263465496857667}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: douglas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   rb: {fileID: 1653952333227796215}
-  jumpForce: 35
+  jumpForce: 80
   colliderRaySize: 1
   groundCollider: {fileID: 0}
   Camera: {fileID: 0}

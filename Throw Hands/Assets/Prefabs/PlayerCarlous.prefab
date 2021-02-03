@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   rb: {fileID: 5524102872281988145}
-  jumpForce: 35
+  jumpForce: 80
   colliderRaySize: 1
   groundCollider: {fileID: 0}
   Camera: {fileID: 0}
