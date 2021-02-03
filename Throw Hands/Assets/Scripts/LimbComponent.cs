@@ -33,7 +33,7 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
             gameObject.GetComponent<Rigidbody2D>().drag = 10f;
-            gameObject.GetComponent<LimbHitComponent>().Damaging = false;
+            limbHitbox.GetComponent<LimbHitComponent>().Damaging = false;
         }
     }
 
