@@ -16,6 +16,7 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
             {
                 collision.gameObject.GetComponent<LimbHitComponent>().Damaging = false;
                 player.TakeDamage();
+                state.Animator.SetTrigger("Damage");
             }
             
         }
