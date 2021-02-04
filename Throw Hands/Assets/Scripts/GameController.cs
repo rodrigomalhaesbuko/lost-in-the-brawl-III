@@ -30,11 +30,16 @@ public class GameController : GlobalEventListener
 
     public float battleOffset = 5f;
 
+    private bool p1AcceptRematch = false;
+
+    private bool p2AcceptRematch = false;
+
     public void createGame()
     {
         Debug.Log("JOGO CRIADO");
-        gameStarted = true;
         //StartCoroutine(QuitWait());
+        // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
+        // DA PARA FAZER ISSO COM CORROUTINA
         WaitingPlayer.SetActive(false);
         playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
         playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
@@ -77,7 +82,6 @@ public class GameController : GlobalEventListener
     [Obsolete]
     public override void SceneLoadLocalDone(string scene)
     {
-
         if (BoltNetwork.IsClient)
         {
             ClientLogged.Create().Send();
@@ -89,6 +93,17 @@ public class GameController : GlobalEventListener
         //createGame();
         gameStarted = true;
         Debug.Log("client logged");
+    }
+
+
+    public override void OnEvent(P1Rematch evnt)
+    {
+        p1AcceptRematch = true;
+    }
+
+    public override void OnEvent(P2Rematch evnt)
+    {
+        p2AcceptRematch = true;
     }
 
     //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
@@ -105,11 +120,37 @@ public class GameController : GlobalEventListener
         RematchBox.SetActive(true);
     }
 
-    public void Rematch()
+    private void Restart()
     {
+        BoltNetwork.Destroy(DouglasInstance);
+        BoltNetwork.Destroy(CarlousInstance);
+        p1AcceptRematch = false;
+        p2AcceptRematch = false;
+        RematchBox.SetActive(false);
+        // AQUI TEM QUE TER DE NOVO O 3 2 1
+        // E O THROW ARMS 
+        createGame();
     }
 
-    public void Leave()
+    public void Rematch()
+    {
+        if (BoltNetwork.IsClient)
+        {
+            P2Rematch.Create().Send();
+        }
+        else
+        {
+            P1Rematch.Create().Send();
+        }
+    }
+
+    public void LeaveButton()
+    {
+        Leave.Create().Send();
+    }
+
+    // EVENT FOR LEAVE THE GAME 
+    public override void OnEvent(Leave evnt)
     {
         BoltLauncher.Shutdown();
         SceneManager.LoadScene("SampleScene");
@@ -161,8 +202,13 @@ public class GameController : GlobalEventListener
 
         if (gameStarted)
         {
-            createGame();
             gameStarted = false;
+            createGame();
+        }
+
+        if(p1AcceptRematch && p2AcceptRematch)
+        {
+            Restart();
         }
     }
 
