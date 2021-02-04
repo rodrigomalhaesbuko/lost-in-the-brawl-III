@@ -17,47 +17,19 @@ public class MenuController: GlobalEventListener
     [SerializeField] private GameObject AlertBox;
     [SerializeField] private GameObject Disclaimer;
 
-    //    private void Awake()
-    //    {
-    //        PhotonNetwork.ConnectUsingSettings(versionName);
-    //    }
-
-    //    void OnConnectedToMaster()
-    //    {
-    //        PhotonNetwork.JoinLobby(TypedLobby.Default);
-    //        PhotonNetwork.playerName = "rodrigo";
-    //        Debug.Log("connected");
-    //    }
-
-    //    public void CreateGame()
-    //    {
-    //        PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() { MaxPlayers = 2 }, null);
-    //        Debug.Log("obaaa");
-    //    }
-
-    //    public void JoinGame()
-    //    {
-    //        RoomOptions roomOptions = new RoomOptions();
-    //        roomOptions.MaxPlayers = 2;
-    //        PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, roomOptions, TypedLobby.Default);
-
-    //    }
-
-    //    private void OnJoinedRoom()
-    //    {
-    //        PhotonNetwork.LoadLevel("GameScene");
-    //        Debug.Log("mudou de scena");
-    //    }
-    //}
-
-    /// <summary>
-    /// USING BOLT
-    /// </summary>
+    //Loading
+    [SerializeField] private GameObject Loading;
+    [SerializeField] private GameObject RoomName;
+    [SerializeField] private GameObject RoomImageClient;
+    [SerializeField] private GameObject RoomImageHost;
 
     public void CreateGame()
     {
-        if(CreateGameInput.text.Length > 0)
+        if(JoinGameInput.text.Length > 0)
         {
+            Loading.SetActive(true);
+            RoomImageHost.SetActive(true);
+            RoomName.GetComponent<Text>().text = JoinGameInput.text;
             BoltLauncher.StartServer();
         }
         else
@@ -68,7 +40,7 @@ public class MenuController: GlobalEventListener
     }
     public override void BoltStartDone()
     {
-        BoltMatchmaking.CreateSession(sessionID: CreateGameInput.text, sceneToLoad: "GameScene");
+        BoltMatchmaking.CreateSession(sessionID: JoinGameInput.text, sceneToLoad: "GameScene");
     }
 
 
@@ -76,14 +48,19 @@ public class MenuController: GlobalEventListener
     {
         if (JoinGameInput.text.Length > 0)
         {
+            Loading.SetActive(true);
+            RoomImageClient.SetActive(true);
+            RoomName.GetComponent<Text>().text = JoinGameInput.text;
             BoltLauncher.StartClient();
-            Debug.Log(JoinGameInput.text);
+            //Debug.Log(JoinGameInput.text);
             StartCoroutine(CannotConectWithHost());
         }
         else
         {
             OpenAlertBox2();
         }
+
+        Debug.Log("foi");
        
     }
 
@@ -112,7 +89,7 @@ public class MenuController: GlobalEventListener
         if (!foundHost)
         {
             //mostrar que não achou a sala com o nome
-            Debug.Log("NAO ACHOU A SALA COM O NOME" + " " + JoinGameInput.text);
+            //Debug.Log("NAO ACHOU A SALA COM O NOME" + " " + JoinGameInput.text);
             BoltLauncher.Shutdown();
             OpenAlertBox();
         }
@@ -122,11 +99,14 @@ public class MenuController: GlobalEventListener
     public void CloseAlertBox()
     {
         AlertBox.SetActive(false);
+        Loading.SetActive(false);
+        RoomImageHost.SetActive(false);
+        RoomImageClient.SetActive(false);
     }
 
     public void OpenAlertBox()
     {
-        Disclaimer.GetComponent<Text>().text = "NAO FOI POSSIVEL ENCONTRAR A SALA COM O NOME" + JoinGameInput.text;
+        Disclaimer.GetComponent<Text>().text = "NAO FOI POSSIVEL ENCONTRAR A SALA COM O NOME " + JoinGameInput.text;
         AlertBox.SetActive(true);
     }
 

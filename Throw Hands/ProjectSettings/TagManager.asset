@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - limb
+  - rightForearm
+  - leftArm
+  - leftForearm
+  - rightArm
+  - ground
+  - limbHitbox
+  - douglas
+  - carlous
   layers:
   - Default
   - TransparentFX
