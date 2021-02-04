@@ -97,7 +97,9 @@ public class GameController : GlobalEventListener
 
     public override void OnEvent(ClientLogged evnt)
     {
-        gameStarted = true;
+        //gameStarted = true;
+
+        StartCoroutine(noia());
     }
 
     public override void OnEvent(P1Rematch evnt)
@@ -109,15 +111,6 @@ public class GameController : GlobalEventListener
     {
         p2AcceptRematch = true;
     }
-
-    //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
-    //{
-    //    foreach (var session in sessionList)
-    //    {
-    //        UdpSession photonSession = session.Value as UdpSession;
-    //        Debug.Log(photonSession.ConnectionsCurrent);
-    //    }
-    //}
 
     public void OpenRematchBox()
     {
@@ -191,11 +184,12 @@ public class GameController : GlobalEventListener
             }
         }
 
-        if (gameStarted)
+        if (false)
         {
             gameStarted = false;
             createGame();
-            Restart();
+
+            StartCoroutine(noia());
         }
 
         if(p1AcceptRematch && p2AcceptRematch)
@@ -217,6 +211,12 @@ public class GameController : GlobalEventListener
         CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
     }
 
+    private IEnumerator noia()
+    {
+        yield return new WaitForSeconds(2.0f);
+        createGame();
+    }
+
     private IEnumerator QuitWait()
     {
         yield return new WaitForSeconds(2.0f);
@@ -225,7 +225,16 @@ public class GameController : GlobalEventListener
     }
 }
 
+//PHOTON NETWORK
 
+//public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
+//{
+//    foreach (var session in sessionList)
+//    {
+//        UdpSession photonSession = session.Value as UdpSession;
+//        Debug.Log(photonSession.ConnectionsCurrent);
+//    }
+//}
 
 //{
 //    public GameObject PlayerPrefab;
