@@ -14,16 +14,15 @@ public class GameController : GlobalEventListener
 
     public GameObject playerPrefab;
     public GameObject playerPrefab2;
-    public GameObject hostSlider;
-    public GameObject clientSlider;
-    
+
+    public GameObject lifeHost;
+    public GameObject lifeClient;
+
     public GameObject RematchBox;
     public GameObject Camera;
 
     private GameObject CameraPriv;
-    private GameObject hostSliderPriv;
-    private GameObject clientSliderPriv;
-
+    
     private GameObject DouglasInstance;
     private GameObject CarlousInstance;
 
@@ -39,13 +38,14 @@ public class GameController : GlobalEventListener
 
     public void createGame()
     {
-        Debug.Log("JOGO CRIADO");
-        //StartCoroutine(QuitWait());
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
-        // DA PARA FAZER ISSO COM CORROUTINA
+
         WaitingPlayer.SetActive(false);
-        playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-        playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+
+        //Player1
+        playerPrefab.GetComponent<PlayerStatus>().lifeHost = lifeHost;
+        playerPrefab.GetComponent<PlayerStatus>().lifeClient = lifeClient;
+
         playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
 
         playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
@@ -54,8 +54,12 @@ public class GameController : GlobalEventListener
             this.transform.position.x + (battleOffset * -1.5f),
                 this.transform.position.y
                 ), Quaternion.identity);
-        playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-        playerPrefab2.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+
+
+        //Player 2
+        playerPrefab2.GetComponent<PlayerStatus>().lifeHost = lifeHost;
+        playerPrefab2.GetComponent<PlayerStatus>().lifeClient = lifeClient;
+
         playerPrefab2.GetComponent<PlayerController>().Camera = CameraPriv;
 
         playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
@@ -65,21 +69,19 @@ public class GameController : GlobalEventListener
         this.transform.position.y
             ), Quaternion.identity);
 
-        if (!BoltNetwork.IsClient)
+        if (BoltNetwork.IsClient)
         {
-            bola2.SetActive(false);
+            bola1.SetActive(false);
         }
         else
         {
-            bola1.SetActive(false);
+            bola2.SetActive(false);
         }
     }
 
     private void Start()
     {
         CameraPriv = Camera;
-        hostSliderPriv = hostSlider;
-        clientSliderPriv = clientSlider;
 
         roomName.GetComponent<Text>().text = PlayerPrefs.GetString("roomName");
     }
@@ -95,11 +97,8 @@ public class GameController : GlobalEventListener
 
     public override void OnEvent(ClientLogged evnt)
     {
-        //createGame();
         gameStarted = true;
-        Debug.Log("client logged");
     }
-
 
     public override void OnEvent(P1Rematch evnt)
     {
@@ -133,19 +132,19 @@ public class GameController : GlobalEventListener
         p2AcceptRematch = false;
         RematchBox.SetActive(false);
         // AQUI TEM QUE TER DE NOVO O 3 2 1
-        // E O THROW ARMS 
+        // E O THROW ARMS
         createGame();
     }
 
     public void Rematch()
     {
-        if (BoltNetwork.IsClient)
+        if (!BoltNetwork.IsClient)
         {
-            P2Rematch.Create().Send();
+            P1Rematch.Create().Send();
         }
         else
         {
-            P1Rematch.Create().Send();
+            P2Rematch.Create().Send();
         }
     }
 
@@ -165,17 +164,12 @@ public class GameController : GlobalEventListener
     {
         if (GameObject.FindGameObjectWithTag("carlous") != null && CarlousInstance == null)
         {
-            Debug.Log("ENTROU INSTANCE CARLOUS");
             CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
         }
 
         if (GameObject.FindGameObjectWithTag("douglas") != null && DouglasInstance == null)
         {
-            Debug.Log("ENTROU INSTANCE DOUGLAS");
             DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
-
-            DouglasInstance.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-            DouglasInstance.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
         }
 
         if (DouglasInstance != null && CarlousInstance != null)
@@ -195,14 +189,6 @@ public class GameController : GlobalEventListener
                     Flip();
                 }
             }
-        }
-
-        if(DouglasInstance != null)
-        {
-            DouglasInstance.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-            DouglasInstance.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
-
-            Debug.LogWarning(DouglasInstance.GetComponent<PlayerStatus>().clientSlider == null);
         }
 
         if (gameStarted)

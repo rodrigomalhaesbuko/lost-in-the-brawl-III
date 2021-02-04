@@ -7,16 +7,26 @@ using UnityEngine.UI;
 public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 {
     public int localHealth = 5;
-    public GameObject hostSlider;
-    public GameObject clientSlider;
+    public GameObject lifeHost;
+    public GameObject lifeClient;
+
     public GameObject GameController;
     public bool isFlipped = false;
 
-    public GameObject currentSlider;
-
     public PlayerType playerType;
 
-    // void Start
+    private Color greenColor;
+    private Color redColor;
+
+    private void Start()
+    {
+        ColorUtility.TryParseHtmlString("#B8D19C", out greenColor);
+        ColorUtility.TryParseHtmlString("#DB9DA1", out redColor);
+
+        restartLife();
+    }
+
+    // void Start do Bolt
     public override void Attached()
     {
         state.Health = localHealth;
@@ -28,77 +38,48 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void HealthCallBack()
     {
-        localHealth = state.Health;
+        lifeHost.transform.GetChild(state.Health).GetComponent<Image>().color = redColor;
 
-        //Debug.Log("FROM Host");
-        //Debug.Log("host");
-        //Debug.Log(state.Health);
-        //Debug.Log("Client");
-        //Debug.Log(state.EnemyHealth);
-
-        hostSlider.GetComponent<Slider>().value = 0.20f * state.Health;
-
-        if (localHealth <= 0)
+        if (state.Health <= 0)
         {
             Debug.Log("GameOver Player 1 ganhou");
             GameController.GetComponent<GameController>().OpenRematchBox();
         }
+
     }
 
     private void EnemyHealthCallBack()
     {
-        localHealth = state.EnemyHealth;
-        //Debug.Log(state.Health);
-        //Debug.Log(state.EnemyHealth);
-        //Debug.Log(localHealth);
+        lifeClient.transform.GetChild(state.EnemyHealth).GetComponent<Image>().color = redColor;
 
-        if (!BoltNetwork.IsClient)
-        {
-            Debug.Log("FROM ENEMY");
-            Debug.Log("host");
-            Debug.Log(state.Health);
-            Debug.Log("Client");
-            Debug.Log(state.EnemyHealth);
-        }
-
-        clientSlider.GetComponent<Slider>().value = 0.20f * state.EnemyHealth;
-
-        if (localHealth <= 0)
+        if (state.EnemyHealth <= 0)
         {
             Debug.Log("GameOver Player 2 ganhou");
             GameController.GetComponent<GameController>().OpenRematchBox();
         }
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        if (BoltNetwork.IsClient)
-    //        {
-    //            state.EnemyHealth -= 1;
-    //        }
-    //        else
-    //        {
-    //            state.Health -= 1;
-    //        }
+    private void restartLife()
+    {
 
-    //    }
-    //}
+        for(int i = 0; i<5; i++)
+        {
+            lifeClient.transform.GetChild(i).GetComponent<Image>().color = greenColor;
+            lifeHost.transform.GetChild(i).GetComponent<Image>().color = greenColor;
+        }
+
+    }
 
     public void TakeDamage()
     {
-
         if (BoltNetwork.IsClient)
         {
             state.EnemyHealth -= 1;
-
         }
         else
         {
             state.Health -= 1;
         }
-
     }
 
 }
