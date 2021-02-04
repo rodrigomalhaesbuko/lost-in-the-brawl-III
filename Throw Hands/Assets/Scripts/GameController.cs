@@ -6,9 +6,12 @@ using Bolt;
 using UdpKit;
 using System;
 using Bolt.Matchmaking;
+using UnityEngine.UI;
 
 public class GameController : GlobalEventListener
 {
+    public GameObject roomName;
+
     public GameObject playerPrefab;
     public GameObject playerPrefab2;
     public GameObject hostSlider;
@@ -77,6 +80,8 @@ public class GameController : GlobalEventListener
         CameraPriv = Camera;
         hostSliderPriv = hostSlider;
         clientSliderPriv = clientSlider;
+
+        roomName.GetComponent<Text>().text = PlayerPrefs.GetString("roomName");
     }
 
     [Obsolete]
@@ -204,6 +209,7 @@ public class GameController : GlobalEventListener
         {
             gameStarted = false;
             createGame();
+            Restart();
         }
 
         if(p1AcceptRematch && p2AcceptRematch)

@@ -5,12 +5,9 @@ using UnityEngine.InputSystem;
 
 public class volumeScript : MonoBehaviour
 {
-
     InputMaster controls;
 
     Vector2 m;
-
-    
 
     int vel = 700;
 

@@ -30,6 +30,7 @@ public class MenuController: GlobalEventListener
             Loading.SetActive(true);
             RoomImageHost.SetActive(true);
             RoomName.GetComponent<Text>().text = JoinGameInput.text;
+            PlayerPrefs.SetString("roomName", JoinGameInput.text);
             BoltLauncher.StartServer();
         }
         else
@@ -51,6 +52,9 @@ public class MenuController: GlobalEventListener
             Loading.SetActive(true);
             RoomImageClient.SetActive(true);
             RoomName.GetComponent<Text>().text = JoinGameInput.text;
+
+            PlayerPrefs.SetString("roomName", JoinGameInput.text);
+
             BoltLauncher.StartClient();
             //Debug.Log(JoinGameInput.text);
             StartCoroutine(CannotConectWithHost());
