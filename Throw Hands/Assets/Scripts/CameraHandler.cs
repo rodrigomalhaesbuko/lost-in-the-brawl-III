@@ -17,10 +17,6 @@ public class CameraHandler : MonoBehaviour
             //Debug.Log(hostPositionX.transform.position.x);
             //Debug.Log("CLIENT");
             //Debug.Log(clientPositionX.transform.position.x);
-
-            
-
-            
         }
         
     }

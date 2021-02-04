@@ -17,12 +17,19 @@ public class MenuController: GlobalEventListener
     [SerializeField] private GameObject AlertBox;
     [SerializeField] private GameObject Disclaimer;
 
-
+    //Loading
+    [SerializeField] private GameObject Loading;
+    [SerializeField] private GameObject RoomName;
+    [SerializeField] private GameObject RoomImageClient;
+    [SerializeField] private GameObject RoomImageHost;
 
     public void CreateGame()
     {
         if(JoinGameInput.text.Length > 0)
         {
+            Loading.SetActive(true);
+            RoomImageHost.SetActive(true);
+            RoomName.GetComponent<Text>().text = JoinGameInput.text;
             BoltLauncher.StartServer();
         }
         else
@@ -41,6 +48,9 @@ public class MenuController: GlobalEventListener
     {
         if (JoinGameInput.text.Length > 0)
         {
+            Loading.SetActive(true);
+            RoomImageClient.SetActive(true);
+            RoomName.GetComponent<Text>().text = JoinGameInput.text;
             BoltLauncher.StartClient();
             //Debug.Log(JoinGameInput.text);
             StartCoroutine(CannotConectWithHost());
@@ -89,6 +99,9 @@ public class MenuController: GlobalEventListener
     public void CloseAlertBox()
     {
         AlertBox.SetActive(false);
+        Loading.SetActive(false);
+        RoomImageHost.SetActive(false);
+        RoomImageClient.SetActive(false);
     }
 
     public void OpenAlertBox()

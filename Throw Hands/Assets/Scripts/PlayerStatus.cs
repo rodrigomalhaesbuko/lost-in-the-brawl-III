@@ -10,6 +10,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     public GameObject hostSlider;
     public GameObject clientSlider;
     public GameObject GameController;
+    public bool isFlipped = false;
 
     public GameObject currentSlider;
 
@@ -29,6 +30,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         localHealth = state.Health;
 
+        //Debug.Log("FROM Host");
         //Debug.Log("host");
         //Debug.Log(state.Health);
         //Debug.Log("Client");
@@ -46,11 +48,18 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     private void EnemyHealthCallBack()
     {
         localHealth = state.EnemyHealth;
-
-        //Debug.Log("host");
         //Debug.Log(state.Health);
-        //Debug.Log("Client");
         //Debug.Log(state.EnemyHealth);
+        //Debug.Log(localHealth);
+
+        if (!BoltNetwork.IsClient)
+        {
+            Debug.Log("FROM ENEMY");
+            Debug.Log("host");
+            Debug.Log(state.Health);
+            Debug.Log("Client");
+            Debug.Log(state.EnemyHealth);
+        }
 
         clientSlider.GetComponent<Slider>().value = 0.20f * state.EnemyHealth;
 
@@ -68,7 +77,6 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     //        if (BoltNetwork.IsClient)
     //        {
     //            state.EnemyHealth -= 1;
-
     //        }
     //        else
     //        {
@@ -76,7 +84,22 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     //        }
 
     //    }
- 
+    //}
+
+    public void TakeDamage()
+    {
+
+        if (BoltNetwork.IsClient)
+        {
+            state.EnemyHealth -= 1;
+
+        }
+        else
+        {
+            state.Health -= 1;
+        }
+
+    }
 
 }
 

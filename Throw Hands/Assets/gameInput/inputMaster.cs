@@ -25,6 +25,30 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""LeftArmShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""66423509-4994-48dd-a522-869ed0e2b90f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RightArmShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e2cb39e-456d-4ad2-a5d3-4daf436cf5e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Parry"",
+                    ""type"": ""Button"",
+                    ""id"": ""c646a421-0b3c-4c77-ae04-371780fafc85"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -148,6 +172,72 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4af394f0-4f03-492d-9f2e-689ad9048c25"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftArmShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bdfea4d-39b1-4907-8692-9019d5900a0d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftArmShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe97898d-ace2-4188-85db-6b7cbeab33aa"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightArmShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7fead35-ed9e-4f32-a88c-6cee2176bff0"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightArmShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1920847-4287-41e5-adc8-2f929304588b"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Parry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d867e2f6-b267-4c8b-9b26-6661276f49d5"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Parry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -425,6 +515,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_LeftArmShoot = m_Gameplay.FindAction("LeftArmShoot", throwIfNotFound: true);
+        m_Gameplay_RightArmShoot = m_Gameplay.FindAction("RightArmShoot", throwIfNotFound: true);
+        m_Gameplay_Parry = m_Gameplay.FindAction("Parry", throwIfNotFound: true);
         // MainMenu
         m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
         m_MainMenu_Move = m_MainMenu.FindAction("Move", throwIfNotFound: true);
@@ -483,11 +576,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_LeftArmShoot;
+    private readonly InputAction m_Gameplay_RightArmShoot;
+    private readonly InputAction m_Gameplay_Parry;
     public struct GameplayActions
     {
         private @InputMaster m_Wrapper;
         public GameplayActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @LeftArmShoot => m_Wrapper.m_Gameplay_LeftArmShoot;
+        public InputAction @RightArmShoot => m_Wrapper.m_Gameplay_RightArmShoot;
+        public InputAction @Parry => m_Wrapper.m_Gameplay_Parry;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -500,6 +599,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @LeftArmShoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLeftArmShoot;
+                @LeftArmShoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLeftArmShoot;
+                @LeftArmShoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLeftArmShoot;
+                @RightArmShoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightArmShoot;
+                @RightArmShoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightArmShoot;
+                @RightArmShoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightArmShoot;
+                @Parry.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnParry;
+                @Parry.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnParry;
+                @Parry.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnParry;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -507,6 +615,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @LeftArmShoot.started += instance.OnLeftArmShoot;
+                @LeftArmShoot.performed += instance.OnLeftArmShoot;
+                @LeftArmShoot.canceled += instance.OnLeftArmShoot;
+                @RightArmShoot.started += instance.OnRightArmShoot;
+                @RightArmShoot.performed += instance.OnRightArmShoot;
+                @RightArmShoot.canceled += instance.OnRightArmShoot;
+                @Parry.started += instance.OnParry;
+                @Parry.performed += instance.OnParry;
+                @Parry.canceled += instance.OnParry;
             }
         }
     }
@@ -596,6 +713,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnLeftArmShoot(InputAction.CallbackContext context);
+        void OnRightArmShoot(InputAction.CallbackContext context);
+        void OnParry(InputAction.CallbackContext context);
     }
     public interface IMainMenuActions
     {
