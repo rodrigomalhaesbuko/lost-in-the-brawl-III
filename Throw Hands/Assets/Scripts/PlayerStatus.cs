@@ -72,6 +72,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void TakeDamage()
     {
+        audioControl.PlaySound(SFXType.Damage);
         if (BoltNetwork.IsClient)
         {
             state.EnemyHealth -= 1;

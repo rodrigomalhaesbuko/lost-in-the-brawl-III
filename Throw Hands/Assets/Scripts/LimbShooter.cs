@@ -85,6 +85,7 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if (state.LeftArmEnable && entity.IsOwner && !LeftArmShooted)
         {
+            audioControl.PlaySound(SFXType.Punch);
             LeftArmShooted = true;
             StartCoroutine(PunchAnimation("IsLeftPunching"));
         }
@@ -94,6 +95,7 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if (state.RightArmEnable && entity.IsOwner && !RightArmShooted)
         {
+            audioControl.PlaySound(SFXType.Punch);
             RightArmShooted = true;
             StartCoroutine(PunchAnimation("IsRightPunching"));
         }

@@ -130,6 +130,7 @@ public class GameController : GlobalEventListener
 
     private void Start()
     {
+        audioControl.PlaySound(SFXType.Intro);
         controls.StaticScene.Disable();
 
         CameraPriv = Camera;
@@ -282,10 +283,12 @@ public class GameController : GlobalEventListener
             if(hostWon)
             {
                 youlose.SetActive(true);
+                audioControl.PlaySound(SFXType.Lose);
             }
             else
             {
                 youwin.SetActive(true);
+                audioControl.PlaySound(SFXType.Win);
             }
         }
         else
@@ -293,10 +296,12 @@ public class GameController : GlobalEventListener
             if (hostWon)
             {
                 youwin.SetActive(true);
+                audioControl.PlaySound(SFXType.Lose);
             }
             else
             {
                 youlose.SetActive(true);
+                audioControl.PlaySound(SFXType.Win);
             }
         }
 
