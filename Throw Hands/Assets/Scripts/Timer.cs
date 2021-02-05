@@ -37,13 +37,23 @@ public class Timer : MonoBehaviour
 
     void DisplayTime(int timeToDisplay)
     {
-        timeToDisplay -= 1;
+        if(timeToDisplay == 0)
+        {
+            timeToDisplay = 0;
+        }
+        else
+        {
+            timeToDisplay -= 1;
+        }
 
         if(timeToDisplay < 10)
         {
-            timeText.text += '0';
+            timeText.text = '0' + timeToDisplay.ToString();
+        }
+        else
+        {
+            timeText.text = timeToDisplay.ToString();
         }
 
-        timeText.text = timeToDisplay.ToString();
     }
 }

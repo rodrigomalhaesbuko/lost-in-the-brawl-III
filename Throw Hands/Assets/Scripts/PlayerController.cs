@@ -21,7 +21,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     private bool enableParryAnimation = true;
     private bool alreadyJumped = false;
 
-    InputMaster controls;
+    public InputMaster controls;
 
     Vector2 move;
 
@@ -31,7 +31,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
 
-        controls.Gameplay.Parry.performed += ctx => {
+        controls.Gameplay.Parry.started += ctx => {
             if (enableParry) {
                 enableParry = false;
                 parrying = true;
@@ -238,10 +238,15 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         controls.Gameplay.Disable();
     }
 
-    private void OnEnable()
+    public void enableCOntrols()
     {
         controls.Gameplay.Enable();
     }
+
+    //private void OnEnable()
+    //{
+    //    controls.Gameplay.Enable();
+    //}
 
     private void OnDisable()
     {

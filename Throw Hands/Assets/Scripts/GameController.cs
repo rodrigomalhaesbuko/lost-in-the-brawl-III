@@ -35,6 +35,9 @@ public class GameController : GlobalEventListener
     //endbattle vars
     public GameObject youwin;
     public GameObject youlose;
+    public GameObject youDraw;
+
+    public GameObject ThrowHands;
     
     public GameObject seta;
     public GameObject RematchBox;
@@ -54,7 +57,9 @@ public class GameController : GlobalEventListener
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
         WaitingPlayer.SetActive(false);
         audioControl.PlaySound(SFXType.Intro);
-
+        controls.StaticScene.Disable();
+        counter.GetComponent<Timer>().timerIsRunning = true;
+        // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
         //Player1
         playerPrefab.GetComponent<PlayerStatus>().lifeHost = lifeHost;
         playerPrefab.GetComponent<PlayerStatus>().lifeClient = lifeClient;
@@ -67,7 +72,6 @@ public class GameController : GlobalEventListener
             this.transform.position.x + (battleOffset * -1.5f),
                 this.transform.position.y
                 ), Quaternion.identity);
-
 
         //Player 2
         playerPrefab2.GetComponent<PlayerStatus>().lifeHost = lifeHost;
@@ -93,6 +97,19 @@ public class GameController : GlobalEventListener
         {
             bola2.SetActive(false);
         }
+
+        WaitingPlayer.SetActive(false);
+        StartCoroutine(WaitCreateGame());
+    }
+    
+    private IEnumerator WaitCreateGame()
+    {
+        ThrowHands.SetActive(true);
+        ThrowHands.GetComponent<Animator>().Play("ThrowHandsCutIn");
+        yield return new WaitForSeconds(1.82f);
+        DouglasInstance.GetComponent<PlayerController>().enableCOntrols();
+        CarlousInstance.GetComponent<PlayerController>().enableCOntrols();
+        ThrowHands.SetActive(false);
     }
 
     private void Awake()
@@ -173,10 +190,9 @@ public class GameController : GlobalEventListener
         BoltNetwork.Destroy(DouglasInstance);
         BoltNetwork.Destroy(CarlousInstance);
 
-        
-
         youwin.SetActive(false);
         youlose.SetActive(false);
+        youDraw.SetActive(false);
         p1AcceptRematch = false;
         p2AcceptRematch = false;
         RematchBox.SetActive(false);
@@ -269,40 +285,68 @@ public class GameController : GlobalEventListener
         {
             Restart();
         }
+
+        if (!counter.GetComponent<Timer>().timerIsRunning)
+        {
+            CheckDraw();
+        }
     }
 
-    public void endGame(bool hostWon)
+    private void CheckDraw()
+    {
+        if (DouglasInstance.GetComponent<PlayerStatus>().state.Health > CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
+        {
+            endGame(true, false);
+        }
+        else if (DouglasInstance.GetComponent<PlayerStatus>().state.Health < CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
+        {
+            endGame(false, false);
+        }
+        else
+        {
+            endGame(false, true);
+        }
+    }
+
+    public void endGame(bool hostWon, bool draw)
     {
         //BoltNetwork.Destroy(DouglasInstance);
         //BoltNetwork.Destroy(CarlousInstance);
 
-
-        if(BoltNetwork.IsClient)
+        if (draw)
         {
-            if(hostWon)
-            {
-                youlose.SetActive(true);
-                audioControl.PlaySound(SFXType.Lose);
-            }
-            else
-            {
-                youwin.SetActive(true);
-                audioControl.PlaySound(SFXType.Win);
-            }
+            youDraw.SetActive(true);
         }
         else
         {
-            if (hostWon)
+            if (BoltNetwork.IsClient)
             {
-                youwin.SetActive(true);
-                audioControl.PlaySound(SFXType.Win);
+                if (hostWon)
+                {
+                    youlose.SetActive(true);
+                    audioControl.PlaySound(SFXType.Lose);
+                }
+                else
+                {
+                    youwin.SetActive(true);
+                    audioControl.PlaySound(SFXType.Win);
+                }
             }
             else
             {
-                youlose.SetActive(true);
-                audioControl.PlaySound(SFXType.Lose);
+                if (hostWon)
+                {
+                    youwin.SetActive(true);
+                    audioControl.PlaySound(SFXType.Win);
+                }
+                else
+                {
+                    youlose.SetActive(true);
+                    audioControl.PlaySound(SFXType.Lose);
+                }
             }
         }
+        
 
         RematchBox.SetActive(true);
         lifeHost.SetActive(false);

@@ -43,7 +43,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         if (state.Health <= 0)
         {
             Debug.Log("GameOver Player 1 ganhou");
-            GameController.GetComponent<GameController>().endGame(false);
+            GameController.GetComponent<GameController>().endGame(false, false);
         }
 
     }
@@ -55,7 +55,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         if (state.EnemyHealth <= 0)
         {
             Debug.Log("GameOver Player 2 ganhou");
-            GameController.GetComponent<GameController>().endGame(true);
+            GameController.GetComponent<GameController>().endGame(true, false);
         }
     }
 
