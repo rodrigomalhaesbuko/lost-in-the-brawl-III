@@ -40,15 +40,15 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void Awake()
     {
-        controls = new InputMaster();
+        controls = gameObject.GetComponent<PlayerController>().controls;
 
-        controls.Gameplay.LeftArmShoot.performed += ctx => {
+        controls.Gameplay.LeftArmShoot.started += ctx => {
             if (!rightArmShootTrigger) {
                 leftArmShootTrigger = true;
                 ShootLeftArm();
                 }
         };
-        controls.Gameplay.RightArmShoot.performed += ctx => {
+        controls.Gameplay.RightArmShoot.started += ctx => {
             if (!leftArmShootTrigger)
             {
                 rightArmShootTrigger = true;
@@ -56,13 +56,13 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
             }
         };
 
-        controls.Gameplay.LeftArmShoot.canceled += ctx => {
+        controls.Gameplay.LeftArmShoot.started += ctx => {
 
                 leftArmShootTrigger = false;
                 
 
         };
-        controls.Gameplay.RightArmShoot.canceled += ctx => {
+        controls.Gameplay.RightArmShoot.started += ctx => {
 
                 rightArmShootTrigger = false;
 

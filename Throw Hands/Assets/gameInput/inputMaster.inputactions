@@ -385,6 +385,39 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "b302b202-5068-4dc6-a844-f9fdaafbaf23",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d336462f-45b8-4b0a-91cc-e2135dd13e26",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81bf6928-70d2-45d9-ad90-c878420ff045",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "keyarrows",
                     "id": "dc451f0e-2cab-484c-adcf-29b42f2d2a0d",
                     "path": "2DVector",
