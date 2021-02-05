@@ -6,7 +6,7 @@ public class audioControl : MonoBehaviour
 {
 
     public static AudioSource audioSource;
-    public static AudioClip damegeSource;
+    public static AudioClip damageSource;
     public static AudioClip attackSource;
     public static AudioClip introSource;
     public static AudioClip loseSource;
@@ -22,7 +22,7 @@ public class audioControl : MonoBehaviour
         audioSource.volume = PlayerPrefs.GetFloat("volume");
         audioSource.Play();
 
-        damegeSource = Resources.Load<AudioClip>("damage");
+        damageSource = Resources.Load<AudioClip>("damage");
         attackSource = Resources.Load<AudioClip>("punch");
         introSource = Resources.Load<AudioClip>("intro");
         loseSource = Resources.Load<AudioClip>("lose");
@@ -33,7 +33,7 @@ public class audioControl : MonoBehaviour
     {
         switch (clip) {
             case SFXType.Damage:
-                audioSource.PlayOneShot(damegeSource);
+                audioSource.PlayOneShot(damageSource);
                 break;
             case SFXType.Punch:
                 audioSource.PlayOneShot(attackSource);
