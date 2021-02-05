@@ -35,6 +35,8 @@ public class GameController : GlobalEventListener
     //endbattle vars
     public GameObject youwin;
     public GameObject youlose;
+
+    public GameObject ThrowHands;
     
     public GameObject seta;
     public GameObject RematchBox;
@@ -51,10 +53,8 @@ public class GameController : GlobalEventListener
 
     public void createGame()
     {
+        controls.StaticScene.Disable();
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
-
-        WaitingPlayer.SetActive(false);
-
         //Player1
         playerPrefab.GetComponent<PlayerStatus>().lifeHost = lifeHost;
         playerPrefab.GetComponent<PlayerStatus>().lifeClient = lifeClient;
@@ -67,7 +67,6 @@ public class GameController : GlobalEventListener
             this.transform.position.x + (battleOffset * -1.5f),
                 this.transform.position.y
                 ), Quaternion.identity);
-
 
         //Player 2
         playerPrefab2.GetComponent<PlayerStatus>().lifeHost = lifeHost;
@@ -82,7 +81,6 @@ public class GameController : GlobalEventListener
         this.transform.position.y
             ), Quaternion.identity);
 
-
         counter.GetComponent<Timer>().timerIsRunning = true;
 
         if (BoltNetwork.IsClient)
@@ -93,6 +91,19 @@ public class GameController : GlobalEventListener
         {
             bola2.SetActive(false);
         }
+
+        WaitingPlayer.SetActive(false);
+        StartCoroutine(WaitCreateGame());
+    }
+    
+    private IEnumerator WaitCreateGame()
+    {
+        ThrowHands.SetActive(true);
+        ThrowHands.GetComponent<Animator>().Play("ThrowHandsCutIn");
+        yield return new WaitForSeconds(1.82f);
+        DouglasInstance.GetComponent<PlayerController>().enableCOntrols();
+        CarlousInstance.GetComponent<PlayerController>().enableCOntrols();
+        ThrowHands.SetActive(false);
     }
 
     private void Awake()
@@ -172,8 +183,6 @@ public class GameController : GlobalEventListener
     {
         BoltNetwork.Destroy(DouglasInstance);
         BoltNetwork.Destroy(CarlousInstance);
-
-        
 
         youwin.SetActive(false);
         youlose.SetActive(false);

@@ -238,10 +238,15 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         controls.Gameplay.Disable();
     }
 
-    private void OnEnable()
+    public void enableCOntrols()
     {
         controls.Gameplay.Enable();
     }
+
+    //private void OnEnable()
+    //{
+    //    controls.Gameplay.Enable();
+    //}
 
     private void OnDisable()
     {
