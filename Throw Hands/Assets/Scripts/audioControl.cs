@@ -5,7 +5,12 @@ using UnityEngine;
 public class audioControl : MonoBehaviour
 {
 
-    public AudioSource audioSource;
+    public static AudioSource audioSource;
+    public static AudioClip damegeSource;
+    public static AudioClip attackSource;
+    public static AudioClip introSource;
+    public static AudioClip loseSource;
+    public static AudioClip winSource;
 
     bool play;
 
@@ -16,6 +21,33 @@ public class audioControl : MonoBehaviour
         play = true;
         audioSource.volume = PlayerPrefs.GetFloat("volume");
         audioSource.Play();
+
+        damegeSource = Resources.Load<AudioClip>("damage");
+        attackSource = Resources.Load<AudioClip>("punch");
+        introSource = Resources.Load<AudioClip>("intro");
+        loseSource = Resources.Load<AudioClip>("lose");
+        winSource = Resources.Load<AudioClip>("win");
+    }
+
+    public static void PlaySound(SFXType clip)
+    {
+        switch (clip) {
+            case SFXType.Damage:
+                audioSource.PlayOneShot(damegeSource);
+                break;
+            case SFXType.Punch:
+                audioSource.PlayOneShot(attackSource);
+                break;
+            case SFXType.Intro:
+                audioSource.PlayOneShot(introSource);
+                break;
+            case SFXType.Lose:
+                audioSource.PlayOneShot(loseSource);
+                break;
+            case SFXType.Win:
+                audioSource.PlayOneShot(winSource);
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -34,4 +66,13 @@ public class audioControl : MonoBehaviour
         */
         
     }
+}
+
+public enum SFXType
+{ 
+    Damage,
+    Punch,
+    Intro,
+    Lose,
+    Win
 }
