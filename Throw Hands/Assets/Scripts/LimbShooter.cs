@@ -134,15 +134,20 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if (state.IsRightArmShooting)
         {
+            if (enableRightShooting)
+            {
                 enableRightShooting = false;
                 state.Animator.SetTrigger("IsRightPunching");
+            }
         }
 
         if (state.IsLeftArmShooting)
         {
-
+            if (enableLeftShooting)
+            {
                 enableLeftShooting = false;
                 state.Animator.SetTrigger("IsLeftPunching");
+            }     
         }
     }
 

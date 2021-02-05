@@ -6,21 +6,23 @@ using Bolt;
 using UdpKit;
 using System;
 using Bolt.Matchmaking;
+using UnityEngine.UI;
 
 public class GameController : GlobalEventListener
 {
+    public GameObject counter;
+    public GameObject roomName;
+
     public GameObject playerPrefab;
     public GameObject playerPrefab2;
-    public GameObject hostSlider;
-    public GameObject clientSlider;
-    
-    public GameObject RematchBox;
+
+    public GameObject lifeHost;
+    public GameObject lifeClient;
+
     public GameObject Camera;
 
     private GameObject CameraPriv;
-    private GameObject hostSliderPriv;
-    private GameObject clientSliderPriv;
-
+    
     private GameObject DouglasInstance;
     private GameObject CarlousInstance;
 
@@ -30,14 +32,33 @@ public class GameController : GlobalEventListener
 
     public float battleOffset = 5f;
 
+    //endbattle vars
+    public GameObject youwin;
+    public GameObject youlose;
+    
+    public GameObject seta;
+    public GameObject RematchBox;
+    public GameObject healthBar;
+    private const float stepSeta = 580;
+    private const int setavel = 100;
+    private InputMaster controls;
+    private int setapos;
+    private float posxseta = 0;
+    private int dirseta = 1;
+    private bool gameEnded = false;
+    private bool p1AcceptRematch = false;
+    private bool p2AcceptRematch = false;
+
     public void createGame()
     {
-        Debug.Log("JOGO CRIADO");
-        gameStarted = true;
-        //StartCoroutine(QuitWait());
+        // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
+
         WaitingPlayer.SetActive(false);
-        playerPrefab.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-        playerPrefab.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+
+        //Player1
+        playerPrefab.GetComponent<PlayerStatus>().lifeHost = lifeHost;
+        playerPrefab.GetComponent<PlayerStatus>().lifeClient = lifeClient;
+
         playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
 
         playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
@@ -46,8 +67,12 @@ public class GameController : GlobalEventListener
             this.transform.position.x + (battleOffset * -1.5f),
                 this.transform.position.y
                 ), Quaternion.identity);
-        playerPrefab2.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-        playerPrefab2.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+
+
+        //Player 2
+        playerPrefab2.GetComponent<PlayerStatus>().lifeHost = lifeHost;
+        playerPrefab2.GetComponent<PlayerStatus>().lifeClient = lifeClient;
+
         playerPrefab2.GetComponent<PlayerController>().Camera = CameraPriv;
 
         playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
@@ -57,27 +82,64 @@ public class GameController : GlobalEventListener
         this.transform.position.y
             ), Quaternion.identity);
 
-        if (!BoltNetwork.IsClient)
-        {
-            bola2.SetActive(false);
-        }
-        else
+
+        counter.GetComponent<Timer>().timerIsRunning = true;
+
+        if (BoltNetwork.IsClient)
         {
             bola1.SetActive(false);
         }
+        else
+        {
+            bola2.SetActive(false);
+        }
+    }
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+
+        controls.StaticScene.Move.performed += ctx =>
+        {
+            Vector2 movesetadir = ctx.ReadValue<Vector2>();
+
+            if(movesetadir.x == 1)
+            {
+                setapos = 1;
+            }
+            else if(movesetadir.x == -1)
+            {
+                setapos = 0;
+            }
+        };
+
+        controls.StaticScene.Select.performed += _ =>
+        {
+            gameEnded = false;
+
+            if(setapos == 0)
+            {
+                Rematch();
+            }
+            else if(setapos == 1)
+            {
+                LeaveButton();
+            }
+        };
     }
 
     private void Start()
     {
+        controls.StaticScene.Disable();
+
         CameraPriv = Camera;
-        hostSliderPriv = hostSlider;
-        clientSliderPriv = clientSlider;
+
+        roomName.GetComponent<Text>().text = PlayerPrefs.GetString("roomName");
     }
 
     [Obsolete]
     public override void SceneLoadLocalDone(string scene)
     {
-
         if (BoltNetwork.IsClient)
         {
             ClientLogged.Create().Send();
@@ -86,55 +148,106 @@ public class GameController : GlobalEventListener
 
     public override void OnEvent(ClientLogged evnt)
     {
-        //createGame();
-        gameStarted = true;
-        Debug.Log("client logged");
+        //gameStarted = true;
+
+        StartCoroutine(noia());
     }
 
-    //public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
-    //{
-    //    foreach (var session in sessionList)
-    //    {
-    //        UdpSession photonSession = session.Value as UdpSession;
-    //        Debug.Log(photonSession.ConnectionsCurrent);
-    //    }
-    //}
+    public override void OnEvent(P1Rematch evnt)
+    {
+        p1AcceptRematch = true;
+    }
+
+    public override void OnEvent(P2Rematch evnt)
+    {
+        p2AcceptRematch = true;
+    }
 
     public void OpenRematchBox()
     {
         RematchBox.SetActive(true);
     }
 
-    public void Rematch()
+    private void Restart()
     {
+        BoltNetwork.Destroy(DouglasInstance);
+        BoltNetwork.Destroy(CarlousInstance);
+
+        
+
+        youwin.SetActive(false);
+        youlose.SetActive(false);
+        p1AcceptRematch = false;
+        p2AcceptRematch = false;
+        RematchBox.SetActive(false);
+        lifeHost.SetActive(true);
+        lifeClient.SetActive(true);
+        healthBar.SetActive(true);
+        counter.SetActive(true);
+
+        // AQUI TEM QUE TER DE NOVO O 3 2 1
+        // E O THROW ARMS
+        createGame();
     }
 
-    public void Leave()
+    public void Rematch()
+    {
+        if (!BoltNetwork.IsClient)
+        {
+            P1Rematch.Create().Send();
+        }
+        else
+        {
+            P2Rematch.Create().Send();
+        }
+    }
+
+    public void LeaveButton()
+    {
+        Leave.Create().Send();
+    }
+
+    // EVENT FOR LEAVE THE GAME 
+    public override void OnEvent(Leave evnt)
     {
         BoltLauncher.Shutdown();
         SceneManager.LoadScene("SampleScene");
     }
 
     private void Update()
-    {
+    {     
+
+        if (gameEnded)
+        {            
+            posxseta += setavel * Time.deltaTime * dirseta;
+
+            if(posxseta > 30)
+            {
+                dirseta = -1;
+            }
+            else if(posxseta < 0)
+            {
+                dirseta = 1;
+            }
+
+            seta.GetComponent<RectTransform>().localPosition = new Vector3(-300 + posxseta + setapos * stepSeta, -440, 0);
+
+        }
+       
+
         if (GameObject.FindGameObjectWithTag("carlous") != null && CarlousInstance == null)
         {
-            Debug.Log("ENTROU INSTANCE CARLOUS");
             CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
         }
 
         if (GameObject.FindGameObjectWithTag("douglas") != null && DouglasInstance == null)
         {
-            Debug.Log("ENTROU INSTANCE DOUGLAS");
             DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
-
-            DouglasInstance.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-            DouglasInstance.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
         }
 
         if (DouglasInstance != null && CarlousInstance != null)
         {
-            if (DouglasInstance.transform.position.x > CarlousInstance.transform.position.x) 
+            if (DouglasInstance.transform.position.x > CarlousInstance.transform.position.x)
             {
                 if (!CarlousInstance.GetComponent<PlayerStatus>().isFlipped && !DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
                 {
@@ -144,26 +257,71 @@ public class GameController : GlobalEventListener
 
             if (CarlousInstance.transform.position.x > DouglasInstance.transform.position.x)
             {
-                if(CarlousInstance.GetComponent<PlayerStatus>().isFlipped && DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
+                if (CarlousInstance.GetComponent<PlayerStatus>().isFlipped && DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
                 {
                     Flip();
                 }
             }
         }
+        
 
-        if(DouglasInstance != null)
+        if (p1AcceptRematch && p2AcceptRematch)
         {
-            DouglasInstance.GetComponent<PlayerStatus>().clientSlider = clientSliderPriv;
-            DouglasInstance.GetComponent<PlayerStatus>().hostSlider = hostSliderPriv;
+            Restart();
+        }
+    }
 
-            Debug.LogWarning(DouglasInstance.GetComponent<PlayerStatus>().clientSlider == null);
+    public void endGame(bool hostWon)
+    {
+        //BoltNetwork.Destroy(DouglasInstance);
+        //BoltNetwork.Destroy(CarlousInstance);
+
+
+        if(BoltNetwork.IsClient)
+        {
+            if(hostWon)
+            {
+                youlose.SetActive(true);
+            }
+            else
+            {
+                youwin.SetActive(true);
+            }
+        }
+        else
+        {
+            if (hostWon)
+            {
+                youwin.SetActive(true);
+            }
+            else
+            {
+                youlose.SetActive(true);
+            }
         }
 
-        if (gameStarted)
+        RematchBox.SetActive(true);
+        lifeHost.SetActive(false);
+        lifeClient.SetActive(false);
+        healthBar.SetActive(false);
+        counter.SetActive(false);
+        counter.GetComponent<Timer>().timerIsRunning = false;
+        counter.GetComponent<Timer>().timeRemaining = PlayerPrefs.GetFloat("gameDuration");
+
+        controls.StaticScene.Enable();
+
+        DouglasInstance.GetComponent<PlayerController>().disableControls();
+        CarlousInstance.GetComponent<PlayerController>().disableControls();
+
+        GameObject[] limbs = GameObject.FindGameObjectsWithTag("limb");
+
+        foreach (GameObject limb in limbs)
         {
-            createGame();
-            gameStarted = false;
+
+            BoltNetwork.Destroy(limb);
         }
+
+        gameEnded = true;
     }
 
     private void Flip()
@@ -179,15 +337,32 @@ public class GameController : GlobalEventListener
         CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
     }
 
+    private IEnumerator noia()
+    {
+        yield return new WaitForSeconds(2.0f);
+        createGame();
+    }
+
     private IEnumerator QuitWait()
     {
         yield return new WaitForSeconds(2.0f);
         WaitingPlayer.SetActive(false);
 
     }
+
+    
 }
 
+//PHOTON NETWORK
 
+//public override void SessionListUpdated(Map<Guid, UdpSession> sessionList)
+//{
+//    foreach (var session in sessionList)
+//    {
+//        UdpSession photonSession = session.Value as UdpSession;
+//        Debug.Log(photonSession.ConnectionsCurrent);
+//    }
+//}
 
 //{
 //    public GameObject PlayerPrefab;

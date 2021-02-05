@@ -4145,6 +4145,33 @@
       "Groups": [
         "samples"
       ]
+    },
+    {
+      "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
+      "Properties": [],
+      "Name": "P1Rematch",
+      "Guid": "885ce512-7d8d-4da8-9dc3-2165a77dd775",
+      "Groups": [
+        "samples"
+      ]
+    },
+    {
+      "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
+      "Properties": [],
+      "Name": "P2Rematch",
+      "Guid": "85d3cf60-3b14-4431-9314-4b366eae7006",
+      "Groups": [
+        "samples"
+      ]
+    },
+    {
+      "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
+      "Properties": [],
+      "Name": "Leave",
+      "Guid": "b1efaf63-7f22-4438-984e-e4a073eb9757",
+      "Groups": [
+        "samples"
+      ]
     }
   ],
   "ActiveGroup": "samples"
