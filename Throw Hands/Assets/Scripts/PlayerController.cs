@@ -35,7 +35,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             if (enableParry) {
                 enableParry = false;
                 parrying = true;
-                //StartCoroutine(PrepareParry());
+                //StartCoroutine(PrepareParry());   
             }
         };
 
@@ -230,6 +230,12 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             alreadyJumped = false;
             return false;  
         }
+    }
+
+    public void disableControls()
+    {
+        move = Vector2.zero;
+        controls.Gameplay.Disable();
     }
 
     private void OnEnable()

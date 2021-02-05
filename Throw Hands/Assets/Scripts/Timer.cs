@@ -13,7 +13,8 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         // Starts the timer automatically
-        timerIsRunning = true;
+        PlayerPrefs.SetFloat("gameDuration", timeRemaining);
+        timerIsRunning = false;
     }
 
     void Update()
@@ -23,7 +24,7 @@ public class Timer : MonoBehaviour
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                DisplayTime(timeRemaining);
+                DisplayTime((int) timeRemaining);
             }
             else
             {
@@ -34,9 +35,14 @@ public class Timer : MonoBehaviour
         }
     }
 
-    void DisplayTime(float timeToDisplay)
+    void DisplayTime(int timeToDisplay)
     {
         timeToDisplay -= 1;
+
+        if(timeToDisplay < 10)
+        {
+            timeText.text += '0';
+        }
 
         timeText.text = timeToDisplay.ToString();
     }

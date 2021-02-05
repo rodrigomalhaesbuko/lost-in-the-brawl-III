@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class GameController : GlobalEventListener
 {
+    public GameObject counter;
     public GameObject roomName;
 
     public GameObject playerPrefab;
@@ -18,7 +19,6 @@ public class GameController : GlobalEventListener
     public GameObject lifeHost;
     public GameObject lifeClient;
 
-    public GameObject RematchBox;
     public GameObject Camera;
 
     private GameObject CameraPriv;
@@ -32,8 +32,21 @@ public class GameController : GlobalEventListener
 
     public float battleOffset = 5f;
 
+    //endbattle vars
+    public GameObject youwin;
+    public GameObject youlose;
+    
+    public GameObject seta;
+    public GameObject RematchBox;
+    public GameObject healthBar;
+    private const float stepSeta = 580;
+    private const int setavel = 100;
+    private InputMaster controls;
+    private int setapos;
+    private float posxseta = 0;
+    private int dirseta = 1;
+    private bool gameEnded = false;
     private bool p1AcceptRematch = false;
-
     private bool p2AcceptRematch = false;
 
     public void createGame()
@@ -69,6 +82,9 @@ public class GameController : GlobalEventListener
         this.transform.position.y
             ), Quaternion.identity);
 
+
+        counter.GetComponent<Timer>().timerIsRunning = true;
+
         if (BoltNetwork.IsClient)
         {
             bola1.SetActive(false);
@@ -79,8 +95,43 @@ public class GameController : GlobalEventListener
         }
     }
 
+    private void Awake()
+    {
+        controls = new InputMaster();
+
+        controls.StaticScene.Move.performed += ctx =>
+        {
+            Vector2 movesetadir = ctx.ReadValue<Vector2>();
+
+            if(movesetadir.x == 1)
+            {
+                setapos = 1;
+            }
+            else if(movesetadir.x == -1)
+            {
+                setapos = 0;
+            }
+        };
+
+        controls.StaticScene.Select.performed += _ =>
+        {
+            gameEnded = false;
+
+            if(setapos == 0)
+            {
+                Rematch();
+            }
+            else if(setapos == 1)
+            {
+                LeaveButton();
+            }
+        };
+    }
+
     private void Start()
     {
+        controls.StaticScene.Disable();
+
         CameraPriv = Camera;
 
         roomName.GetComponent<Text>().text = PlayerPrefs.GetString("roomName");
@@ -121,9 +172,19 @@ public class GameController : GlobalEventListener
     {
         BoltNetwork.Destroy(DouglasInstance);
         BoltNetwork.Destroy(CarlousInstance);
+
+        
+
+        youwin.SetActive(false);
+        youlose.SetActive(false);
         p1AcceptRematch = false;
         p2AcceptRematch = false;
         RematchBox.SetActive(false);
+        lifeHost.SetActive(true);
+        lifeClient.SetActive(true);
+        healthBar.SetActive(true);
+        counter.SetActive(true);
+
         // AQUI TEM QUE TER DE NOVO O 3 2 1
         // E O THROW ARMS
         createGame();
@@ -154,7 +215,26 @@ public class GameController : GlobalEventListener
     }
 
     private void Update()
-    {
+    {     
+
+        if (gameEnded)
+        {            
+            posxseta += setavel * Time.deltaTime * dirseta;
+
+            if(posxseta > 30)
+            {
+                dirseta = -1;
+            }
+            else if(posxseta < 0)
+            {
+                dirseta = 1;
+            }
+
+            seta.GetComponent<RectTransform>().localPosition = new Vector3(-300 + posxseta + setapos * stepSeta, -440, 0);
+
+        }
+       
+
         if (GameObject.FindGameObjectWithTag("carlous") != null && CarlousInstance == null)
         {
             CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
@@ -167,7 +247,7 @@ public class GameController : GlobalEventListener
 
         if (DouglasInstance != null && CarlousInstance != null)
         {
-            if (DouglasInstance.transform.position.x > CarlousInstance.transform.position.x) 
+            if (DouglasInstance.transform.position.x > CarlousInstance.transform.position.x)
             {
                 if (!CarlousInstance.GetComponent<PlayerStatus>().isFlipped && !DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
                 {
@@ -177,25 +257,71 @@ public class GameController : GlobalEventListener
 
             if (CarlousInstance.transform.position.x > DouglasInstance.transform.position.x)
             {
-                if(CarlousInstance.GetComponent<PlayerStatus>().isFlipped && DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
+                if (CarlousInstance.GetComponent<PlayerStatus>().isFlipped && DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
                 {
                     Flip();
                 }
             }
         }
+        
 
-        if (false)
-        {
-            gameStarted = false;
-            createGame();
-
-            StartCoroutine(noia());
-        }
-
-        if(p1AcceptRematch && p2AcceptRematch)
+        if (p1AcceptRematch && p2AcceptRematch)
         {
             Restart();
         }
+    }
+
+    public void endGame(bool hostWon)
+    {
+        //BoltNetwork.Destroy(DouglasInstance);
+        //BoltNetwork.Destroy(CarlousInstance);
+
+
+        if(BoltNetwork.IsClient)
+        {
+            if(hostWon)
+            {
+                youlose.SetActive(true);
+            }
+            else
+            {
+                youwin.SetActive(true);
+            }
+        }
+        else
+        {
+            if (hostWon)
+            {
+                youwin.SetActive(true);
+            }
+            else
+            {
+                youlose.SetActive(true);
+            }
+        }
+
+        RematchBox.SetActive(true);
+        lifeHost.SetActive(false);
+        lifeClient.SetActive(false);
+        healthBar.SetActive(false);
+        counter.SetActive(false);
+        counter.GetComponent<Timer>().timerIsRunning = false;
+        counter.GetComponent<Timer>().timeRemaining = PlayerPrefs.GetFloat("gameDuration");
+
+        controls.StaticScene.Enable();
+
+        DouglasInstance.GetComponent<PlayerController>().disableControls();
+        CarlousInstance.GetComponent<PlayerController>().disableControls();
+
+        GameObject[] limbs = GameObject.FindGameObjectsWithTag("limb");
+
+        foreach (GameObject limb in limbs)
+        {
+
+            BoltNetwork.Destroy(limb);
+        }
+
+        gameEnded = true;
     }
 
     private void Flip()
@@ -223,6 +349,8 @@ public class GameController : GlobalEventListener
         WaitingPlayer.SetActive(false);
 
     }
+
+    
 }
 
 //PHOTON NETWORK
