@@ -52,8 +52,8 @@ public class GameController : GlobalEventListener
     public void createGame()
     {
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
-
         WaitingPlayer.SetActive(false);
+        audioControl.PlaySound(SFXType.Intro);
 
         //Player1
         playerPrefab.GetComponent<PlayerStatus>().lifeHost = lifeHost;
@@ -130,7 +130,6 @@ public class GameController : GlobalEventListener
 
     private void Start()
     {
-        audioControl.PlaySound(SFXType.Intro);
         controls.StaticScene.Disable();
 
         CameraPriv = Camera;
@@ -296,12 +295,12 @@ public class GameController : GlobalEventListener
             if (hostWon)
             {
                 youwin.SetActive(true);
-                audioControl.PlaySound(SFXType.Lose);
+                audioControl.PlaySound(SFXType.Win);
             }
             else
             {
                 youlose.SetActive(true);
-                audioControl.PlaySound(SFXType.Win);
+                audioControl.PlaySound(SFXType.Lose);
             }
         }
 
