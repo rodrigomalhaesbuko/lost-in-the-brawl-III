@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class GameController : GlobalEventListener
 {
+    public GameObject counter;
     public GameObject roomName;
 
     public GameObject playerPrefab;
@@ -80,6 +81,9 @@ public class GameController : GlobalEventListener
         this.transform.position.x + (battleOffset * 1.5f),
         this.transform.position.y
             ), Quaternion.identity);
+
+
+        counter.GetComponent<Timer>().timerIsRunning = true;
 
         if (BoltNetwork.IsClient)
         {
@@ -169,6 +173,8 @@ public class GameController : GlobalEventListener
         BoltNetwork.Destroy(DouglasInstance);
         BoltNetwork.Destroy(CarlousInstance);
 
+        
+
         youwin.SetActive(false);
         youlose.SetActive(false);
         p1AcceptRematch = false;
@@ -177,6 +183,7 @@ public class GameController : GlobalEventListener
         lifeHost.SetActive(true);
         lifeClient.SetActive(true);
         healthBar.SetActive(true);
+        counter.SetActive(true);
 
         // AQUI TEM QUE TER DE NOVO O 3 2 1
         // E O THROW ARMS
@@ -297,11 +304,22 @@ public class GameController : GlobalEventListener
         lifeHost.SetActive(false);
         lifeClient.SetActive(false);
         healthBar.SetActive(false);
+        counter.SetActive(false);
+        counter.GetComponent<Timer>().timerIsRunning = false;
+        counter.GetComponent<Timer>().timeRemaining = PlayerPrefs.GetFloat("gameDuration");
 
         controls.StaticScene.Enable();
 
         DouglasInstance.GetComponent<PlayerController>().disableControls();
         CarlousInstance.GetComponent<PlayerController>().disableControls();
+
+        GameObject[] limbs = GameObject.FindGameObjectsWithTag("limb");
+
+        foreach (GameObject limb in limbs)
+        {
+
+            BoltNetwork.Destroy(limb);
+        }
 
         gameEnded = true;
     }
