@@ -35,6 +35,7 @@ public class GameController : GlobalEventListener
     //endbattle vars
     public GameObject youwin;
     public GameObject youlose;
+    public GameObject youDraw;
 
     public GameObject ThrowHands;
     
@@ -54,6 +55,7 @@ public class GameController : GlobalEventListener
     public void createGame()
     {
         controls.StaticScene.Disable();
+        counter.GetComponent<Timer>().timerIsRunning = true;
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
         //Player1
         playerPrefab.GetComponent<PlayerStatus>().lifeHost = lifeHost;
@@ -186,6 +188,7 @@ public class GameController : GlobalEventListener
 
         youwin.SetActive(false);
         youlose.SetActive(false);
+        youDraw.SetActive(false);
         p1AcceptRematch = false;
         p2AcceptRematch = false;
         RematchBox.SetActive(false);
@@ -278,36 +281,64 @@ public class GameController : GlobalEventListener
         {
             Restart();
         }
+
+        if (!counter.GetComponent<Timer>().timerIsRunning)
+        {
+            CheckDraw();
+        }
     }
 
-    public void endGame(bool hostWon)
+    private void CheckDraw()
+    {
+        if (DouglasInstance.GetComponent<PlayerStatus>().state.Health > CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
+        {
+            endGame(true, false);
+        }
+        else if (DouglasInstance.GetComponent<PlayerStatus>().state.Health < CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
+        {
+            endGame(false, false);
+        }
+        else
+        {
+            endGame(false, true);
+        }
+    }
+
+    public void endGame(bool hostWon, bool draw)
     {
         //BoltNetwork.Destroy(DouglasInstance);
         //BoltNetwork.Destroy(CarlousInstance);
 
-
-        if(BoltNetwork.IsClient)
+        if (draw)
         {
-            if(hostWon)
-            {
-                youlose.SetActive(true);
-            }
-            else
-            {
-                youwin.SetActive(true);
-            }
+            youDraw.SetActive(true);
         }
         else
         {
-            if (hostWon)
+            if (BoltNetwork.IsClient)
             {
-                youwin.SetActive(true);
+                if (hostWon)
+                {
+                    youlose.SetActive(true);
+                }
+                else
+                {
+                    youwin.SetActive(true);
+                }
             }
             else
             {
-                youlose.SetActive(true);
+                if (hostWon)
+                {
+                    youwin.SetActive(true);
+                }
+                else
+                {
+                    youlose.SetActive(true);
+                }
             }
         }
+        
 
         RematchBox.SetActive(true);
         lifeHost.SetActive(false);
