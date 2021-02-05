@@ -439,11 +439,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localHealth: 5
-  hostSlider: {fileID: 0}
-  clientSlider: {fileID: 0}
+  lifeHost: {fileID: 0}
+  lifeClient: {fileID: 0}
   GameController: {fileID: 0}
   isFlipped: 0
-  currentSlider: {fileID: 0}
   playerType: 1
 --- !u!114 &2334636835849245404
 MonoBehaviour:
@@ -491,7 +490,7 @@ MonoBehaviour:
   LeftArmShooted: 0
   RightArmShooted: 0
   playerAnimator: {fileID: 0}
-  animationTime: 0.5
+  animationTime: 0.3
   parryAnimationTime: 0.6
   Block: {fileID: 464860556945578697}
   HitBox: {fileID: 6316737200646267329}
