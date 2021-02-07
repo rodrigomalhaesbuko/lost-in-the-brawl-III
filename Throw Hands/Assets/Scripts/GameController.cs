@@ -100,6 +100,7 @@ public class GameController : GlobalEventListener
 
         WaitingPlayer.SetActive(false);
         StartCoroutine(WaitCreateGame());
+        gameStarted = true;
     }
     
     private IEnumerator WaitCreateGame()
@@ -189,7 +190,7 @@ public class GameController : GlobalEventListener
     {
         BoltNetwork.Destroy(DouglasInstance);
         BoltNetwork.Destroy(CarlousInstance);
-
+        gameStarted = false;
         youwin.SetActive(false);
         youlose.SetActive(false);
         youDraw.SetActive(false);
@@ -289,6 +290,16 @@ public class GameController : GlobalEventListener
         if (!counter.GetComponent<Timer>().timerIsRunning)
         {
             CheckDraw();
+        }
+
+
+        // Resolve other player quitting
+        if (gameStarted)
+        {
+            if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1)
+            {
+                LeaveButton();
+            }
         }
     }
 
