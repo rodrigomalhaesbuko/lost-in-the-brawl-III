@@ -1856,6 +1856,7 @@ MonoBehaviour:
   player: {fileID: -4397341728968391736}
   myLimbs: 1
   myRgbody: {fileID: 1653952333227796215}
+  impactForce: 50
 --- !u!1 &6742846388862954350
 GameObject:
   m_ObjectHideFlags: 0
