@@ -253,7 +253,6 @@ public class GameController : GlobalEventListener
             seta.GetComponent<RectTransform>().localPosition = new Vector3(-300 + posxseta + setapos * stepSeta, -440, 0);
 
         }
-       
 
         if (GameObject.FindGameObjectWithTag("carlous") != null && CarlousInstance == null)
         {
@@ -284,7 +283,6 @@ public class GameController : GlobalEventListener
             }
         }
         
-
         if (p1AcceptRematch && p2AcceptRematch)
         {
             Restart();
