@@ -6,6 +6,8 @@ using System;
 using Bolt.Matchmaking;
 using UdpKit;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class MenuController: GlobalEventListener
 {
@@ -22,6 +24,84 @@ public class MenuController: GlobalEventListener
     [SerializeField] private GameObject RoomName;
     [SerializeField] private GameObject RoomImageClient;
     [SerializeField] private GameObject RoomImageHost;
+
+    private InputMaster controls;
+
+    private float posx = 0;
+    private float posy = 0;
+
+    private int pos = 0;
+
+    public GameObject seta;
+
+    public void Awake()
+    {
+        controls = new InputMaster();
+        controls.StaticScene.Enable();
+
+        controls.StaticScene.Move.performed += ctx =>
+        {
+            posx += ctx.ReadValue<Vector2>().x;
+            posy += ctx.ReadValue<Vector2>().y;
+
+            if(posx > 1)
+                posx = 1;
+            else if (posx < 0)
+                posx = 0;
+            if(posy > 1)
+                posy = 1;
+            else if(posy < 0)
+                posy = 0;
+            
+        };
+
+        controls.StaticScene.Select.performed += _ => go();
+          
+    }
+
+    public void Update()
+    {
+
+        if (posy == 1)
+        {
+            seta.GetComponent<RectTransform>().localPosition = new Vector3(-890, 430, 0);
+            pos = 0;
+        }
+        else if (posx == 0)
+        {
+            seta.GetComponent<RectTransform>().localPosition = new Vector3(-775, -240, 0);
+            pos = 1;
+        }
+        else
+        {
+            seta.GetComponent<RectTransform>().localPosition = new Vector3(-220, -240, 0);
+            pos = 2;
+        }
+
+    }
+
+    public void go()
+    {
+        controls.StaticScene.Disable();
+        seta.SetActive(false);
+
+        if (pos == 0)
+        {
+            SceneManager.LoadScene("initialScreen");
+        }
+        else
+        if(pos == 1)
+        {
+            JoinGame();
+        }
+        else
+        if(pos == 2)
+        {
+            CreateGame();
+        }
+
+        
+    }
 
     public void CreateGame()
     {
