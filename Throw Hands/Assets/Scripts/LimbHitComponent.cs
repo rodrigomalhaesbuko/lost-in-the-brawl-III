@@ -5,5 +5,7 @@ using UnityEngine;
 public class LimbHitComponent : MonoBehaviour
 {
     public LimbComponent LimbComponent;
-    public bool Damaging = true; 
+    public bool Damaging = true;
+    public Rigidbody2D rdbody;
+    public Collider2D myColider;
 }

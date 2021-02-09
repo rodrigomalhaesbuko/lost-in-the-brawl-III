@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2892374336230199509}
   - component: {fileID: 3452937086688302444}
   - component: {fileID: 2755181441614803833}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Hitbox
   m_TagString: limbHitbox
   m_Icon: {fileID: 0}
@@ -72,6 +72,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LimbComponent: {fileID: 7861990554960350045}
   Damaging: 1
+  rdbody: {fileID: -2685515184846413354}
+  myColider: {fileID: 8171722020455617926}
 --- !u!1 &1595820471432824447
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +88,7 @@ GameObject:
   - component: {fileID: -2685515184846413354}
   - component: {fileID: 7861990554960350045}
   - component: {fileID: 2009948329005267206}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DouglasLeftArm
   m_TagString: limb
   m_Icon: {fileID: 0}
@@ -265,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8124091899985745235}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: LeftArmTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +299,7 @@ GameObject:
   - component: {fileID: 627168248190752890}
   - component: {fileID: 3499313348225970390}
   - component: {fileID: 2298671496069909893}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Shoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +371,7 @@ GameObject:
   - component: {fileID: 2699154672405407471}
   - component: {fileID: 8765275704237911190}
   - component: {fileID: 763964102722421487}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: "bra\xE7o e"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2257837996393494258}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: bone_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3346131616782710179}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: bone_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +537,7 @@ GameObject:
   - component: {fileID: 2004296679490924428}
   - component: {fileID: 8293241601101752268}
   - component: {fileID: 7561043659580476155}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: "antebra\xE7o e"
   m_TagString: Untagged
   m_Icon: {fileID: 0}

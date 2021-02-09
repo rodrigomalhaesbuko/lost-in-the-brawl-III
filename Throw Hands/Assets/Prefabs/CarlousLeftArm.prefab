@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6037698144753932619}
   - component: {fileID: 8942515302453127697}
   - component: {fileID: 4885620204129050883}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: "bra\xE7o e"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2351977627005439006}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 3305002709276252203}
   - component: {fileID: 5224939607854501592}
   - component: {fileID: 3731026509962780292}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: "antebra\xE7o e"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: -8365452944420457046}
   - component: {fileID: -407116751342602093}
   - component: {fileID: -2459215468549253393}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: CarlousLeftArm
   m_TagString: limb
   m_Icon: {fileID: 0}
@@ -436,7 +436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8116788518527443345}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: bone_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3349539562986772619}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: RightArmTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2560978912875258526}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: RightArmSolver_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 5650640442364622803}
   - component: {fileID: 6708262185026739061}
   - component: {fileID: 8698730562921277046}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Hitbox
   m_TagString: limbHitbox
   m_Icon: {fileID: 0}
@@ -590,6 +590,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LimbComponent: {fileID: -407116751342602093}
   Damaging: 1
+  rdbody: {fileID: -8365452944420457046}
+  myColider: {fileID: 6687898531256024465}
 --- !u!1 &7463915113642724451
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +603,7 @@ GameObject:
   - component: {fileID: 4202517974535315985}
   - component: {fileID: 3800674410794552541}
   - component: {fileID: 5338907084045641549}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Shoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3848348244821730945}
   - component: {fileID: 4005962774519136965}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: RightArmSolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -364,6 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1775555525840984334}
   myLimbs: 0
+  myRgbody: {fileID: 5524102872281988145}
 --- !u!1 &1875545057529751075
 GameObject:
   m_ObjectHideFlags: 0

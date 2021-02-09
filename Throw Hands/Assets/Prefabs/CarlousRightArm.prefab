@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6870648132833846428}
   - component: {fileID: 4643683851853321670}
   - component: {fileID: 7813669992323584483}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: CarlousRightArm
   m_TagString: limb
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3981781599315834874}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: bone_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8790054199686767771}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: bone_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7349075869150654408}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: LeftArmTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 4488544704719166286}
   - component: {fileID: 8258116963516910526}
   - component: {fileID: 1634877154896825583}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: "bra\xE7o d"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 7391527322504995705}
   - component: {fileID: 5311592254831115019}
   - component: {fileID: 9030162676987718436}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: "bra\xE7o d_1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 7818540884669562101}
   - component: {fileID: 6513448150452375620}
   - component: {fileID: 2452856559218090987}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Shoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 5321530351105265795}
   - component: {fileID: 19506239993943697}
   - component: {fileID: 6250592433942753686}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Hitbox
   m_TagString: limbHitbox
   m_Icon: {fileID: 0}
@@ -627,3 +627,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LimbComponent: {fileID: 4643683851853321670}
   Damaging: 1
+  rdbody: {fileID: -6870648132833846428}
+  myColider: {fileID: -5759925762062718567}
