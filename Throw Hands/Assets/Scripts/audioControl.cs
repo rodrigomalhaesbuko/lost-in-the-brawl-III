@@ -20,7 +20,6 @@ public class audioControl : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         play = true;
         audioSource.volume = PlayerPrefs.GetFloat("volume");
-        audioSource.Play();
 
         damageSource = Resources.Load<AudioClip>("damage");
         attackSource = Resources.Load<AudioClip>("punch");

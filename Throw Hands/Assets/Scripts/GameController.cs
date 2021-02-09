@@ -32,6 +32,8 @@ public class GameController : GlobalEventListener
 
     public float battleOffset = 5f;
 
+    public AudioSource bgm;
+
     //endbattle vars
     public GameObject youwin;
     public GameObject youlose;
@@ -57,6 +59,7 @@ public class GameController : GlobalEventListener
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
         WaitingPlayer.SetActive(false);
         audioControl.PlaySound(SFXType.Intro);
+        bgm.Play();
         controls.StaticScene.Disable();
         counter.GetComponent<Timer>().timerIsRunning = true;
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
@@ -287,11 +290,13 @@ public class GameController : GlobalEventListener
             Restart();
         }
 
-        if (!counter.GetComponent<Timer>().timerIsRunning)
+        if (!gameEnded)
         {
-            CheckDraw();
+            if (!counter.GetComponent<Timer>().timerIsRunning)
+            {
+                CheckDraw();
+            }
         }
-
 
         // Resolve other player quitting
         if (gameStarted)
@@ -305,25 +310,28 @@ public class GameController : GlobalEventListener
 
     private void CheckDraw()
     {
-        if (DouglasInstance.GetComponent<PlayerStatus>().state.Health > CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
+        if (DouglasInstance != null && CarlousInstance != null)
         {
-            endGame(true, false);
+            if (DouglasInstance.GetComponent<PlayerStatus>().state.Health > CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
+            {
+                endGame(true, false);
+            }
+            else if (DouglasInstance.GetComponent<PlayerStatus>().state.Health < CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
+            {
+                endGame(false, false);
+            }
+            else
+            {
+                endGame(false, true);
+            }
         }
-        else if (DouglasInstance.GetComponent<PlayerStatus>().state.Health < CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
-        {
-            endGame(false, false);
-        }
-        else
-        {
-            endGame(false, true);
-        }
+       
     }
 
     public void endGame(bool hostWon, bool draw)
     {
         //BoltNetwork.Destroy(DouglasInstance);
         //BoltNetwork.Destroy(CarlousInstance);
-
         if (draw)
         {
             youDraw.SetActive(true);
@@ -357,7 +365,6 @@ public class GameController : GlobalEventListener
                 }
             }
         }
-        
 
         RematchBox.SetActive(true);
         lifeHost.SetActive(false);

@@ -38,7 +38,11 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void HealthCallBack()
     {
-        lifeHost.transform.GetChild(state.Health).GetComponent<Image>().color = redColor;
+        if (lifeHost.transform)
+        {
+            lifeHost.transform.GetChild(state.Health).GetComponent<Image>().color = redColor;
+        }
+       
 
         if (state.Health <= 0)
         {
@@ -50,7 +54,10 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void EnemyHealthCallBack()
     {
-        lifeClient.transform.GetChild(state.EnemyHealth).GetComponent<Image>().color = redColor;
+        if (lifeClient.transform)
+        {
+            lifeClient.transform.GetChild(state.EnemyHealth).GetComponent<Image>().color = redColor;
+        }
 
         if (state.EnemyHealth <= 0)
         {
