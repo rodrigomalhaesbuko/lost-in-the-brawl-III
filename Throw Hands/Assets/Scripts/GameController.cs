@@ -7,6 +7,7 @@ using UdpKit;
 using System;
 using Bolt.Matchmaking;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class GameController : GlobalEventListener
 {
@@ -34,6 +35,9 @@ public class GameController : GlobalEventListener
 
     public AudioSource bgm;
 
+    //CAMERA
+    public CinemachineTargetGroup targetGroup;
+
     //endbattle vars
     public GameObject youwin;
     public GameObject youlose;
@@ -58,6 +62,7 @@ public class GameController : GlobalEventListener
     {
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
         WaitingPlayer.SetActive(false);
+        gameEnded = false;
         audioControl.PlaySound(SFXType.Intro);
         bgm.Play();
         controls.StaticScene.Disable();
@@ -191,6 +196,8 @@ public class GameController : GlobalEventListener
 
     private void Restart()
     {
+        targetGroup.RemoveMember(DouglasInstance.transform);
+        targetGroup.RemoveMember(CarlousInstance.transform);
         BoltNetwork.Destroy(DouglasInstance);
         BoltNetwork.Destroy(CarlousInstance);
         gameStarted = false;
@@ -257,11 +264,13 @@ public class GameController : GlobalEventListener
         if (GameObject.FindGameObjectWithTag("carlous") != null && CarlousInstance == null)
         {
             CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
+            targetGroup.AddMember(CarlousInstance.transform, 1f, 4f);
         }
 
         if (GameObject.FindGameObjectWithTag("douglas") != null && DouglasInstance == null)
         {
             DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
+            targetGroup.AddMember(DouglasInstance.transform, 1f, 4f);
         }
 
         if (DouglasInstance != null && CarlousInstance != null)
