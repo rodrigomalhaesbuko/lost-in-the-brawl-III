@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     public float timeRemaining = 99;
     public bool timerIsRunning = false;
     public Text timeText;
+    public GameController gameController;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class Timer : MonoBehaviour
             {
                 timeRemaining = 0;
                 timerIsRunning = false;
+                gameController.CheckDraw();
                 // Ver quem tem mais vida e acabar
             }
         }

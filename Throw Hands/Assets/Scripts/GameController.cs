@@ -64,7 +64,12 @@ public class GameController : GlobalEventListener
         WaitingPlayer.SetActive(false);
         gameEnded = false;
         audioControl.PlaySound(SFXType.Intro);
-        GameObject.FindGameObjectWithTag("musicMenu").GetComponent<AudioSource>().Stop(); 
+
+        if (GameObject.FindGameObjectWithTag("musicMenu") != null)
+        {
+            GameObject.FindGameObjectWithTag("musicMenu").GetComponent<AudioSource>().Stop();
+        }
+
         bgm.Play();
         controls.StaticScene.Disable();
         Time.timeScale = 1f;
@@ -299,13 +304,13 @@ public class GameController : GlobalEventListener
             Restart();
         }
 
-        if (!gameEnded)
-        {
-            if (!counter.GetComponent<Timer>().timerIsRunning)
-            {
-                CheckDraw();
-            }
-        }
+        //if (!gameEnded)
+        //{
+        //    if (!counter.GetComponent<Timer>().timerIsRunning)
+        //    {
+        //        CheckDraw();
+        //    }
+        //}
 
         // Resolve other player quitting
         if (gameStarted)
@@ -317,7 +322,7 @@ public class GameController : GlobalEventListener
         }
     }
 
-    private void CheckDraw()
+    public void CheckDraw()
     {
         if (DouglasInstance != null && CarlousInstance != null)
         {
