@@ -32,10 +32,9 @@ public class BlockComponent : MonoBehaviour
                 {
                     impactForce *= -1;
                 }
-
-                collision.gameObject.GetComponent<LimbHitComponent>().myColider.isTrigger = true;
                 collision.gameObject.GetComponent<LimbHitComponent>().Damaging = false;
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.velocity = Vector2.zero;
+                collision.gameObject.GetComponent<LimbHitComponent>().limb.layer = LayerMask.NameToLayer("TransparentFX");
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.AddForce(new Vector2(impactForce, 0f), ForceMode2D.Impulse);
             }
            

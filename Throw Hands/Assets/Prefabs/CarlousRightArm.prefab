@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 364566321606910961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.4504992, y: -0.36162606, z: -2.6570814}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.73, y: 0.73, z: 1}
   m_Children:
   - {fileID: 3981781599315834874}
   - {fileID: 4488544704719166286}
@@ -375,8 +375,8 @@ MonoBehaviour:
   - {fileID: 3981781599315834874}
   - {fileID: 8790054199686767771}
   m_Bounds:
-    m_Center: {x: -0.38836706, y: 0.084779024, z: -0.01999998}
-    m_Extent: {x: 1.0268968, y: 0.8684353, z: 9.313226e-10}
+    m_Center: {x: -0.3883674, y: 0.084779084, z: -0.01999998}
+    m_Extent: {x: 1.0268968, y: 0.86843526, z: 9.313226e-10}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!1 &7095372361741366298
@@ -479,7 +479,7 @@ MonoBehaviour:
   - {fileID: 8790054199686767771}
   - {fileID: 3981781599315834874}
   m_Bounds:
-    m_Center: {x: -2.2682986, y: 1.5809762, z: -0.01999998}
+    m_Center: {x: -2.2682989, y: 1.580976, z: -0.01999998}
     m_Extent: {x: 1.2291899, y: 0.6395595, z: 9.313226e-10}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -629,3 +629,4 @@ MonoBehaviour:
   Damaging: 1
   rdbody: {fileID: -6870648132833846428}
   myColider: {fileID: -5759925762062718567}
+  limb: {fileID: 364566321606910961}

@@ -116,7 +116,7 @@ public class MenuController: GlobalEventListener
             }
         }
 
-        Debug.Log(pos);
+        //Debug.Log(pos);
         
     }
 

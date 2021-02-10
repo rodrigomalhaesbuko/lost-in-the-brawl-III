@@ -569,6 +569,7 @@ MonoBehaviour:
   Damaging: 1
   rdbody: {fileID: 4314283759232894280}
   myColider: {fileID: 1245892878489768631}
+  limb: {fileID: 482591445015878545}
 --- !u!1 &5657479354491518838
 GameObject:
   m_ObjectHideFlags: 0

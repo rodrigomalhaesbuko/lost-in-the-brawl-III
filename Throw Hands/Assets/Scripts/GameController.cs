@@ -64,6 +64,7 @@ public class GameController : GlobalEventListener
         WaitingPlayer.SetActive(false);
         gameEnded = false;
         audioControl.PlaySound(SFXType.Intro);
+        GameObject.FindGameObjectWithTag("musicMenu").GetComponent<AudioSource>().Stop(); 
         bgm.Play();
         controls.StaticScene.Disable();
         Time.timeScale = 1f;
@@ -340,6 +341,8 @@ public class GameController : GlobalEventListener
     {
         //BoltNetwork.Destroy(DouglasInstance);
         //BoltNetwork.Destroy(CarlousInstance);
+        audioControl.audioSource.Stop();
+        audioControl.PlaySound(SFXType.End);
         if (draw)
         {
             youDraw.SetActive(true);
@@ -373,7 +376,6 @@ public class GameController : GlobalEventListener
                 }
             }
         }
-
         RematchBox.SetActive(true);
         lifeHost.SetActive(false);
         lifeClient.SetActive(false);

@@ -79,15 +79,17 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void TakeDamage()
     {
-        audioControl.PlaySound(SFXType.Damage);
         if (BoltNetwork.IsClient)
         {
+            Debug.Log("CLIENTE TOMOU DANO");
             state.EnemyHealth -= 1;
         }
         else
         {
+            Debug.Log("HOST TOMOU DANO");
             state.Health -= 1;
         }
+        audioControl.PlaySound(SFXType.Damage);
     }
 
 }

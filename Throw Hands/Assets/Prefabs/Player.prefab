@@ -1645,7 +1645,7 @@ GameObject:
   - component: {fileID: 75430443314542946}
   - component: {fileID: 2565327656439636564}
   - component: {fileID: 7217972710704784325}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Shoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

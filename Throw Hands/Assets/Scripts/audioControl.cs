@@ -11,6 +11,7 @@ public class audioControl : MonoBehaviour
     public static AudioClip introSource;
     public static AudioClip loseSource;
     public static AudioClip winSource;
+    public static AudioClip endSource;
 
     bool play;
 
@@ -26,6 +27,7 @@ public class audioControl : MonoBehaviour
         introSource = Resources.Load<AudioClip>("intro");
         loseSource = Resources.Load<AudioClip>("lose");
         winSource = Resources.Load<AudioClip>("win");
+        endSource = Resources.Load<AudioClip>("battleEnd");
     }
 
     public static void PlaySound(SFXType clip)
@@ -42,6 +44,9 @@ public class audioControl : MonoBehaviour
                 break;
             case SFXType.Lose:
                 audioSource.PlayOneShot(loseSource);
+                break;
+            case SFXType.End:
+                audioSource.PlayOneShot(endSource);
                 break;
             case SFXType.Win:
                 audioSource.PlayOneShot(winSource);
@@ -73,5 +78,6 @@ public enum SFXType
     Punch,
     Intro,
     Lose,
+    End,
     Win
 }

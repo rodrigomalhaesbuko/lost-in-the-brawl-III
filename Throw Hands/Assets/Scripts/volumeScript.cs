@@ -42,6 +42,7 @@ public class volumeScript : MonoBehaviour
         gameObject.GetComponent<RectTransform>().localPosition = new Vector3(posx, 220, 0);
 
         volume = (posx + 120) / 850;
+        GameObject.FindGameObjectWithTag("musicMenu").GetComponent<AudioSource>().volume = volume;
     }
 
     private void OnEnable()

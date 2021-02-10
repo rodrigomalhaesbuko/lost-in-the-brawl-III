@@ -8,4 +8,5 @@ public class LimbHitComponent : MonoBehaviour
     public bool Damaging = true;
     public Rigidbody2D rdbody;
     public Collider2D myColider;
+    public GameObject limb;
 }
