@@ -42,7 +42,7 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
 
         if (shoes.GetComponent<ShoeComponent>().onFloor)
         {
-            Debug.Log("NO CHÃO");
+            //Debug.Log("NO CHÃO");
             return true;
         }
         else

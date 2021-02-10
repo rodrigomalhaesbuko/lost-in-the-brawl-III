@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Limb: {fileID: 6858302287848131728, guid: 10d46af2ef684de46880f16abed68c05, type: 3}
-  launchForce: 25
+  launchForce: 80
   shotPoint: {fileID: 1354810822718345913}
   leftArmSprite: {fileID: 8383232600338365447}
   leftForearmSprite: {fileID: 5170017346273819747}

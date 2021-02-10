@@ -227,22 +227,22 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
             {
                 if (playerType == PlayerType.Carlous)
                 {
-                    newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce;
+                    newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce * 2;
                 }
                 else
                 {
-                    newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
+                    newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce * 2;
                 }
             }
             else
             {
                 if (playerType == PlayerType.Carlous)
                 {
-                    newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
+                    newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce * 2;
                  }
                 else
                 {
-                    newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce;
+                    newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce * 2;
                 }
 
                 Vector3 newLimbLocalScale = newLimb.transform.localScale;

@@ -38,15 +38,14 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void HealthCallBack()
     {
-        if (lifeHost.transform)
+        if(state.Health < 5 && state.Health >= 0)
         {
             lifeHost.transform.GetChild(state.Health).GetComponent<Image>().color = redColor;
-        }
-       
-
+        } 
+      
         if (state.Health <= 0)
         {
-            Debug.Log("GameOver Player 1 ganhou");
+            //Debug.Log("GameOver Player 1 ganhou");
             GameController.GetComponent<GameController>().endGame(false, false);
         }
 
@@ -54,14 +53,14 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void EnemyHealthCallBack()
     {
-        if (lifeClient.transform)
+        if (state.EnemyHealth <= 5 && state.EnemyHealth >= 0)
         {
             lifeClient.transform.GetChild(state.EnemyHealth).GetComponent<Image>().color = redColor;
         }
 
         if (state.EnemyHealth <= 0)
         {
-            Debug.Log("GameOver Player 2 ganhou");
+            //Debug.Log("GameOver Player 2 ganhou");
             GameController.GetComponent<GameController>().endGame(true, false);
         }
     }
@@ -82,14 +81,17 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         if (BoltNetwork.IsClient)
         {
             Debug.Log("CLIENTE TOMOU DANO");
-            state.EnemyHealth -= 1;
+            state.EnemyHealth = state.EnemyHealth - 1;
         }
         else
         {
             Debug.Log("HOST TOMOU DANO");
-            state.Health -= 1;
+            state.Health = state.Health - 1;
         }
+
         audioControl.PlaySound(SFXType.Damage);
+        Debug.Log("CLIENTE" + " " + "VIDA" + " " + state.EnemyHealth.ToString());
+        Debug.Log("host" + " " + "VIDA" + " " + state.Health.ToString());
     }
 
 }
