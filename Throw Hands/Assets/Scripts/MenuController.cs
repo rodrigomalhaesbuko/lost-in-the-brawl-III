@@ -13,7 +13,6 @@ public class MenuController: GlobalEventListener
 {
     //    [SerializeField] private string versionName = "0.1";
     //    [SerializeField] private GameObject conectPanel;
-    [SerializeField] private InputField CreateGameInput;
     [SerializeField] private InputField JoinGameInput;
     private bool foundHost = false;
     [SerializeField] private GameObject AlertBox;
@@ -28,9 +27,12 @@ public class MenuController: GlobalEventListener
     private InputMaster controls;
 
     private float posx = 0;
-    private float posy = 0;
+    private float posy = 2;
 
-    private int pos = 0;
+    private float setamovx = 0;
+
+    private int pos = 2;
+    private int vel = 60;
 
     public GameObject seta;
 
@@ -48,8 +50,8 @@ public class MenuController: GlobalEventListener
                 posx = 1;
             else if (posx < 0)
                 posx = 0;
-            if(posy > 1)
-                posy = 1;
+            if(posy > 2)
+                posy = 2;
             else if(posy < 0)
                 posy = 0;
             
@@ -59,54 +61,98 @@ public class MenuController: GlobalEventListener
           
     }
 
+    public void Start()
+    {
+        posx = 0;
+        posy = 2;
+
+        setamovx = 0;
+
+        pos = 2;
+        vel = 60;
+    }
+
     public void Update()
     {
+        if (pos < 4)
+        {
+            if (posy == 2)
+            {
+                seta.GetComponent<RectTransform>().localPosition = new Vector3(-900 - setamovx, 430, 0);
+                pos = 0;
+            }
+            else if (posy == 1)
+            {
+                JoinGameInput.ActivateInputField();
+                seta.SetActive(false);
+                pos = 1;
+            }
+            else if (posx == 0)
+            {
+                seta.GetComponent<RectTransform>().localPosition = new Vector3(-785 - setamovx, -240, 0);
+                pos = 2;
+            }
+            else
+            {
+                seta.GetComponent<RectTransform>().localPosition = new Vector3(-220 - setamovx, -240, 0);
+                pos = 3;
+            }
 
-        if (posy == 1)
-        {
-            seta.GetComponent<RectTransform>().localPosition = new Vector3(-890, 430, 0);
-            pos = 0;
-        }
-        else if (posx == 0)
-        {
-            seta.GetComponent<RectTransform>().localPosition = new Vector3(-775, -240, 0);
-            pos = 1;
-        }
-        else
-        {
-            seta.GetComponent<RectTransform>().localPosition = new Vector3(-220, -240, 0);
-            pos = 2;
+            setamovx += Time.deltaTime * vel;
+
+            if (setamovx > 30)
+            {
+                vel *= -1;
+            }
+            else if (setamovx < 0)
+            {
+                vel *= -1;
+            }
+
+            if (pos != 1)
+            {
+                seta.SetActive(true);
+                JoinGameInput.DeactivateInputField();
+            }
         }
 
+        Debug.Log(pos);
+        
     }
 
     public void go()
     {
-        controls.StaticScene.Disable();
-        seta.SetActive(false);
 
         if (pos == 0)
         {
+            controls.StaticScene.Disable();
             SceneManager.LoadScene("initialScreen");
         }
-        else
-        if(pos == 1)
+        else if(pos == 1)
         {
-            JoinGame();
+            posy--;
         }
         else
         if(pos == 2)
         {
+            JoinGame();
+        }
+        else
+        if(pos == 3)
+        {
             CreateGame();
         }
-
         
     }
 
     public void CreateGame()
     {
-        if(JoinGameInput.text.Length > 0)
+        if (JoinGameInput.text.Length > 0)
         {
+            pos = 4;
+            controls.StaticScene.Disable();
+            seta.SetActive(false);
+
             Loading.SetActive(true);
             RoomImageHost.SetActive(true);
             RoomName.GetComponent<Text>().text = JoinGameInput.text;
@@ -129,6 +175,10 @@ public class MenuController: GlobalEventListener
     {
         if (JoinGameInput.text.Length > 0)
         {
+            pos = 4;
+            controls.StaticScene.Disable();
+            seta.SetActive(false);
+
             Loading.SetActive(true);
             RoomImageClient.SetActive(true);
             RoomName.GetComponent<Text>().text = JoinGameInput.text;
@@ -186,6 +236,8 @@ public class MenuController: GlobalEventListener
         Loading.SetActive(false);
         RoomImageHost.SetActive(false);
         RoomImageClient.SetActive(false);
+        controls.StaticScene.Enable();
+        seta.SetActive(true);
     }
 
     public void OpenAlertBox()
