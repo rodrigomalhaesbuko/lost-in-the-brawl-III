@@ -66,6 +66,7 @@ public class GameController : GlobalEventListener
         audioControl.PlaySound(SFXType.Intro);
         bgm.Play();
         controls.StaticScene.Disable();
+        Time.timeScale = 1f;
         counter.GetComponent<Timer>().timerIsRunning = true;
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
         //Player1

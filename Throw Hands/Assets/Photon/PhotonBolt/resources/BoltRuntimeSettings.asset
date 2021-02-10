@@ -50,7 +50,7 @@ MonoBehaviour:
   debugStartMapName: SimpleMoveAndShoot_Game
   debugPlayAsServer: 1
   showDebugInfo: 0
-  overrideTimeScale: 1
+  overrideTimeScale: 0
   debugEditorMode: 0
   consoleToggleKey: 9
   consoleVisibleByDefault: 1

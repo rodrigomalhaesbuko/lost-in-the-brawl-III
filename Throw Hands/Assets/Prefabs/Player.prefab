@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4671598793033555064}
   - component: {fileID: 8929503718965427677}
   - component: {fileID: 9102539543633584205}
+  - component: {fileID: 7726134930254434219}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -42,7 +43,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.04878068, y: -0.08520651}
@@ -79,6 +80,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7726134930254434219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464860556945578697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfca60c5c515541b8a6c5390786bd7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: -4397341728968391736}
+  myLimbs: 1
+  myRgbody: {fileID: 1653952333227796215}
+  impactForce: 30
 --- !u!1 &467564123527690693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,6 +1874,8 @@ MonoBehaviour:
   myLimbs: 1
   myRgbody: {fileID: 1653952333227796215}
   impactForce: 50
+  playerObject: {fileID: 1653952333227796214}
+  slowSeconds: 40
 --- !u!1 &6742846388862954350
 GameObject:
   m_ObjectHideFlags: 0

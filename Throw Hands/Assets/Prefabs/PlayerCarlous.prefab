@@ -318,7 +318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687778593408439531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.44, y: 3.08, z: -0.04594378}
+  m_LocalPosition: {x: -0.64, y: 3.06, z: -0.04594378}
   m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 0.3071852}
   m_Children: []
   m_Father: {fileID: 5524102872281988147}
@@ -337,7 +337,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.31627655, y: -1.9738731}
+  m_Offset: {x: 0.36343098, y: -1.7698026}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -348,7 +348,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.345482, y: 4.9477463}
+  m_Size: {x: 2.6186123, y: 4.539605}
   m_EdgeRadius: 0
 --- !u!114 &2008962941664768699
 MonoBehaviour:
@@ -366,6 +366,8 @@ MonoBehaviour:
   myLimbs: 0
   myRgbody: {fileID: 5524102872281988145}
   impactForce: 50
+  playerObject: {fileID: 5524102872281988144}
+  slowSeconds: 10
 --- !u!1 &1875545057529751075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,7 +1635,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.18959379, y: 1.0531712}
+  m_Offset: {x: -0.24537599, y: 0.91763747}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1644,7 +1646,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3692327, y: 5.6785564}
+  m_Size: {x: 2.767042, y: 5.3392115}
   m_EdgeRadius: 0
 --- !u!1 &6163102823278672749
 GameObject:
@@ -2105,6 +2107,7 @@ GameObject:
   - component: {fileID: 6221475494269855103}
   - component: {fileID: 6514539276960346992}
   - component: {fileID: 1748359519767088786}
+  - component: {fileID: 3241900749146812781}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -2136,7 +2139,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.04878068, y: 0.495193}
@@ -2173,6 +2176,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3241900749146812781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119007275232967522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfca60c5c515541b8a6c5390786bd7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1775555525840984334}
+  myLimbs: 0
+  myRgbody: {fileID: 5524102872281988145}
+  impactForce: 30
 --- !u!1 &8214074559245974285
 GameObject:
   m_ObjectHideFlags: 0

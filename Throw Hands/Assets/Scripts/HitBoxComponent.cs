@@ -9,6 +9,7 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
     public PlayerType myLimbs;
     public Rigidbody2D myRgbody;
     public float impactForce = 30.0f;
+    public GameObject playerObject;
 
     private void Start()
     {
@@ -30,7 +31,17 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
             {
                 collision.gameObject.GetComponent<LimbHitComponent>().Damaging = false;
 
-                if(collision.gameObject.GetComponent<LimbHitComponent>().rdbody.velocity.x > 0.0f)
+                if (player.isFlipped)
+                {
+                    impactForce *= -1;
+                }
+
+                if (player.state.Health == 1 || player.state.EnemyHealth == 1)
+                {
+                    impactForce *= 1.5f;
+                }
+
+                if (collision.gameObject.GetComponent<LimbHitComponent>().rdbody.velocity.x > 0.0f)
                 {
                     myRgbody.AddForce(new Vector2(-impactForce, 0f), ForceMode2D.Impulse);
                 }
@@ -38,14 +49,36 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
                 {
                     myRgbody.AddForce(new Vector2(impactForce, 0f), ForceMode2D.Impulse);
                 }
+
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.velocity = Vector2.zero;
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.AddForce(new Vector2(0f, -10.0f),ForceMode2D.Impulse);
 
                 collision.gameObject.GetComponent<LimbHitComponent>().myColider.isTrigger = true;
+                MakeSlowMotion();
                 player.TakeDamage();
                 state.Animator.SetTrigger("Damage");
             }
             
         }
     }
+
+    private void MakeSlowMotion()
+    {
+        bool slowed = false;
+
+        if (player.state.Health == 1 || player.state.EnemyHealth == 1)
+        {
+            Time.timeScale = 0.05f;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
+        }
+    }
+
+    public float slowSeconds = 40.0f;
+
+    private void Update()
+    {
+        Time.timeScale += (1f / slowSeconds) * Time.unscaledDeltaTime;
+        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+    }
+
 }
