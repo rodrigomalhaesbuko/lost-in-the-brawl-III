@@ -84,6 +84,7 @@ public class MenuController: GlobalEventListener
             else if (posy == 1)
             {
                 JoinGameInput.ActivateInputField();
+                JoinGameInput.transform.Find("Placeholder").GetComponent<Text>().text = "";
                 seta.SetActive(false);
                 pos = 1;
             }
@@ -113,6 +114,11 @@ public class MenuController: GlobalEventListener
             {
                 seta.SetActive(true);
                 JoinGameInput.DeactivateInputField();
+                if (JoinGameInput.text.Length == 0)
+                {
+                    JoinGameInput.transform.Find("Placeholder").GetComponent<Text>().text = "Type here...";
+                }
+
             }
         }
 
@@ -194,7 +200,7 @@ public class MenuController: GlobalEventListener
             OpenAlertBox2();
         }
 
-        Debug.Log("foi");
+        //Debug.Log("foi");
        
     }
 

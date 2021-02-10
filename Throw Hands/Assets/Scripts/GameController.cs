@@ -63,6 +63,7 @@ public class GameController : GlobalEventListener
         // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
         WaitingPlayer.SetActive(false);
         gameEnded = false;
+        audioControl.audioSource.Stop();
         audioControl.PlaySound(SFXType.Intro);
 
         if (GameObject.FindGameObjectWithTag("musicMenu") != null)
@@ -101,16 +102,17 @@ public class GameController : GlobalEventListener
         this.transform.position.y
             ), Quaternion.identity);
 
-
         counter.GetComponent<Timer>().timerIsRunning = true;
 
         if (BoltNetwork.IsClient)
         {
-            bola1.SetActive(false);
+            //bola1.SetActive(false);
+            BoltNetwork.Destroy(bola1);
         }
         else
         {
-            bola2.SetActive(false);
+            //bola2.SetActive(false);
+            BoltNetwork.Destroy(bola2);
         }
 
         WaitingPlayer.SetActive(false);
@@ -203,6 +205,13 @@ public class GameController : GlobalEventListener
 
     private void Restart()
     {
+        GameObject[] limbs = GameObject.FindGameObjectsWithTag("limb");
+
+        foreach (GameObject limb in limbs)
+        {
+            BoltNetwork.Destroy(limb);
+        }
+
         targetGroup.RemoveMember(DouglasInstance.transform);
         targetGroup.RemoveMember(CarlousInstance.transform);
         BoltNetwork.Destroy(DouglasInstance);
@@ -351,6 +360,7 @@ public class GameController : GlobalEventListener
         if (draw)
         {
             youDraw.SetActive(true);
+            audioControl.PlaySound(SFXType.Draw);
         }
         else
         {
@@ -393,14 +403,6 @@ public class GameController : GlobalEventListener
 
         DouglasInstance.GetComponent<PlayerController>().disableControls();
         CarlousInstance.GetComponent<PlayerController>().disableControls();
-
-        GameObject[] limbs = GameObject.FindGameObjectsWithTag("limb");
-
-        foreach (GameObject limb in limbs)
-        {
-
-            BoltNetwork.Destroy(limb);
-        }
 
         gameEnded = true;
     }

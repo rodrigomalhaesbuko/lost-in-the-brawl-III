@@ -30,8 +30,6 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
             if(collision.gameObject.GetComponent<LimbHitComponent>().LimbComponent.playerType != myLimbs && collision.gameObject.GetComponent<LimbHitComponent>().Damaging )
             {
                 collision.gameObject.GetComponent<LimbHitComponent>().Damaging = false;
-                player.TakeDamage();
-                state.Animator.SetTrigger("Damage");
 
                 if (player.isFlipped)
                 {
@@ -56,6 +54,8 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.AddForce(new Vector2(0f, -5.0f),ForceMode2D.Impulse);
                 collision.gameObject.GetComponent<LimbHitComponent>().limb.layer = LayerMask.NameToLayer("TransparentFX");
                 MakeSlowMotion();
+                state.Animator.SetTrigger("Damage");
+                player.TakeDamage();
             }
             
         }
@@ -72,7 +72,7 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-    public float slowSeconds = 40.0f;
+    public float slowSeconds = 45.0f;
 
     private void Update()
     {
