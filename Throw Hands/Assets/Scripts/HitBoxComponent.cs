@@ -29,16 +29,14 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             if(collision.gameObject.GetComponent<LimbHitComponent>().LimbComponent.playerType != myLimbs && collision.gameObject.GetComponent<LimbHitComponent>().Damaging )
             {
-                collision.gameObject.GetComponent<LimbHitComponent>().Damaging = false;
-                player.TakeDamage();
-                state.Animator.SetTrigger("Damage");
+                
 
-                if (player.isFlipped)
+                if (playerObject.GetComponent<PlayerStatus>().isFlipped)
                 {
                     impactForce *= -1;
                 }
 
-                if (player.state.Health == 1 || player.state.EnemyHealth == 1)
+                if (state.Health == 1 || state.EnemyHealth == 1)
                 {
                     impactForce *= 1.5f;
                 }
@@ -56,6 +54,11 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.AddForce(new Vector2(0f, -5.0f),ForceMode2D.Impulse);
                 collision.gameObject.GetComponent<LimbHitComponent>().limb.layer = LayerMask.NameToLayer("TransparentFX");
                 MakeSlowMotion();
+
+
+                collision.gameObject.GetComponent<LimbHitComponent>().Damaging = false;
+                playerObject.GetComponent<PlayerStatus>().TakeDamage();
+                state.Animator.SetTrigger("Damage");
             }
             
         }
@@ -64,8 +67,14 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
     private void MakeSlowMotion()
     {
         bool slowed = false;
+        
+        if(myLimbs == PlayerType.Carlous && state.EnemyHealth == 1)
+        {
+            Time.timeScale = 0.05f;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
+        }
 
-        if (player.state.Health == 1 || player.state.EnemyHealth == 1)
+        if (myLimbs == PlayerType.Douglas && state.Health == 1)
         {
             Time.timeScale = 0.05f;
             Time.fixedDeltaTime = Time.timeScale * .02f;
@@ -78,6 +87,8 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         Time.timeScale += (1f / slowSeconds) * Time.unscaledDeltaTime;
         Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+
+        audioControl.audioSource.pitch = Time.timeScale;
     }
 
 }
