@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Limb: {fileID: 6858302287848131728, guid: 10d46af2ef684de46880f16abed68c05, type: 3}
-  launchForce: 80
+  launchForce: 30
   shotPoint: {fileID: 5228903377246013567}
   leftArmSprite: {fileID: 6747447415425098768}
   leftForearmSprite: {fileID: 8214074559245974285}

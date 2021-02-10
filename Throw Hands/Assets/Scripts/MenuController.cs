@@ -68,6 +68,11 @@ public class MenuController: GlobalEventListener
 
         setamovx = 0;
 
+        if (GameObject.FindGameObjectWithTag("musicMenu") != null && !GameObject.FindGameObjectWithTag("musicMenu").GetComponent<AudioSource>().isPlaying)
+        {
+            GameObject.FindGameObjectWithTag("musicMenu").GetComponent<AudioSource>().Play();
+        }
+
         pos = 2;
         vel = 60;
     }
