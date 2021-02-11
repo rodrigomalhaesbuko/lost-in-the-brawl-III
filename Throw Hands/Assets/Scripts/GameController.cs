@@ -58,6 +58,10 @@ public class GameController : GlobalEventListener
     
     public static bool armFlip = false;
 
+    public float slowSeconds = 4.0f;
+
+    private float slowTimer = 0f;
+
     private void getInstances()
     {
         CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
@@ -247,7 +251,6 @@ public class GameController : GlobalEventListener
 
     public void Rematch()
     {
-        gameState = GameState.rematchClick;
 
         if (!BoltNetwork.IsClient)
         {
@@ -355,6 +358,22 @@ public class GameController : GlobalEventListener
         {
             Restart();
         }
+
+        if(gameState == GameState.slowed)
+        {
+            Time.timeScale = .05f;
+
+            slowTimer += Time.unscaledDeltaTime;
+
+            if(slowTimer > slowSeconds)
+            {
+                Time.timeScale = 1f;
+            }
+        }
+
+        Time.fixedDeltaTime = Time.timeScale * .02f;
+        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+        audioControl.audioSource.pitch = Time.timeScale;
     }
 
     public override void Disconnected(BoltConnection connection)
@@ -379,8 +398,23 @@ public class GameController : GlobalEventListener
         }
     }
 
-    public void endGame(bool hostWon, bool draw)
+    private void MakeSlowMotion()
     {
+        //Time.timeScale = 0.9f;
+        Time.fixedDeltaTime = Time.timeScale * .02f;
+    }
+
+    
+
+    private IEnumerator afterEndGame(bool hostWon, bool draw)
+    {
+        MakeSlowMotion();
+
+        DouglasInstance.GetComponent<PlayerController>().disableControls();
+        CarlousInstance.GetComponent<PlayerController>().disableControls();
+
+        yield return new WaitForSeconds(1.5f);
+
         audioControl.audioSource.Stop();
         audioControl.PlaySound(SFXType.End);
 
@@ -426,11 +460,16 @@ public class GameController : GlobalEventListener
         counter.SetActive(false);
         counter.GetComponent<Timer>().timerIsRunning = false;
 
-        DouglasInstance.GetComponent<PlayerController>().disableControls();
-        CarlousInstance.GetComponent<PlayerController>().disableControls();
         controls.StaticScene.Enable();
 
         gameState = GameState.rematch;
+
+    }
+
+    public void endGame(bool hostWon, bool draw)
+    {
+        gameState = GameState.slowed;
+        StartCoroutine(afterEndGame(hostWon, draw));
     }
 }
 
@@ -441,7 +480,8 @@ public enum GameState
     play,            // Jogando o jogo
     rematch,        // Tela de pós jogo
     rematchClick,  // Clicou na tela de pós jogo
-    restart       // restartando o jogo
+    restart,      // Restartando o jogo
+    slowed       // Slowmotion do fim de jogo
 }
 
 //PHOTON NETWORK

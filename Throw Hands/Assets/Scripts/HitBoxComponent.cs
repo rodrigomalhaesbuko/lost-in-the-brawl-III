@@ -52,10 +52,7 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.velocity = Vector2.zero;
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.AddForce(new Vector2(0f, -5.0f),ForceMode2D.Impulse);
                 collision.gameObject.GetComponent<LimbHitComponent>().limb.layer = LayerMask.NameToLayer("TransparentFX");
-                MakeSlowMotion();
-
-
-
+            
                 collision.gameObject.GetComponent<LimbHitComponent>().Damaging = false;
                 playerObject.GetComponent<PlayerStatus>().TakeDamage();
                 state.Animator.SetTrigger("Damage");
@@ -65,31 +62,6 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-    private void MakeSlowMotion()
-    {
-        bool slowed = false;
-        
-        if(myLimbs == PlayerType.Carlous && state.EnemyHealth == 1)
-        {
-            Time.timeScale = 0.05f;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
-        }
-
-        if (myLimbs == PlayerType.Douglas && state.Health == 1)
-        {
-            Time.timeScale = 0.05f;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
-        }
-    }
-
-    public float slowSeconds = 45.0f;
-
-    private void Update()
-    {
-        Time.timeScale += (1f / slowSeconds) * Time.unscaledDeltaTime;
-        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-
-        audioControl.audioSource.pitch = Time.timeScale;
-    }
+    
 
 }
