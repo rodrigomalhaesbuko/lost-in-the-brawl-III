@@ -175,9 +175,12 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public IEnumerator ShootCourotine()
     {
+        GameObject newLimb = null;
+        PlayerType playerType = gameObject.GetComponent<PlayerStatus>().playerType;
+
         if (entity.IsOwner)
         {
-            PlayerType playerType = gameObject.GetComponent<PlayerStatus>().playerType;
+            
             if (limbType == LimbType.leftArm)
             {
                 leftArmSprite.SetActive(state.LeftArmEnable);
@@ -219,8 +222,10 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
                     break;
             }
 
-            GameObject newLimb = BoltNetwork.Instantiate(limb, shotPoint.position, shotPoint.rotation);
+            newLimb = BoltNetwork.Instantiate(limb, shotPoint.position, shotPoint.rotation);
             newLimb.GetComponent<LimbComponent>().limbHitbox.GetComponent<BoxCollider2D>().isTrigger = true;
+            newLimb.GetComponent<LimbComponent>().owner = gameObject;
+                        
 
             if (!gameObject.GetComponent<PlayerStatus>().isFlipped)
             {
@@ -238,20 +243,22 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
                 if (playerType == PlayerType.Carlous)
                 {
                     newLimb.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce * 2;
-                 }
+                }
                 else
                 {
                     newLimb.GetComponent<Rigidbody2D>().velocity = -1 * transform.right * launchForce * 2;
                 }
 
-                Vector3 newLimbLocalScale = newLimb.transform.localScale;
-                newLimbLocalScale.x *= -1;
-                newLimb.transform.localScale = newLimbLocalScale;
+                //Vector3 newLimbLocalScale = newLimb.transform.localScale;
+                //newLimbLocalScale.x *= -1;
+                //newLimb.transform.localScale = newLimbLocalScale;
             }
-            
+
             yield return new WaitForEndOfFrame();
 
         }
+
+
     }
 
     //void setupLimbSprite(LimbType type)

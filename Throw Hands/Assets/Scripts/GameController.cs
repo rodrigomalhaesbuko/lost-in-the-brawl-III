@@ -55,7 +55,8 @@ public class GameController : GlobalEventListener
     private bool gameEnded = false;
     private bool p1AcceptRematch = false;
     private bool p2AcceptRematch = false;
-
+    
+    public static bool armFlip = false;
 
     private void getInstances()
     {
@@ -69,6 +70,8 @@ public class GameController : GlobalEventListener
     public void createGame()
     {
         //gameEnded = false;
+
+        armFlip = false;
 
         gameState = GameState.intro;
 
@@ -301,6 +304,8 @@ public class GameController : GlobalEventListener
         newScaleCarlous.x *= -1;
         CarlousInstance.transform.localScale = newScaleCarlous;
         CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
+
+        armFlip = !armFlip;
     }
 
     private void Update()
