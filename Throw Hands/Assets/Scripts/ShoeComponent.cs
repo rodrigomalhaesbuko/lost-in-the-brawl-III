@@ -13,10 +13,10 @@ public class ShoeComponent : MonoBehaviour
         {
             onFloor= true;
         }
-        if (limbHitbox != null)
-        {
-            limbHitbox.SetActive(false);
-        }
+        //if (limbHitbox != null)
+        //{
+        //    limbHitbox.SetActive(false);
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -303,7 +303,8 @@ GameObject:
   - component: {fileID: 32396740195887410}
   - component: {fileID: 1706979654072479651}
   - component: {fileID: 2008962941664768699}
-  m_Layer: 0
+  - component: {fileID: 6000244950704292175}
+  m_Layer: 5
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +335,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.4115467, y: -1.6480064}
@@ -367,6 +368,21 @@ MonoBehaviour:
   myRgbody: {fileID: 5524102872281988145}
   impactForce: 50
   playerObject: {fileID: 5524102872281988144}
+--- !u!114 &6000244950704292175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687778593408439531}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64af5fb834ccffc4cb9f7bad1806da35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasLeftArm: 1
+  hasRightArm: 1
+  myBody: 0
 --- !u!1 &1875545057529751075
 GameObject:
   m_ObjectHideFlags: 0

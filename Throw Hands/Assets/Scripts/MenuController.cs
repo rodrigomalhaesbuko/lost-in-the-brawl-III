@@ -169,7 +169,7 @@ public class MenuController: GlobalEventListener
             RoomName.GetComponent<Text>().text = JoinGameInput.text;
             PlayerPrefs.SetString("roomName", JoinGameInput.text);
             BoltLauncher.StartServer();
-            StartCoroutine(CannotConectCreateRoom());
+            //StartCoroutine(CannotConectCreateRoom());
         }
         else
         {
@@ -222,7 +222,6 @@ public class MenuController: GlobalEventListener
                     BoltMatchmaking.JoinSession(photonSession);
                     foundHost = true;
                 }
-              
             }
         }
 
@@ -231,7 +230,7 @@ public class MenuController: GlobalEventListener
     IEnumerator CannotConectWithHost()
     {
 
-        yield return new WaitForSecondsRealtime(40.0f);
+        yield return new WaitForSecondsRealtime(60.0f);
         if (!foundHost)
         {
             //mostrar que não achou a sala com o nome
@@ -255,11 +254,11 @@ public class MenuController: GlobalEventListener
 
     public void CloseAlertBox()
     {
+        controls.StaticScene.Enable();
         AlertBox.SetActive(false);
         Loading.SetActive(false);
         RoomImageHost.SetActive(false);
         RoomImageClient.SetActive(false);
-        controls.StaticScene.Enable();
         seta.SetActive(true);
     }
 

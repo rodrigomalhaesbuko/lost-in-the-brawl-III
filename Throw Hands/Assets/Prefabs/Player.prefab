@@ -1810,7 +1810,8 @@ GameObject:
   - component: {fileID: 868621622368890976}
   - component: {fileID: 4258368027453741879}
   - component: {fileID: 1260829586001251773}
-  m_Layer: 0
+  - component: {fileID: 531478690843522847}
+  m_Layer: 5
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1874,6 +1875,21 @@ MonoBehaviour:
   myRgbody: {fileID: 1653952333227796215}
   impactForce: 50
   playerObject: {fileID: 1653952333227796214}
+--- !u!114 &531478690843522847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6316737200646267329}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64af5fb834ccffc4cb9f7bad1806da35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasLeftArm: 1
+  hasRightArm: 1
+  myBody: 1
 --- !u!1 &6742846388862954350
 GameObject:
   m_ObjectHideFlags: 0
