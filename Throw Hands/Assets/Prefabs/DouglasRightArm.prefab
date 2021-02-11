@@ -155,6 +155,7 @@ MonoBehaviour:
   shoes: {fileID: 3946779878926263152}
   limbHitbox: {fileID: 4494226130871294160}
   playerType: 1
+  owner: {fileID: 0}
 --- !u!114 &-101828011128597807
 MonoBehaviour:
   m_ObjectHideFlags: 0

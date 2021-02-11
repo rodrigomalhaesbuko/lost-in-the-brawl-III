@@ -367,7 +367,6 @@ MonoBehaviour:
   myRgbody: {fileID: 5524102872281988145}
   impactForce: 50
   playerObject: {fileID: 5524102872281988144}
-  slowSeconds: 10
 --- !u!1 &1875545057529751075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1549,6 @@ MonoBehaviour:
   jumpForce: 80
   colliderRaySize: 1
   groundCollider: {fileID: 0}
-  Camera: {fileID: 0}
   playerAnimator: {fileID: 0}
   shoes: {fileID: 7832222057766702294}
   bola: 10

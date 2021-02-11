@@ -169,6 +169,7 @@ public class MenuController: GlobalEventListener
             RoomName.GetComponent<Text>().text = JoinGameInput.text;
             PlayerPrefs.SetString("roomName", JoinGameInput.text);
             BoltLauncher.StartServer();
+            StartCoroutine(CannotConectCreateRoom());
         }
         else
         {
@@ -241,6 +242,17 @@ public class MenuController: GlobalEventListener
 
     }
 
+    IEnumerator CannotConectCreateRoom()
+    {
+
+        yield return new WaitForSecondsRealtime(70.0f);
+        //mostrar que não achou a sala com o nome
+        //Debug.Log("NAO ACHOU A SALA COM O NOME" + " " + JoinGameInput.text);
+        BoltLauncher.Shutdown();
+        OpenAlertBox3();
+
+    }
+
     public void CloseAlertBox()
     {
         AlertBox.SetActive(false);
@@ -253,7 +265,7 @@ public class MenuController: GlobalEventListener
 
     public void OpenAlertBox()
     {
-        Disclaimer.GetComponent<Text>().text = "NAO FOI POSSIVEL ENCONTRAR A SALA COM O NOME " + JoinGameInput.text;
+        Disclaimer.GetComponent<Text>().text = "Could not find the room you are looking for with name: " + JoinGameInput.text;
         AlertBox.SetActive(true);
     }
 
@@ -263,4 +275,9 @@ public class MenuController: GlobalEventListener
         AlertBox.SetActive(true);
     }
 
+    public void OpenAlertBox3()
+    {
+        Disclaimer.GetComponent<Text>().text = "Cannot create the room with name: " + JoinGameInput.text;
+        AlertBox.SetActive(true);
+    }
 }

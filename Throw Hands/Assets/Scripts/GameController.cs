@@ -52,7 +52,6 @@ public class GameController : GlobalEventListener
     private int setapos;
     private float posxseta = 0;
     private int dirseta = 1;
-    private bool gameEnded = false;
     private bool p1AcceptRematch = false;
     private bool p2AcceptRematch = false;
     
@@ -208,14 +207,12 @@ public class GameController : GlobalEventListener
         createGame();
     }
 
-    
-
     public void OpenRematchBox()
     {
         RematchBox.SetActive(true);
     }
 
-    private void Restart()
+    private void RestartGame()
     {
         GameObject[] limbs = GameObject.FindGameObjectsWithTag("limb");
 
@@ -224,12 +221,18 @@ public class GameController : GlobalEventListener
             BoltNetwork.Destroy(limb);
         }
 
-        targetGroup.RemoveMember(DouglasInstance.transform);
-        targetGroup.RemoveMember(CarlousInstance.transform);
-        BoltNetwork.Destroy(DouglasInstance);
-        BoltNetwork.Destroy(CarlousInstance);
+        if (BoltNetwork.IsClient)
+        {
+            BoltNetwork.Destroy(CarlousInstance);
+        }
+        else
+        {
+            BoltNetwork.Destroy(DouglasInstance);
+        }
 
         gameState = GameState.restart;
+        slowTimer = 0f;
+        Time.timeScale = 1f;
         youwin.SetActive(false);
         youlose.SetActive(false);
         youDraw.SetActive(false);
@@ -251,7 +254,6 @@ public class GameController : GlobalEventListener
 
     public void Rematch()
     {
-
         if (!BoltNetwork.IsClient)
         {
             P1Rematch.Create().Send();
@@ -266,20 +268,29 @@ public class GameController : GlobalEventListener
     {
         p1AcceptRematch = true;
 
-        //if(p2AcceptRematch)
-        //{
-        //    Restart();
-        //}
+        if (p2AcceptRematch)
+        {
+           Restart.Create().Send();
+        }
+
     }
 
     public override void OnEvent(P2Rematch evnt)
     {
+        
         p2AcceptRematch = true;
 
-        //if(p1AcceptRematch)
-        //{
-        //    Restart();
-        //}
+        if (p1AcceptRematch)
+        {
+           Restart.Create().Send();
+            
+        }
+
+    }
+
+    public override void OnEvent(Restart evnt)
+    {
+        RestartGame();
     }
 
     public void LeaveButton()
@@ -310,6 +321,7 @@ public class GameController : GlobalEventListener
 
         armFlip = !armFlip;
     }
+
 
     private void Update()
     {
@@ -354,11 +366,6 @@ public class GameController : GlobalEventListener
             
         }
 
-        if(p1AcceptRematch && p2AcceptRematch)
-        {
-            Restart();
-        }
-
         if(gameState == GameState.slowed)
         {
             Time.timeScale = .05f;
@@ -367,8 +374,9 @@ public class GameController : GlobalEventListener
 
             if(slowTimer > slowSeconds)
             {
-                Time.timeScale = 1f;
+                Time.timeScale = 1.0f;
             }
+
         }
 
         Time.fixedDeltaTime = Time.timeScale * .02f;
@@ -400,11 +408,10 @@ public class GameController : GlobalEventListener
 
     private void MakeSlowMotion()
     {
-        //Time.timeScale = 0.9f;
         Time.fixedDeltaTime = Time.timeScale * .02f;
     }
 
-    
+
 
     private IEnumerator afterEndGame(bool hostWon, bool draw)
     {
@@ -413,7 +420,7 @@ public class GameController : GlobalEventListener
         DouglasInstance.GetComponent<PlayerController>().disableControls();
         CarlousInstance.GetComponent<PlayerController>().disableControls();
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new  WaitForSeconds(1.2f);
 
         audioControl.audioSource.Stop();
         audioControl.PlaySound(SFXType.End);

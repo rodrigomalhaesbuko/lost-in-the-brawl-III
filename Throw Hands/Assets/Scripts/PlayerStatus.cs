@@ -53,7 +53,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void EnemyHealthCallBack()
     {
-        if (state.EnemyHealth <= 5 && state.EnemyHealth >= 0)
+        if (state.EnemyHealth < 5 && state.EnemyHealth >= 0)
         {
             lifeClient.transform.GetChild(state.EnemyHealth).GetComponent<Image>().color = redColor;
         }
