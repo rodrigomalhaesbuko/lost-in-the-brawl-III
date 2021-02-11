@@ -36,14 +36,16 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
             gameObject.GetComponent<Rigidbody2D>().drag = 10f;
             limbHitbox.GetComponent<LimbHitComponent>().Damaging = false;
         }
-
-        if (GameController.armFlip && !fliped)
+        else
         {
-            fliped = true;
+            if (GameController.armFlip && !fliped)
+            {
+                fliped = true;
 
-            Vector3 newLimbLocalScale = gameObject.transform.localScale;
-            newLimbLocalScale.x *= -1;
-            gameObject.transform.localScale = newLimbLocalScale;
+                Vector3 newLimbLocalScale = gameObject.transform.localScale;
+                newLimbLocalScale.x *= -1;
+                gameObject.transform.localScale = newLimbLocalScale;
+            }
         }
     }
 
