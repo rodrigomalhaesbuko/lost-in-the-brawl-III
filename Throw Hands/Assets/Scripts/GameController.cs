@@ -11,6 +11,8 @@ using Cinemachine;
 
 public class GameController : GlobalEventListener
 {
+    public GameState gameState;
+
     public GameObject counter;
     public GameObject roomName;
 
@@ -19,10 +21,6 @@ public class GameController : GlobalEventListener
 
     public GameObject lifeHost;
     public GameObject lifeClient;
-
-    public GameObject Camera;
-
-    private GameObject CameraPriv;
     
     private GameObject DouglasInstance;
     private GameObject CarlousInstance;
@@ -58,51 +56,55 @@ public class GameController : GlobalEventListener
     private bool p1AcceptRematch = false;
     private bool p2AcceptRematch = false;
 
+
+    private void getInstances()
+    {
+        CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
+        targetGroup.AddMember(CarlousInstance.transform, 1f, 4f);
+
+        DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
+        targetGroup.AddMember(DouglasInstance.transform, 1f, 4f);
+    }
+
     public void createGame()
     {
-        // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
-        WaitingPlayer.SetActive(false);
-        gameEnded = false;
-        audioControl.audioSource.Stop();
+        //gameEnded = false;
+
+        gameState = GameState.intro;
+
         audioControl.PlaySound(SFXType.Intro);
 
         if (GameObject.FindGameObjectWithTag("musicMenu") != null)
         {
             GameObject.FindGameObjectWithTag("musicMenu").GetComponent<AudioSource>().Stop();
-        }
-
-        bgm.Play();
-        controls.StaticScene.Disable();
-        Time.timeScale = 1f;
-        counter.GetComponent<Timer>().timerIsRunning = true;
-        // AQUI TEM QUE TER 0 THROW ARMS E DEPOIS QUE DE FATO COMECA O JOGO
-        //Player1
+        }        
+        
+        //Player 1
         playerPrefab.GetComponent<PlayerStatus>().lifeHost = lifeHost;
         playerPrefab.GetComponent<PlayerStatus>().lifeClient = lifeClient;
-
-        playerPrefab.GetComponent<PlayerController>().Camera = CameraPriv;
-
         playerPrefab.GetComponent<PlayerStatus>().GameController = gameObject;
         playerPrefab.GetComponent<PlayerStatus>().playerType = PlayerType.Douglas;
+
+        
+
+        //Player 2
+        playerPrefab2.GetComponent<PlayerStatus>().lifeHost = lifeHost;
+        playerPrefab2.GetComponent<PlayerStatus>().lifeClient = lifeClient;
+        playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
+        playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
+
+
+        //Bug
         GameObject bola1 = BoltNetwork.Instantiate(playerPrefab, new Vector2(
             this.transform.position.x + (battleOffset * -1.5f),
                 this.transform.position.y
                 ), Quaternion.identity);
 
-        //Player 2
-        playerPrefab2.GetComponent<PlayerStatus>().lifeHost = lifeHost;
-        playerPrefab2.GetComponent<PlayerStatus>().lifeClient = lifeClient;
 
-        playerPrefab2.GetComponent<PlayerController>().Camera = CameraPriv;
-
-        playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
-        playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
         GameObject bola2 = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
         this.transform.position.x + (battleOffset * 1.5f),
         this.transform.position.y
             ), Quaternion.identity);
-
-        counter.GetComponent<Timer>().timerIsRunning = true;
 
         if (BoltNetwork.IsClient)
         {
@@ -114,10 +116,11 @@ public class GameController : GlobalEventListener
             //bola2.SetActive(false);
             BoltNetwork.Destroy(bola2);
         }
+        //endBug
 
         WaitingPlayer.SetActive(false);
+        bgm.Play();
         StartCoroutine(WaitCreateGame());
-        gameStarted = true;
     }
     
     private IEnumerator WaitCreateGame()
@@ -125,8 +128,11 @@ public class GameController : GlobalEventListener
         ThrowHands.SetActive(true);
         ThrowHands.GetComponent<Animator>().Play("ThrowHandsCutIn");
         yield return new WaitForSeconds(1.82f);
-        DouglasInstance.GetComponent<PlayerController>().enableCOntrols();
-        CarlousInstance.GetComponent<PlayerController>().enableCOntrols();
+        counter.GetComponent<Timer>().timerIsRunning = true;
+        getInstances();
+        gameState = GameState.play;
+        DouglasInstance.GetComponent<PlayerController>().enableControls();
+        CarlousInstance.GetComponent<PlayerController>().enableControls();
         ThrowHands.SetActive(false);
     }
 
@@ -136,29 +142,35 @@ public class GameController : GlobalEventListener
 
         controls.StaticScene.Move.performed += ctx =>
         {
-            Vector2 movesetadir = ctx.ReadValue<Vector2>();
+            if(gameState == GameState.rematch)
+            { 
+                Vector2 movesetadir = ctx.ReadValue<Vector2>();
 
-            if(movesetadir.x == 1)
-            {
-                setapos = 1;
-            }
-            else if(movesetadir.x == -1)
-            {
-                setapos = 0;
+                if(movesetadir.x == 1)
+                {
+                    setapos = 1;
+                }
+                else if(movesetadir.x == -1)
+                {
+                    setapos = 0;
+                }
             }
         };
 
         controls.StaticScene.Select.performed += _ =>
         {
-            gameEnded = false;
+            if(gameState == GameState.rematch)
+            {
+                gameState = GameState.rematchClick;
 
-            if(setapos == 0)
-            {
-                Rematch();
-            }
-            else if(setapos == 1)
-            {
-                LeaveButton();
+                if(setapos == 0)
+                {
+                    Rematch();
+                }
+                else if(setapos == 1)
+                {
+                    LeaveButton();
+                }
             }
         };
     }
@@ -166,9 +178,6 @@ public class GameController : GlobalEventListener
     private void Start()
     {
         controls.StaticScene.Disable();
-
-        CameraPriv = Camera;
-
         roomName.GetComponent<Text>().text = PlayerPrefs.GetString("roomName");
     }
 
@@ -183,20 +192,16 @@ public class GameController : GlobalEventListener
 
     public override void OnEvent(ClientLogged evnt)
     {
-        //gameStarted = true;
-
         StartCoroutine(noia());
     }
 
-    public override void OnEvent(P1Rematch evnt)
+    private IEnumerator noia()
     {
-        p1AcceptRematch = true;
+        yield return new WaitForSeconds(.5f);
+        createGame();
     }
 
-    public override void OnEvent(P2Rematch evnt)
-    {
-        p2AcceptRematch = true;
-    }
+    
 
     public void OpenRematchBox()
     {
@@ -216,7 +221,8 @@ public class GameController : GlobalEventListener
         targetGroup.RemoveMember(CarlousInstance.transform);
         BoltNetwork.Destroy(DouglasInstance);
         BoltNetwork.Destroy(CarlousInstance);
-        gameStarted = false;
+
+        gameState = GameState.restart;
         youwin.SetActive(false);
         youlose.SetActive(false);
         youDraw.SetActive(false);
@@ -227,14 +233,19 @@ public class GameController : GlobalEventListener
         lifeClient.SetActive(true);
         healthBar.SetActive(true);
         counter.SetActive(true);
+        counter.GetComponent<Timer>().timeRemaining = PlayerPrefs.GetFloat("gameDuration");
 
-        // AQUI TEM QUE TER DE NOVO O 3 2 1
-        // E O THROW ARMS
+        audioControl.audioSource.Stop();
+        controls.StaticScene.Disable();
+        Time.timeScale = 1f;
+
         createGame();
     }
 
     public void Rematch()
     {
+        gameState = GameState.rematchClick;
+
         if (!BoltNetwork.IsClient)
         {
             P1Rematch.Create().Send();
@@ -245,6 +256,26 @@ public class GameController : GlobalEventListener
         }
     }
 
+    public override void OnEvent(P1Rematch evnt)
+    {
+        p1AcceptRematch = true;
+
+        //if(p2AcceptRematch)
+        //{
+        //    Restart();
+        //}
+    }
+
+    public override void OnEvent(P2Rematch evnt)
+    {
+        p2AcceptRematch = true;
+
+        //if(p1AcceptRematch)
+        //{
+        //    Restart();
+        //}
+    }
+
     public void LeaveButton()
     {
         Leave.Create().Send();
@@ -253,14 +284,28 @@ public class GameController : GlobalEventListener
     // EVENT FOR LEAVE THE GAME 
     public override void OnEvent(Leave evnt)
     {
+        controls.StaticScene.Disable();
         BoltLauncher.Shutdown();
         SceneManager.LoadScene("SampleScene");
     }
 
-    private void Update()
-    {     
 
-        if (gameEnded)
+    private void Flip()
+    {
+        Vector3 newScaleDouglas = DouglasInstance.transform.localScale;
+        newScaleDouglas.x *= -1;
+        DouglasInstance.transform.localScale = newScaleDouglas;
+        DouglasInstance.GetComponent<PlayerStatus>().isFlipped = !DouglasInstance.GetComponent<PlayerStatus>().isFlipped;
+
+        Vector3 newScaleCarlous = CarlousInstance.transform.localScale;
+        newScaleCarlous.x *= -1;
+        CarlousInstance.transform.localScale = newScaleCarlous;
+        CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
+    }
+
+    private void Update()
+    {
+        if (gameState == GameState.rematch)
         {            
             posxseta += setavel * Time.deltaTime * dirseta;
 
@@ -274,23 +319,15 @@ public class GameController : GlobalEventListener
             }
 
             seta.GetComponent<RectTransform>().localPosition = new Vector3(-300 + posxseta + setapos * stepSeta, -440, 0);
-
         }
-
-        if (GameObject.FindGameObjectWithTag("carlous") != null && CarlousInstance == null)
+       
+        if (gameState == GameState.play)
         {
-            CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
-            targetGroup.AddMember(CarlousInstance.transform, 1f, 4f);
-        }
+            if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1)
+            {
+                LeaveButton();
+            }
 
-        if (GameObject.FindGameObjectWithTag("douglas") != null && DouglasInstance == null)
-        {
-            DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
-            targetGroup.AddMember(DouglasInstance.transform, 1f, 4f);
-        }
-
-        if (DouglasInstance != null && CarlousInstance != null)
-        {
             if (DouglasInstance.transform.position.x > CarlousInstance.transform.position.x)
             {
                 if (!CarlousInstance.GetComponent<PlayerStatus>().isFlipped && !DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
@@ -306,57 +343,42 @@ public class GameController : GlobalEventListener
                     Flip();
                 }
             }
+            
         }
-        
-        if (p1AcceptRematch && p2AcceptRematch)
+
+        if(p1AcceptRematch && p2AcceptRematch)
         {
             Restart();
         }
+    }
 
-        //if (!gameEnded)
-        //{
-        //    if (!counter.GetComponent<Timer>().timerIsRunning)
-        //    {
-        //        CheckDraw();
-        //    }
-        //}
-
-        // Resolve other player quitting
-        if (gameStarted)
-        {
-            if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1)
-            {
-                LeaveButton();
-            }
-        }
+    public override void Disconnected(BoltConnection connection)
+    {
+        controls.StaticScene.Disable();
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void CheckDraw()
     {
-        if (DouglasInstance != null && CarlousInstance != null)
+        if (DouglasInstance.GetComponent<PlayerStatus>().state.Health > CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
         {
-            if (DouglasInstance.GetComponent<PlayerStatus>().state.Health > CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
-            {
-                endGame(true, false);
-            }
-            else if (DouglasInstance.GetComponent<PlayerStatus>().state.Health < CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
-            {
-                endGame(false, false);
-            }
-            else
-            {
-                endGame(false, true);
-            }
+            endGame(true, false);
         }
-       
+        else if (DouglasInstance.GetComponent<PlayerStatus>().state.Health < CarlousInstance.GetComponent<PlayerStatus>().state.EnemyHealth)
+        {
+            endGame(false, false);
+        }
+        else
+        {
+            endGame(false, true);
+        }
     }
 
     public void endGame(bool hostWon, bool draw)
     {
-        //BoltNetwork.Destroy(DouglasInstance);
-        //BoltNetwork.Destroy(CarlousInstance);
         audioControl.audioSource.Stop();
         audioControl.PlaySound(SFXType.End);
+
         if (draw)
         {
             youDraw.SetActive(true);
@@ -391,49 +413,30 @@ public class GameController : GlobalEventListener
                 }
             }
         }
+
         RematchBox.SetActive(true);
         lifeHost.SetActive(false);
         lifeClient.SetActive(false);
         healthBar.SetActive(false);
         counter.SetActive(false);
         counter.GetComponent<Timer>().timerIsRunning = false;
-        counter.GetComponent<Timer>().timeRemaining = PlayerPrefs.GetFloat("gameDuration");
-
-        controls.StaticScene.Enable();
 
         DouglasInstance.GetComponent<PlayerController>().disableControls();
         CarlousInstance.GetComponent<PlayerController>().disableControls();
+        controls.StaticScene.Enable();
 
-        gameEnded = true;
+        gameState = GameState.rematch;
     }
+}
 
-    private void Flip()
-    {
-        Vector3 newScaleDouglas = DouglasInstance.transform.localScale;
-        newScaleDouglas.x *= -1;
-        DouglasInstance.transform.localScale = newScaleDouglas;
-        DouglasInstance.GetComponent<PlayerStatus>().isFlipped = !DouglasInstance.GetComponent<PlayerStatus>().isFlipped;
 
-        Vector3 newScaleCarlous = CarlousInstance.transform.localScale;
-        newScaleCarlous.x *= -1;
-        CarlousInstance.transform.localScale = newScaleCarlous;
-        CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
-    }
-
-    private IEnumerator noia()
-    {
-        yield return new WaitForSeconds(2.0f);
-        createGame();
-    }
-
-    private IEnumerator QuitWait()
-    {
-        yield return new WaitForSeconds(2.0f);
-        WaitingPlayer.SetActive(false);
-
-    }
-
-    
+public enum GameState
+{
+    intro,            // Rodando a animação throw hands
+    play,            // Jogando o jogo
+    rematch,        // Tela de pós jogo
+    rematchClick,  // Clicou na tela de pós jogo
+    restart       // restartando o jogo
 }
 
 //PHOTON NETWORK

@@ -56,13 +56,12 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
             }
         };
 
-        controls.Gameplay.LeftArmShoot.started += ctx => {
+        controls.Gameplay.LeftArmShoot.canceled += ctx => {
 
                 leftArmShootTrigger = false;
-                
-
+            
         };
-        controls.Gameplay.RightArmShoot.started += ctx => {
+        controls.Gameplay.RightArmShoot.canceled += ctx => {
 
                 rightArmShootTrigger = false;
 
