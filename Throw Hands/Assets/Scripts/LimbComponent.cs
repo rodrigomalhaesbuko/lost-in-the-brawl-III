@@ -31,8 +31,9 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
         if (IsGrounded())
         {
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-            //gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-            //gameObject.GetComponent<Rigidbody2D>().drag = 10f;
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            gameObject.GetComponent<Rigidbody2D>().drag = 10f;
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             limbHitbox.GetComponent<LimbHitComponent>().Damaging = false;
         }
     }
