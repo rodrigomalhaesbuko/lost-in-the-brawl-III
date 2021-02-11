@@ -35,7 +35,7 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
                     impactForce *= -1;
                 }
 
-                if (state.Health == 1 || state.EnemyHealth == 1)
+                if (state.Health == 1 || state.EnemyHealth == 1) //tem q mudar, checar se o cara vai tomar o last hit
                 {
                     impactForce *= 1.5f;
                 }
