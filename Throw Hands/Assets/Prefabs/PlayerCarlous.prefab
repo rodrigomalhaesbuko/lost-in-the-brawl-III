@@ -2122,7 +2122,7 @@ GameObject:
   - component: {fileID: 6514539276960346992}
   - component: {fileID: 1748359519767088786}
   - component: {fileID: 3241900749146812781}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
