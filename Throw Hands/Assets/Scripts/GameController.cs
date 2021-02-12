@@ -66,11 +66,13 @@ public class GameController : GlobalEventListener
 
     private void getInstances()
     {
-        CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
-        targetGroup.AddMember(CarlousInstance.transform, 1f, 4f);
-
-        DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
+        if (!BoltNetwork.IsClient)
+            CarlousInstance = GameObject.FindGameObjectWithTag("carlous");
+        else
+            DouglasInstance = GameObject.FindGameObjectWithTag("douglas");
+        
         targetGroup.AddMember(DouglasInstance.transform, 1f, 4f);
+        targetGroup.AddMember(CarlousInstance.transform, 1f, 4f);
     }
 
     public void createGame()
@@ -103,29 +105,18 @@ public class GameController : GlobalEventListener
         playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
 
 
-        //Bug
-        GameObject bola1 = BoltNetwork.Instantiate(playerPrefab, new Vector2(
-            this.transform.position.x + (battleOffset * -1.5f),
-                this.transform.position.y
-                ), Quaternion.identity);
-
-
-        GameObject bola2 = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
-        this.transform.position.x + (battleOffset * 1.5f),
-        this.transform.position.y
-            ), Quaternion.identity);
-
-        if (BoltNetwork.IsClient)
+        if(!BoltNetwork.IsClient)
         {
-            //bola1.SetActive(false);
-            BoltNetwork.Destroy(bola1);
+            DouglasInstance = BoltNetwork.Instantiate(playerPrefab, new Vector2(
+                this.transform.position.x + (battleOffset * -1.5f), this.transform.position.y), Quaternion.identity);
+
+            
         }
         else
         {
-            //bola2.SetActive(false);
-            BoltNetwork.Destroy(bola2);
+            CarlousInstance = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
+                this.transform.position.x + (battleOffset * 1.5f), this.transform.position.y), Quaternion.identity);
         }
-        //endBug
 
         WaitingPlayer.SetActive(false);
         bgm.Play();
@@ -248,11 +239,13 @@ public class GameController : GlobalEventListener
 
         if (BoltNetwork.IsServer)
         {
-            BoltNetwork.Destroy(DouglasInstance);
-
-        }else
+            if(DouglasInstance != null)
+                BoltNetwork.Destroy(DouglasInstance);
+        }
+        else
         {
-            BoltNetwork.Destroy(CarlousInstance);
+            if(CarlousInstance != null)
+                BoltNetwork.Destroy(CarlousInstance);
         }
 
         gameState = GameState.restart;
@@ -368,7 +361,8 @@ public class GameController : GlobalEventListener
        
         if (gameState == GameState.play)
         {
-            if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1)
+
+            if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1) // Criar um gamestate loading
             {
                 LeaveButton();
             }
