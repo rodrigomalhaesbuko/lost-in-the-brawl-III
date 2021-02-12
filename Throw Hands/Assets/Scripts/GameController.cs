@@ -327,11 +327,25 @@ public class GameController : GlobalEventListener
         newScaleDouglas.x *= -1;
         DouglasInstance.transform.localScale = newScaleDouglas;
         DouglasInstance.GetComponent<PlayerStatus>().isFlipped = !DouglasInstance.GetComponent<PlayerStatus>().isFlipped;
-
+        
         Vector3 newScaleCarlous = CarlousInstance.transform.localScale;
         newScaleCarlous.x *= -1;
         CarlousInstance.transform.localScale = newScaleCarlous;
         CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
+
+        // jump
+        if (armFlip)
+        {
+
+            CarlousInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2( -5f , 0f), ForceMode2D.Impulse);
+            //DouglasInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 10f), ForceMode2D.Impulse);
+        }
+        else
+        {
+            //CarlousInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 10f), ForceMode2D.Impulse);
+            DouglasInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(5f, 0f), ForceMode2D.Impulse);
+        }
+        
 
         armFlip = !armFlip;
     }
