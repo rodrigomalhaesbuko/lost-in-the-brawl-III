@@ -215,30 +215,46 @@ public class GameController : GlobalEventListener
         RematchBox.SetActive(true);
     }
 
+    void DestroyAllPlayers()
+    {
+        Debug.Log("entrou!!!!---------!!!");
+        foreach (var entity in BoltNetwork.SceneObjects)
+        {
+            Debug.Log("entrou!!!!");
+            if (entity.StateIs<ICustomPlayerState>())
+            {
+                BoltNetwork.Destroy(entity.gameObject);
+            }
+        }
+    }
+
     private IEnumerator RestartGameCourotine()
     {
         GameObject[] limbs = GameObject.FindGameObjectsWithTag("limb");
 
         foreach (GameObject limb in limbs)
         {
-            BoltNetwork.Destroy(limb);
+            //BoltNetwork.Destroy(limb);
+            Destroy(limb);
         }
 
-        if (BoltNetwork.IsClient)
-        {
-            if(CarlousInstance != null)
-            {
-               BoltNetwork.Destroy(CarlousInstance);
-            }
-          
-        }
-        else
-        {
-            if (DouglasInstance != null)
-            {
-                BoltNetwork.Destroy(DouglasInstance);
-            }
-        }
+        //if (BoltNetwork.IsClient)
+        //{
+        //    if(CarlousInstance != null)
+        //    {
+        //        BoltNetwork.Destroy(CarlousInstance);
+        //    }
+
+        //}
+        //else
+        //{
+        //    if (DouglasInstance != null)
+        //    {
+        //        BoltNetwork.Destroy(DouglasInstance);
+        //    }
+        //}
+
+        DestroyAllPlayers();
 
         yield return new WaitForSeconds(0.2f);
 
