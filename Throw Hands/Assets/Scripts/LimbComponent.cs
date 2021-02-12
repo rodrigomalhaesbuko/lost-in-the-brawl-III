@@ -15,6 +15,9 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
 
     public GameObject owner;
 
+    public bool wallCollison = false;
+    public bool wallFlipped = false;
+
     private bool fliped = false;
 
     void Start()
@@ -48,6 +51,7 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
             }
         }
     }
+
 
     public bool IsGrounded()
     {

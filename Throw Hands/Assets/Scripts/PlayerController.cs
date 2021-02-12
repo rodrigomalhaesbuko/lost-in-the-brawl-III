@@ -135,6 +135,8 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             }
         }
 
+        
+
         //if(state.MyX > state.OtherX)
         //{
         //        Vector3 newScale = gameObject.transform.localScale;
