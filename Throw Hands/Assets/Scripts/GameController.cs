@@ -228,13 +228,13 @@ public class GameController : GlobalEventListener
         {
             if(CarlousInstance != null)
             {
-                BoltNetwork.Destroy(CarlousInstance);
+               BoltNetwork.Destroy(CarlousInstance);
             }
           
         }
         else
         {
-            if (CarlousInstance != null)
+            if (DouglasInstance != null)
             {
                 BoltNetwork.Destroy(DouglasInstance);
             }
