@@ -37,6 +37,11 @@ public class GameController : GlobalEventListener
     public CinemachineTargetGroup targetGroup;
 
     //endbattle vars
+    public GameObject hostWins;
+    public GameObject clientWins;
+    private int hostScore = 0;
+    private int clientScore = 0;
+
     public GameObject youwin;
     public GameObject youlose;
     public GameObject youDraw;
@@ -63,6 +68,8 @@ public class GameController : GlobalEventListener
     public float slowSeconds = 4.0f;
 
     private float slowTimer = 0f;
+
+   
 
     private void getInstances()
     {
@@ -472,6 +479,14 @@ public class GameController : GlobalEventListener
                 }
             }
         }
+
+        if (hostWon)
+            hostScore++;
+        else
+            clientScore++;
+
+        hostWins.GetComponent<Text>().text = hostScore.ToString();
+        clientWins.GetComponent<Text>().text = clientScore.ToString();
 
         RematchBox.SetActive(true);
         lifeHost.SetActive(false);
