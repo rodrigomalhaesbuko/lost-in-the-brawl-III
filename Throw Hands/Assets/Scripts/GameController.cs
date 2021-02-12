@@ -206,17 +206,6 @@ public class GameController : GlobalEventListener
         RematchBox.SetActive(true);
     }
 
-    void DestroyAllPlayers()
-    {
-        foreach (var entity in BoltNetwork.SceneObjects)
-        {
-            Debug.Log("entrou!!!!");
-            if (entity.StateIs<ICustomPlayerState>())
-            {
-                BoltNetwork.Destroy(entity.gameObject);
-            }
-        }
-    }
 
     //private IEnumerator RestartGameCourotine()
     //{
