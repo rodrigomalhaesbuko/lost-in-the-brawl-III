@@ -217,7 +217,6 @@ public class GameController : GlobalEventListener
 
     void DestroyAllPlayers()
     {
-        Debug.Log("entrou!!!!---------!!!");
         foreach (var entity in BoltNetwork.SceneObjects)
         {
             Debug.Log("entrou!!!!");
@@ -228,7 +227,16 @@ public class GameController : GlobalEventListener
         }
     }
 
-    private IEnumerator RestartGameCourotine()
+    //private IEnumerator RestartGameCourotine()
+    //{
+
+
+    //    yield return new WaitForSeconds(0.2f);
+
+    //    RestartGame();
+    //}
+
+    private void RestartGame()
     {
         GameObject[] limbs = GameObject.FindGameObjectsWithTag("limb");
 
@@ -238,31 +246,15 @@ public class GameController : GlobalEventListener
             Destroy(limb);
         }
 
-        //if (BoltNetwork.IsClient)
-        //{
-        //    if(CarlousInstance != null)
-        //    {
-        //        BoltNetwork.Destroy(CarlousInstance);
-        //    }
+        if (BoltNetwork.IsServer)
+        {
+            BoltNetwork.Destroy(DouglasInstance);
 
-        //}
-        //else
-        //{
-        //    if (DouglasInstance != null)
-        //    {
-        //        BoltNetwork.Destroy(DouglasInstance);
-        //    }
-        //}
+        }else
+        {
+            BoltNetwork.Destroy(CarlousInstance);
+        }
 
-        DestroyAllPlayers();
-
-        yield return new WaitForSeconds(0.2f);
-
-        RestartGame();
-    }
-
-    private void RestartGame()
-    {
         gameState = GameState.restart;
         slowTimer = 0f;
         Time.timeScale = 1f;
@@ -324,7 +316,7 @@ public class GameController : GlobalEventListener
 
     public override void OnEvent(Restart evnt)
     {
-        StartCoroutine(RestartGameCourotine());
+        RestartGame();
     }
 
     public void LeaveButton()
