@@ -13,7 +13,6 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public float jumpForce;
     public float colliderRaySize;
     public Collider2D groundCollider;
-    public GameObject Camera;
     public Animator playerAnimator;
     public GameObject shoes;
     private bool parrying;
@@ -46,9 +45,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, gameObject.transform);
-        state.SetTransforms(state.CameraTransform, Camera.transform);
         playerAnimator = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
-        Camera.GetComponent<CameraHandler>().clientPositionX = gameObject;
         state.SetAnimator(playerAnimator);
         state.LeftArmEnable = true;
         state.RightArmEnable = true;
@@ -83,21 +80,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             state.OtherX = move.x;
         }
 
-        if (Camera.transform.position.x > 21.0f || Camera.transform.position.x < -5.5f)
-        {
-            Vector3 position = new Vector3((Camera.transform.position.x), Camera.transform.position.y, Camera.transform.position.z);
-            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
-        }
-        else if (Camera.transform.position.x - Mathf.Abs(transform.position.x) > 10f || Camera.transform.position.x - Mathf.Abs(transform.position.x) < -10f)
-        {
-            Vector3 position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z);
-            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
-        }
-        else
-        {
-            Vector3 position = new Vector3((Camera.transform.position.x + transform.position.x) / 2.0f, Camera.transform.position.y, Camera.transform.position.z);
-            Camera.transform.position = Vector3.Lerp(Camera.transform.position, position, Time.deltaTime * 1f);
-        }
+        
     }
 
     public void Update()
@@ -152,6 +135,8 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             }
         }
 
+        
+
         //if(state.MyX > state.OtherX)
         //{
         //        Vector3 newScale = gameObject.transform.localScale;
@@ -168,29 +153,21 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private IEnumerator ParryAnimation()
     {
-        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(false);
-        gameObject.GetComponent<LimbShooter>().Block.SetActive(true);
+        StartCoroutine(Block(gameObject.GetComponent<LimbShooter>().parryAnimationTime));
         yield return new WaitForSeconds(gameObject.GetComponent<LimbShooter>().parryAnimationTime);
-        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(true);
-        gameObject.GetComponent<LimbShooter>().Block.SetActive(false);
         enableParry = true;
         parrying = false;
         enableParryAnimation = true;
     }
 
-    //    // Start is called before the first frame update
-    //    public PhotonView photonView;
-    //    public Rigidbody2D rb;
-    //    public GameObject PlayerCamera;
-
-    //    private void Awake()
-    //    {
-    //        if (photonView.isMine)
-    //        {
-    //            Debug.Log("eu tenho photon view");
-    //            PlayerCamera.SetActive(true);
-    //        }
-    //    } 
+    private IEnumerator Block(float animationTime )
+    {
+        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(false);
+        gameObject.GetComponent<LimbShooter>().Block.SetActive(true);
+        yield return new WaitForSeconds(animationTime / 2);
+        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(true);
+        gameObject.GetComponent<LimbShooter>().Block.SetActive(false);
+    }
 
 
     private void CheckInputs()
@@ -238,7 +215,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         controls.Gameplay.Disable();
     }
 
-    public void enableCOntrols()
+    public void enableControls()
     {
         controls.Gameplay.Enable();
     }

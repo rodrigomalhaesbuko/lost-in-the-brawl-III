@@ -169,6 +169,7 @@ public class MenuController: GlobalEventListener
             RoomName.GetComponent<Text>().text = JoinGameInput.text;
             PlayerPrefs.SetString("roomName", JoinGameInput.text);
             BoltLauncher.StartServer();
+            StartCoroutine(CannotConectCreateRoom());
         }
         else
         {
@@ -178,6 +179,7 @@ public class MenuController: GlobalEventListener
     }
     public override void BoltStartDone()
     {
+
         BoltMatchmaking.CreateSession(sessionID: JoinGameInput.text, sceneToLoad: "GameScene");
     }
 
@@ -221,7 +223,6 @@ public class MenuController: GlobalEventListener
                     BoltMatchmaking.JoinSession(photonSession);
                     foundHost = true;
                 }
-              
             }
         }
 
@@ -230,7 +231,7 @@ public class MenuController: GlobalEventListener
     IEnumerator CannotConectWithHost()
     {
 
-        yield return new WaitForSecondsRealtime(40.0f);
+        yield return new WaitForSecondsRealtime(60.0f);
         if (!foundHost)
         {
             //mostrar que não achou a sala com o nome
@@ -241,19 +242,30 @@ public class MenuController: GlobalEventListener
 
     }
 
+    IEnumerator CannotConectCreateRoom()
+    {
+
+        yield return new WaitForSecondsRealtime(30.0f);
+
+        BoltLauncher.Shutdown();
+        OpenAlertBox3();
+
+    }
+
     public void CloseAlertBox()
     {
+        controls.StaticScene.Enable();
+        pos = 0;
         AlertBox.SetActive(false);
         Loading.SetActive(false);
         RoomImageHost.SetActive(false);
         RoomImageClient.SetActive(false);
-        controls.StaticScene.Enable();
         seta.SetActive(true);
     }
 
     public void OpenAlertBox()
     {
-        Disclaimer.GetComponent<Text>().text = "NAO FOI POSSIVEL ENCONTRAR A SALA COM O NOME " + JoinGameInput.text;
+        Disclaimer.GetComponent<Text>().text = "Could not find the room you are looking for with name: " + JoinGameInput.text;
         AlertBox.SetActive(true);
     }
 
@@ -263,4 +275,9 @@ public class MenuController: GlobalEventListener
         AlertBox.SetActive(true);
     }
 
+    public void OpenAlertBox3()
+    {
+        Disclaimer.GetComponent<Text>().text = "Cannot create the room with name: " + JoinGameInput.text;
+        AlertBox.SetActive(true);
+    }
 }

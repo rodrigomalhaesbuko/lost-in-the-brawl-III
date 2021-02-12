@@ -13,8 +13,13 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
     public GameObject limbHitbox;
     public PlayerType playerType;
 
+    public GameObject owner;
 
-    // Start is called before the first frame update
+    public bool wallCollison = false;
+    public bool wallFlipped = false;
+
+    private bool fliped = false;
+
     void Start()
     {
         groundCollider = GameObject.FindGameObjectWithTag("ground").GetComponent<Collider2D>();
@@ -25,7 +30,6 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
         state.SetTransforms(state.LimbTransform, gameObject.transform);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (IsGrounded())
@@ -36,14 +40,25 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             limbHitbox.GetComponent<LimbHitComponent>().Damaging = false;
         }
+        else
+        {
+            if (GameController.armFlip && !fliped)
+            {
+                fliped = true;
+
+                Vector3 newLimbLocalScale = gameObject.transform.localScale;
+                newLimbLocalScale.x *= -1;
+                gameObject.transform.localScale = newLimbLocalScale;
+            }
+        }
     }
+
 
     public bool IsGrounded()
     {
 
         if (shoes.GetComponent<ShoeComponent>().onFloor)
         {
-            //Debug.Log("NO CHÃO");
             return true;
         }
         else
@@ -51,4 +66,6 @@ public class LimbComponent : Bolt.EntityBehaviour<ILimbState>
             return false;
         }
     }
+
+
 }
