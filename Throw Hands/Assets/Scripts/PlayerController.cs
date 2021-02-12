@@ -151,14 +151,20 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private IEnumerator ParryAnimation()
     {
-        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(false);
-        gameObject.GetComponent<LimbShooter>().Block.SetActive(true);
+        StartCoroutine(Block(gameObject.GetComponent<LimbShooter>().parryAnimationTime));
         yield return new WaitForSeconds(gameObject.GetComponent<LimbShooter>().parryAnimationTime);
-        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(true);
-        gameObject.GetComponent<LimbShooter>().Block.SetActive(false);
         enableParry = true;
         parrying = false;
         enableParryAnimation = true;
+    }
+
+    private IEnumerator Block(float animationTime )
+    {
+        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(false);
+        gameObject.GetComponent<LimbShooter>().Block.SetActive(true);
+        yield return new WaitForSeconds(animationTime / 2);
+        gameObject.GetComponent<LimbShooter>().HitBox.SetActive(true);
+        gameObject.GetComponent<LimbShooter>().Block.SetActive(false);
     }
 
 
