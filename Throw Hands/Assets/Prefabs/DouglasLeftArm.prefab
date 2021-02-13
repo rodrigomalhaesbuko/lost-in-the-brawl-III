@@ -45,7 +45,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.1599228, y: 0.12084043}
+  m_Offset: {x: 1.8544456, y: 0.13337243}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2286553, y: 1.8089879}
+  m_Size: {x: 0.3, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2755181441614803833
 MonoBehaviour:
@@ -105,7 +105,7 @@ Transform:
   m_GameObject: {fileID: 1595820471432824447}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.4504992, y: -0.03, z: -2.6570814}
-  m_LocalScale: {x: 0.73, y: 0.73, z: 1}
+  m_LocalScale: {x: 0.97, y: 0.97, z: 1}
   m_Children:
   - {fileID: 2004296679490924428}
   - {fileID: 2257837996393494258}
@@ -178,7 +178,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.36898243, y: 0.19180262}
+  m_Offset: {x: 0.36898232, y: 1.4359903}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -189,7 +189,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.8810606, y: 2.3487053}
+  m_Size: {x: 4.8810606, y: 2.643248}
   m_EdgeRadius: 0
 --- !u!50 &-2685515184846413354
 Rigidbody2D:
@@ -231,6 +231,8 @@ MonoBehaviour:
   limbHitbox: {fileID: 996993554065995206}
   playerType: 1
   owner: {fileID: 0}
+  wallCollison: 0
+  wallFlipped: 0
 --- !u!114 &2009948329005267206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +351,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13342309, y: -0.17455542}
+  m_Offset: {x: 0.43194288, y: 0.22761714}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -360,7 +362,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.9315248, y: 2.577016}
+  m_Size: {x: 3.5550175, y: 1.772671}
   m_EdgeRadius: 0
 --- !u!1 &3512662561497267884
 GameObject:
@@ -462,8 +464,8 @@ MonoBehaviour:
   - {fileID: 2257837996393494258}
   - {fileID: 3346131616782710179}
   m_Bounds:
-    m_Center: {x: 1.3161793, y: -0.3430028, z: 0}
-    m_Extent: {x: 1.3151622, y: 0.96201456, z: 0}
+    m_Center: {x: 1.3161794, y: -0.34300268, z: 0}
+    m_Extent: {x: 1.3151624, y: 0.96201456, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!1 &4305796364654822728
@@ -628,7 +630,7 @@ MonoBehaviour:
   - {fileID: 3346131616782710179}
   - {fileID: 2257837996393494258}
   m_Bounds:
-    m_Center: {x: 4.664718, y: 0.75135404, z: 0}
-    m_Extent: {x: 1.4932842, y: 1.0528816, z: 0}
+    m_Center: {x: 4.6647186, y: 0.751354, z: 0}
+    m_Extent: {x: 1.4932843, y: 1.0528816, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
