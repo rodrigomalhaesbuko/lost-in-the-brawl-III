@@ -15,6 +15,7 @@ TagManager:
   - carlous
   - musicMenu
   - Wall
+  - hat
   layers:
   - Default
   - TransparentFX
@@ -51,4 +52,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 40857121
     locked: 0
