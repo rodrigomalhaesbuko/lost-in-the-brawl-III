@@ -220,8 +220,16 @@ public class MenuController: GlobalEventListener
             {
                 if (photonSession.HostName.ToString() == JoinGameInput.text)
                 {
-                    BoltMatchmaking.JoinSession(photonSession);
-                    foundHost = true;
+                    if(photonSession.ConnectionsCurrent >= 2)
+                    {
+                        OpenAlertBox4();
+                    }
+                    else
+                    {
+                        BoltMatchmaking.JoinSession(photonSession);
+                        foundHost = true;
+                    }
+
                 }
             }
         }
@@ -278,6 +286,12 @@ public class MenuController: GlobalEventListener
     public void OpenAlertBox3()
     {
         Disclaimer.GetComponent<Text>().text = "Cannot create the room with name: " + JoinGameInput.text;
+        AlertBox.SetActive(true);
+    }
+
+    public void OpenAlertBox4()
+    {
+        Disclaimer.GetComponent<Text>().text = "This room is full" + JoinGameInput.text;
         AlertBox.SetActive(true);
     }
 }

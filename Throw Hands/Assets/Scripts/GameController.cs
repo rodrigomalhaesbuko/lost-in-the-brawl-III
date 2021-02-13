@@ -22,8 +22,8 @@ public class GameController : GlobalEventListener
     public GameObject lifeHost;
     public GameObject lifeClient;
     
-    private GameObject DouglasInstance;
-    private GameObject CarlousInstance;
+    public GameObject DouglasInstance;
+    public GameObject CarlousInstance;
 
     public GameObject WaitingPlayer;
 
@@ -333,18 +333,18 @@ public class GameController : GlobalEventListener
         CarlousInstance.transform.localScale = newScaleCarlous;
         CarlousInstance.GetComponent<PlayerStatus>().isFlipped = !CarlousInstance.GetComponent<PlayerStatus>().isFlipped;
 
-        // jump
-        if (armFlip)
-        {
+        //// jump
+        //if (armFlip)
+        //{
 
-            CarlousInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2( -5f , 0f), ForceMode2D.Impulse);
-            //DouglasInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 10f), ForceMode2D.Impulse);
-        }
-        else
-        {
-            //CarlousInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 10f), ForceMode2D.Impulse);
-            DouglasInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(5f, 0f), ForceMode2D.Impulse);
-        }
+        //    CarlousInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2( -5f , 0f), ForceMode2D.Impulse);
+        //    //DouglasInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 10f), ForceMode2D.Impulse);
+        //}
+        //else
+        //{
+        //    //CarlousInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 10f), ForceMode2D.Impulse);
+        //    DouglasInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(5f, 0f), ForceMode2D.Impulse);
+        //}
         
 
         armFlip = !armFlip;

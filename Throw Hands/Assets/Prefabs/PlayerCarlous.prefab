@@ -680,10 +680,67 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5428000984734604826}
   m_Bounds:
-    m_Center: {x: 0.16958189, y: -0.12103611, z: -0.0000001215376}
-    m_Extent: {x: 0.35881627, y: 0.7447828, z: 0}
+    m_Center: {x: 0.16960636, y: -0.121041, z: -0.0000001215376}
+    m_Extent: {x: 0.3588205, y: 0.7447835, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!1 &2519950253226877968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7957940506003890989}
+  - component: {fileID: 4319747259012210563}
+  m_Layer: 0
+  m_Name: Hat
+  m_TagString: hat
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7957940506003890989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2519950253226877968}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.09, y: 3.81, z: -4.990978}
+  m_LocalScale: {x: 1, y: 1, z: 0.3071852}
+  m_Children: []
+  m_Father: {fileID: 5524102872281988147}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &4319747259012210563
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2519950253226877968}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.017396927, y: -0.4507475}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.38539886, y: 0.07491875}
+  m_EdgeRadius: 0
 --- !u!1 &2625853661889533258
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +809,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2650211167449171561}
-  m_LocalRotation: {x: -0, y: -0, z: -0.01387438, w: 0.9999038}
+  m_LocalRotation: {x: -0, y: -0, z: -0.013878184, w: 0.99990374}
   m_LocalPosition: {x: 2.3432, y: -0.00000010744147, z: 0}
   m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 1}
   m_Children:
@@ -1447,6 +1504,7 @@ Transform:
   - {fileID: 32396740195887410}
   - {fileID: 6221475494269855103}
   - {fileID: 595777281981247204}
+  - {fileID: 7957940506003890989}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1564,7 +1622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 13
   rb: {fileID: 5524102872281988145}
-  jumpForce: 70
+  jumpForce: 80
   colliderRaySize: 1
   groundCollider: {fileID: 0}
   playerAnimator: {fileID: 0}
@@ -1585,6 +1643,7 @@ MonoBehaviour:
   localHealth: 5
   lifeHost: {fileID: 0}
   lifeClient: {fileID: 0}
+  hatForce: 3
   GameController: {fileID: 0}
   isFlipped: 0
   playerType: 0
@@ -1708,8 +1767,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.22069168, y: 1.1197652}
-  m_Size: {x: 2.2022018, y: 4.5052824}
+  m_Offset: {x: -0.22069168, y: 0.6471472}
+  m_Size: {x: 2.2022018, y: 4.7127285}
   m_Direction: 0
 --- !u!1 &6163102823278672749
 GameObject:
@@ -2641,7 +2700,7 @@ MonoBehaviour:
   - {fileID: 1142921441643678526}
   - {fileID: 3967945971797638237}
   m_Bounds:
-    m_Center: {x: 0.09548652, y: 0.0050177574, z: -0.0000001215376}
-    m_Extent: {x: 1.7510154, y: 2.6418986, z: 0}
+    m_Center: {x: 0.095504045, y: 0.005022526, z: -0.0000001215376}
+    m_Extent: {x: 1.7510126, y: 2.6419034, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1

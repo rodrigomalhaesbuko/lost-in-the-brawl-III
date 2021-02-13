@@ -9,6 +9,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     public int localHealth = 5;
     public GameObject lifeHost;
     public GameObject lifeClient;
+    public float hatForce = 4f;
 
     public GameObject GameController;
     public bool isFlipped = false;
@@ -74,6 +75,46 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
             lifeHost.transform.GetChild(i).GetComponent<Image>().color = greenColor;
         }
 
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("hat"))
+        {
+            
+            if(playerType == PlayerType.Douglas)
+            {
+              
+                if (GameController.GetComponent<GameController>().CarlousInstance.transform.position.x > gameObject.transform.position.x)
+                {
+                    Debug.Log("OBAAAAAAAA1");
+                    //transform.Translate(new Vector2(-0.2f, 0f), Space.World);
+                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-hatForce, 0f), ForceMode2D.Impulse);
+                }
+                else
+                {
+                    Debug.Log("OBAAAAAAAA2");
+                    //transform.Translate(new Vector2(-0.2f, 0f), Space.World);
+                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hatForce, 0f), ForceMode2D.Impulse);
+                }
+            }else
+            {
+                if (GameController.GetComponent<GameController>().DouglasInstance.transform.position.x > gameObject.transform.position.x)
+                {
+                    Debug.Log("OBAAAAAAAA3");
+                    //transform.Translate(new Vector2(-0.2f, 0f), Space.World);
+                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-hatForce, 0f), ForceMode2D.Impulse);
+                }
+                else
+                {
+                    Debug.Log("OBAAAAAAAA4");
+                    //transform.Translate(new Vector2(-0.2f, 0f), Space.World);
+                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(hatForce, 0f), ForceMode2D.Impulse);
+                }
+            }
+
+           
+        }
     }
 
     public void TakeDamage()
