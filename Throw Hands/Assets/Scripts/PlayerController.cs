@@ -20,6 +20,8 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     private bool enableParryAnimation = true;
     private bool alreadyJumped = false;
 
+    public bool isDucking = false; 
+
     public InputMaster controls;
 
     Vector2 move;
@@ -115,10 +117,12 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
        
         if (state.MoveY < -0.5f)
         {
+            isDucking = true;
             state.Animator.SetBool("Duck", true);
         }
         else
         {
+            isDucking = false;
             state.Animator.SetBool("Duck", false);
         }
 
@@ -126,12 +130,20 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             if (enableParryAnimation)
             {
-                if(state.LeftArmEnable || state.RightArmEnable)
+                if((state.LeftArmEnable || state.RightArmEnable) && !isDucking)
                 {
                     enableParryAnimation = false;
                     state.Animator.SetTrigger("ParryT");
                     StartCoroutine(ParryAnimation());
                 }
+                else
+                {
+                    parrying = false;
+                }
+            }
+            else
+            {
+                parrying = false;
             }
         }
 
@@ -182,8 +194,11 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
         //Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
 
-
-        transform.Translate(new Vector2(m.x, 0f), Space.World);
+        if (!isDucking)
+        {
+            transform.Translate(new Vector2(m.x, 0f), Space.World);
+        }
+      
 
         //transform.position += new Vector3(m.x, 0f, transform.position.z);
 

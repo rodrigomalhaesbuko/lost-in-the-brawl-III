@@ -82,7 +82,7 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     //PUNCHES 
     public void ShootLeftArm()
     {
-        if (state.LeftArmEnable && entity.IsOwner && !LeftArmShooted)
+        if (state.LeftArmEnable && entity.IsOwner && !LeftArmShooted && !gameObject.GetComponent<PlayerController>().isDucking)
         {
             audioControl.PlaySound(SFXType.Punch);
             LeftArmShooted = true;
@@ -92,7 +92,7 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void ShootRightArm()
     {
-        if (state.RightArmEnable && entity.IsOwner && !RightArmShooted)
+        if (state.RightArmEnable && entity.IsOwner && !RightArmShooted && !gameObject.GetComponent<PlayerController>().isDucking)
         {
             audioControl.PlaySound(SFXType.Punch);
             RightArmShooted = true;

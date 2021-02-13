@@ -502,6 +502,7 @@ MonoBehaviour:
   groundCollider: {fileID: 0}
   playerAnimator: {fileID: 0}
   shoes: {fileID: 5190747391526417558}
+  isDucking: 0
   bola: 10
 --- !u!114 &-4397341728968391736
 MonoBehaviour:
@@ -518,7 +519,7 @@ MonoBehaviour:
   localHealth: 5
   lifeHost: {fileID: 0}
   lifeClient: {fileID: 0}
-  hatForce: 3
+  hatForce: 2.5
   GameController: {fileID: 0}
   isFlipped: 0
   playerType: 1
