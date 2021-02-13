@@ -16,8 +16,8 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public PlayerType playerType;
 
-    private Color greenColor;
-    private Color redColor;
+    public Color greenColor;
+    public Color redColor;
 
     private void Start()
     {
@@ -36,16 +36,14 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         state.AddCallback("EnemyHealth", EnemyHealthCallBack);
     }
 
+
     private void HealthCallBack()
     {
-
-        //state.Health vai de 4 a 0
-        if (state.Health < 5 && state.Health >= 0)
+        if(state.Health < 5 && state.Health >= 0)
         {
-            for (int i = state.Health; i < 5; i++)
-                lifeHost.transform.GetChild(i).GetComponent<Image>().color = redColor;
-        }
-
+            lifeHost.transform.GetChild(state.Health).GetComponent<Image>().color = redColor;
+        } 
+      
         if (state.Health <= 0)
         {
             //Debug.Log("GameOver Player 1 ganhou");
@@ -58,8 +56,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if (state.EnemyHealth < 5 && state.EnemyHealth >= 0)
         {
-            for(int i = state.EnemyHealth; i<5; i++)
-                lifeClient.transform.GetChild(4 - i).GetComponent<Image>().color = redColor;
+            lifeClient.transform.GetChild(state.EnemyHealth).GetComponent<Image>().color = redColor;
         }
 
         if (state.EnemyHealth <= 0)

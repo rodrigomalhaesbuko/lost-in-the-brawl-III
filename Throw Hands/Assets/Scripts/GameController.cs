@@ -36,6 +36,10 @@ public class GameController : GlobalEventListener
     //CAMERA
     public CinemachineTargetGroup targetGroup;
 
+
+    //Damage
+    public float impactForce = 30.0f;
+
     //endbattle vars
     public GameObject hostWins;
     public GameObject clientWins;
@@ -82,6 +86,8 @@ public class GameController : GlobalEventListener
         targetGroup.AddMember(CarlousInstance.transform, 1f, 4f);
     }
 
+
+   
     public void createGame()
     {
         //gameEnded = false;
@@ -202,6 +208,77 @@ public class GameController : GlobalEventListener
         StartCoroutine(noia());
     }
 
+    private int HostLife = 5;
+    private int ClientLife = 5;
+
+    // DANO NOIA 
+    public override void OnEvent(Damaged evnt)
+    {
+        if (evnt.WasHost)
+        {
+            HostLife -= 1;
+
+            DouglasInstance.GetComponent<PlayerController>().state.Animator.SetTrigger("Damage");
+
+            if (HostLife < 5 && HostLife >= 0)
+            {
+                lifeHost.transform.GetChild(HostLife).GetComponent<Image>().color = DouglasInstance.GetComponent<PlayerStatus>().redColor;
+            }
+
+            if (HostLife <= 0)
+            {
+                //Debug.Log("GameOver Player 2 ganhou");
+                endGame(true, false);
+            }
+
+            if (DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
+            {
+                impactForce *= -1;
+            }
+
+            //if (DouglasInstance.GetComponent<LimbHitComponent>().rdbody.velocity.x > 0.0f)
+            //{
+            //    DouglasInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-impactForce, 0f), ForceMode2D.Impulse);
+            //}
+            //else
+            //{
+            //    DouglasInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(impactForce, 0f), ForceMode2D.Impulse);
+            //}
+
+        }
+        else
+        {
+
+            ClientLife -= 1;
+
+            if (ClientLife < 5 && ClientLife >= 0)
+            {
+                lifeClient.transform.GetChild(ClientLife).GetComponent<Image>().color = CarlousInstance.GetComponent<PlayerStatus>().redColor;
+            }
+
+            if (ClientLife <= 0)
+            {
+                //Debug.Log("GameOver Player 2 ganhou");
+                endGame(true, false);
+            }
+
+            CarlousInstance.GetComponent<PlayerController>().state.Animator.SetTrigger("Damage");
+
+            if (CarlousInstance.GetComponent<PlayerStatus>().isFlipped)
+            {
+                impactForce *= -1;
+            }
+
+            //if (CarlousInstance.GetComponent<LimbHitComponent>().rdbody.velocity.x > 0.0f)
+            //{
+            //    CarlousInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-impactForce, 0f), ForceMode2D.Impulse);
+            //}
+            //else
+            //{
+            //    CarlousInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(impactForce, 0f), ForceMode2D.Impulse);
+            //}
+        }
+    }
     private IEnumerator noia()
     {
         yield return new WaitForSeconds(.5f);
@@ -247,6 +324,8 @@ public class GameController : GlobalEventListener
         gameState = GameState.restart;
         slowTimer = 0f;
         Time.timeScale = 1f;
+        HostLife = 5;
+        ClientLife = 5;
         youwin.SetActive(false);
         youlose.SetActive(false);
         youDraw.SetActive(false);
