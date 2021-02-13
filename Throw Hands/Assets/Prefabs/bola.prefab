@@ -391,6 +391,8 @@ MonoBehaviour:
   limbHitbox: {fileID: 0}
   playerType: 0
   owner: {fileID: 0}
+  wallCollison: 0
+  wallFlipped: 0
 --- !u!114 &-7881744337910019498
 MonoBehaviour:
   m_ObjectHideFlags: 0
