@@ -918,32 +918,32 @@ PrefabInstance:
     - target: {fileID: 4701701847548075404, guid: 518cac1a2a85f4f109143dca840712b7,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5665987
+      value: 1.7205952
       objectReference: {fileID: 0}
     - target: {fileID: 4701701847548075404, guid: 518cac1a2a85f4f109143dca840712b7,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.292444
+      value: 1.4194912
       objectReference: {fileID: 0}
     - target: {fileID: 4701701847548075404, guid: 518cac1a2a85f4f109143dca840712b7,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.292444
+      value: 1.4194912
       objectReference: {fileID: 0}
     - target: {fileID: 4701701847548075404, guid: 518cac1a2a85f4f109143dca840712b7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.25
+      value: -4.692
       objectReference: {fileID: 0}
     - target: {fileID: 4701701847548075404, guid: 518cac1a2a85f4f109143dca840712b7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41946
+      value: -0.56297
       objectReference: {fileID: 0}
     - target: {fileID: 4701701847548075404, guid: 518cac1a2a85f4f109143dca840712b7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.4954
+      value: 8.2492
       objectReference: {fileID: 0}
     - target: {fileID: 4701701847548075404, guid: 518cac1a2a85f4f109143dca840712b7,
         type: 3}
@@ -2122,7 +2122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081193667}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 25.37, y: -7.3, z: -12}
+  m_LocalPosition: {x: 28.79, y: -7.3, z: -12}
   m_LocalScale: {x: 438.1118, y: 14.84128, z: 14.84128}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2308,7 +2308,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 2.915802, y: -6.478551}
+  m_Offset: {x: 3.3113651, y: -6.5197306}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2319,7 +2319,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 33.365204, y: 13.397551}
+  m_Size: {x: 39.309605, y: 14.883169}
   m_EdgeRadius: 0
 --- !u!4 &1240193425
 Transform:
@@ -2355,20 +2355,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1240193424}
     m_ColliderPaths:
-    - - X: 195983739
-        Y: -131773264
-      - X: 195983739
-        Y: 2202243
-      - X: -137668000
-        Y: 2201950
-      - X: -137667707
-        Y: -131773264
+    - - X: 229661387
+        Y: -139613152
+      - X: 229661387
+        Y: 9218540
+      - X: -163434368
+        Y: 9218247
+      - X: -163434075
+        Y: -139613152
   m_CompositePaths:
     m_Paths:
-    - - {x: 19.598345, y: -13.177326}
-      - {x: 19.598345, y: 0.2202243}
-      - {x: -13.7668, y: 0.2201657}
-      - {x: -13.766741, y: -13.177326}
+    - - {x: 22.966108, y: -13.961315}
+      - {x: 22.966108, y: 0.921854}
+      - {x: -16.343437, y: 0.9217954}
+      - {x: -16.343378, y: -13.961315}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &1240193427
@@ -2491,7 +2491,7 @@ RectTransform:
   m_GameObject: {fileID: 1430507692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 0.21535054, y: 0.10690286, z: 0.076584384}
+  m_LocalScale: {x: 0.2341559, y: 0.11623809, z: 0.08327207}
   m_Children:
   - {fileID: 740359475}
   - {fileID: 283515408}
@@ -2502,7 +2502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -580.8, y: -331.4}
+  m_AnchoredPosition: {x: -580.78, y: -331.47}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1488956946
@@ -3360,7 +3360,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 6.7894855
+  orthographic size: 7.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3384,7 +3384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846920735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.000001, y: 0.44361496, z: -20}
+  m_LocalPosition: {x: 7.9999995, y: 0.16085434, z: -20}
   m_LocalScale: {x: 0.8292075, y: 1.0051, z: 1.0051}
   m_Children:
   - {fileID: 1795840773}
@@ -3744,8 +3744,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961811210}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.9, y: 0.44, z: 100}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.0915071}
+  m_LocalPosition: {x: 8.1, y: 0.44, z: 100}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.0915071}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -4099,7 +4099,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106291728}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -9.84, y: -7.3, z: -12}
+  m_LocalPosition: {x: -12.2, y: -7.3, z: -12}
   m_LocalScale: {x: 438.1118, y: 14.84128, z: 14.84128}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4162,7 +4162,7 @@ MonoBehaviour:
   m_Follow: {fileID: 194697805}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 6.7894855
+    OrthographicSize: 7.2
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
