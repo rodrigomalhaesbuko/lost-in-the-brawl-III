@@ -49,7 +49,7 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
                     myRgbody.AddForce(new Vector2(impactForce, 0f), ForceMode2D.Impulse);
                 }
 
-                collision.gameObject.GetComponent<LimbHitComponent>().rdbody.velocity = Vector2.zero;
+                //collision.gameObject.GetComponent<LimbHitComponent>().rdbody.velocity = Vector2.zero;
                 collision.gameObject.GetComponent<LimbHitComponent>().rdbody.AddForce(new Vector2(0f, -5.0f),ForceMode2D.Impulse);
                 collision.gameObject.GetComponent<LimbHitComponent>().limb.layer = LayerMask.NameToLayer("TransparentFX");
             
