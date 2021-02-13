@@ -366,7 +366,7 @@ public class GameController : GlobalEventListener
                 dirseta = 1;
             }
 
-            seta.GetComponent<RectTransform>().localPosition = new Vector3(-300 + posxseta + setapos * stepSeta, -440, 0);
+            seta.GetComponent<RectTransform>().localPosition = new Vector3(-443 + posxseta + setapos * stepSeta, -440, 0);
         }
        
         if (gameState == GameState.play)
