@@ -30,10 +30,14 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         controls = new InputMaster();
 
-        controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Move.performed += ctx =>
+        {
+            move = ctx.ReadValue<Vector2>();
+        };
 
         controls.Gameplay.Parry.started += ctx => {
-            if (enableParry) {
+            if (enableParry)
+            {
                 enableParry = false;
                 parrying = true;
                 //StartCoroutine(PrepareParry());   
@@ -112,6 +116,7 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             else
             {
                 state.Animator.SetBool("Jump", false);
+                alreadyJumped = false;
             }
         }
        
@@ -219,7 +224,6 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
         }
         else
         {
-            alreadyJumped = false;
             return false;  
         }
     }
