@@ -517,8 +517,11 @@ public class GameController : GlobalEventListener
 
     public void endGame(bool hostWon, bool draw)
     {
-        gameState = GameState.slowed;
-        StartCoroutine(afterEndGame(hostWon, draw));
+        if (gameState != GameState.slowed)
+        {
+            gameState = GameState.slowed;
+            StartCoroutine(afterEndGame(hostWon, draw));
+        }
     }
 }
 
