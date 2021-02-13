@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 364566321606910961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.4504992, y: -0.36162606, z: -2.6570814}
-  m_LocalScale: {x: 0.73, y: 0.73, z: 1}
+  m_LocalScale: {x: 0.97, y: 0.97, z: 1}
   m_Children:
   - {fileID: 3981781599315834874}
   - {fileID: 4488544704719166286}
@@ -156,6 +156,8 @@ MonoBehaviour:
   limbHitbox: {fileID: 8224063597333890747}
   playerType: 0
   owner: {fileID: 0}
+  wallCollison: 0
+  wallFlipped: 0
 --- !u!114 &7813669992323584483
 MonoBehaviour:
   m_ObjectHideFlags: 0

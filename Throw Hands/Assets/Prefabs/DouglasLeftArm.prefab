@@ -105,7 +105,7 @@ Transform:
   m_GameObject: {fileID: 1595820471432824447}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.4504992, y: -0.03, z: -2.6570814}
-  m_LocalScale: {x: 0.73, y: 0.73, z: 1}
+  m_LocalScale: {x: 0.97, y: 0.97, z: 1}
   m_Children:
   - {fileID: 2004296679490924428}
   - {fileID: 2257837996393494258}
@@ -231,6 +231,8 @@ MonoBehaviour:
   limbHitbox: {fileID: 996993554065995206}
   playerType: 1
   owner: {fileID: 0}
+  wallCollison: 0
+  wallFlipped: 0
 --- !u!114 &2009948329005267206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,8 +464,8 @@ MonoBehaviour:
   - {fileID: 2257837996393494258}
   - {fileID: 3346131616782710179}
   m_Bounds:
-    m_Center: {x: 1.3161792, y: -0.34300268, z: 0}
-    m_Extent: {x: 1.3151623, y: 0.96201456, z: 0}
+    m_Center: {x: 1.3161792, y: -0.3430028, z: 0}
+    m_Extent: {x: 1.3151624, y: 0.9620147, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!1 &4305796364654822728
@@ -628,7 +630,7 @@ MonoBehaviour:
   - {fileID: 3346131616782710179}
   - {fileID: 2257837996393494258}
   m_Bounds:
-    m_Center: {x: 4.6647186, y: 0.75135416, z: 0}
-    m_Extent: {x: 1.4932843, y: 1.0528818, z: 0}
+    m_Center: {x: 4.664718, y: 0.751354, z: 0}
+    m_Extent: {x: 1.4932842, y: 1.0528816, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
