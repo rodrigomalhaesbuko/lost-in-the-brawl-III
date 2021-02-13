@@ -228,7 +228,7 @@ public class GameController : GlobalEventListener
             if (HostLife <= 0)
             {
                 //Debug.Log("GameOver Player 2 ganhou");
-                endGame(true, false);
+                endGame(false, false);
             }
 
             if (DouglasInstance.GetComponent<PlayerStatus>().isFlipped)
