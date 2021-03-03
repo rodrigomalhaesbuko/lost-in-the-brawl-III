@@ -3506,7 +3506,8 @@
           "Name": "PlayerTransform",
           "Enabled": true,
           "Expanded": true,
-          "Priority": 2,
+          "ReplicationMode": 1,
+          "Priority": 1,
           "PropertyType": {
             "$type": "Bolt.Compiler.PropertyTypeTransform, bolt.compiler",
             "PositionSelection": 14,
@@ -3575,7 +3576,7 @@
           },
           "AssetSettings": {
             "$type": "Bolt.Compiler.PropertyStateSettings, bolt.compiler",
-            "SmoothingAlgorithm": 2,
+            "SmoothingAlgorithm": 1,
             "ExtrapolationErrorTolerance": 0.25,
             "_ExtrapolationCorrectionFrames": 6,
             "ExtrapolationMaxFrames": 9,
