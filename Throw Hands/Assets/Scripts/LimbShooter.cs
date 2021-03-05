@@ -29,6 +29,8 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     private bool rightArmShootTrigger = false ;
     private bool leftArmShootTrigger = false ;
 
+    private bool _isLocal = false;
+
     //parry
     public GameObject Block;
     public GameObject HitBox;
@@ -37,35 +39,155 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     private bool enableLeftShooting = true;
     private bool enableRightShooting = true;
 
-
-    private void Awake()
+    public void LocalLeftShootP1(InputAction.CallbackContext ctx)
     {
-        controls = gameObject.GetComponent<PlayerController>().controls;
-
-        controls.Gameplay.LeftArmShoot.started += ctx => {
-            if (!rightArmShootTrigger) {
+        Debug.Log("LEFT BOLA P1");
+        if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas)
+            if (!rightArmShootTrigger)
+            {
                 leftArmShootTrigger = true;
                 ShootLeftArm();
-                }
-        };
-        controls.Gameplay.RightArmShoot.started += ctx => {
+            }
+        leftArmShootTrigger = false;
+    }
+
+    public void LocalRightShootP1(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("RIGHT BOLA P1");
+        if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas && _isLocal)
             if (!leftArmShootTrigger)
             {
                 rightArmShootTrigger = true;
                 ShootRightArm();
             }
-        };
 
-        controls.Gameplay.LeftArmShoot.canceled += ctx => {
+        rightArmShootTrigger = false;
+    }
+
+
+    public void LocalLeftShootP2(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("LEFTARM BOLA P2");
+        if (gameObject.GetComponent<PlayerStatus>().playerType != PlayerType.Douglas && _isLocal)
+            if (!rightArmShootTrigger)
+            {
+                leftArmShootTrigger = true;
+                ShootLeftArm();
+            }
+        leftArmShootTrigger = false;
+    }
+
+    public void LocalRightShootP2(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("RIGHT BOLA P2");
+        if (gameObject.GetComponent<PlayerStatus>().playerType != PlayerType.Douglas && _isLocal)
+            if (!leftArmShootTrigger)
+            {
+                rightArmShootTrigger = true;
+                ShootRightArm();
+            }
+
+        rightArmShootTrigger = false;
+    }
+
+    private void Awake()
+    {
+        controls = gameObject.GetComponent<PlayerController>().controls;
+        _isLocal = gameObject.GetComponent<PlayerStatus>().GameController.GetComponent<GameController>().isLocal;
+        if (gameObject.GetComponent<PlayerStatus>().GameController.GetComponent<GameController>().isLocal)
+        {
+            if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas)
+            {
+                //controls.Gameplay.LocalLeftShootP1.started += ctx => {
+                //    if (!rightArmShootTrigger)
+                //    {
+                //        leftArmShootTrigger = true;
+                //        ShootLeftArm();
+                //    }
+                //};
+                //controls.Gameplay.LocalRightShootP1.started += ctx => {
+                //    if (!leftArmShootTrigger)
+                //    {
+                //        rightArmShootTrigger = true;
+                //        ShootRightArm();
+                //    }
+                //};
+
+                controls.Gameplay.LocalLeftShootP1.canceled += ctx => {
+
+                    leftArmShootTrigger = false;
+                    Debug.Log("SOLTOUUU P1");
+
+                };
+                controls.Gameplay.LocalRightShootP1.canceled += ctx => {
+
+                    rightArmShootTrigger = false;
+                    Debug.Log("SOLTOUUU P1");
+
+                };
+            }
+            else
+            {
+                //controls.Gameplay.LocalLeftShootP2.started += ctx => {
+                //    if (!rightArmShootTrigger)
+                //    {
+                //        leftArmShootTrigger = true;
+                //        ShootLeftArm();
+                //    }
+                //};
+                //controls.Gameplay.LocalRightShootP2.started += ctx => {
+                //    if (!leftArmShootTrigger)
+                //    {
+                //        rightArmShootTrigger = true;
+                //        ShootRightArm();
+                //    }
+                //};
+
+                controls.Gameplay.LocalLeftShootP2.canceled += ctx => {
+
+                    leftArmShootTrigger = false;
+                    Debug.Log("SOLTOUUU P2");
+
+                };
+
+                controls.Gameplay.LocalRightShootP2.canceled += ctx => {
+
+                    rightArmShootTrigger = false;
+                    Debug.Log("SOLTOUUU P2");
+
+                };
+            }
+        }
+        else
+        {
+            controls.Gameplay.LeftArmShoot.started += ctx => {
+                if (!rightArmShootTrigger)
+                {
+                    leftArmShootTrigger = true;
+                    ShootLeftArm();
+                }
+            };
+            controls.Gameplay.RightArmShoot.started += ctx => {
+                if (!leftArmShootTrigger)
+                {
+                    rightArmShootTrigger = true;
+                    ShootRightArm();
+                }
+            };
+
+            controls.Gameplay.LeftArmShoot.canceled += ctx => {
 
                 leftArmShootTrigger = false;
-            
-        };
-        controls.Gameplay.RightArmShoot.canceled += ctx => {
+
+            };
+            controls.Gameplay.RightArmShoot.canceled += ctx => {
 
                 rightArmShootTrigger = false;
 
-        };
+            };
+        }
+
+
     }
 
     // bolt void start 

@@ -1481,6 +1481,7 @@ GameObject:
   - component: {fileID: 8430605979221251717}
   - component: {fileID: 952656974546312832}
   - component: {fileID: 7635911802457509390}
+  - component: {fileID: 4644944591617584386}
   m_Layer: 0
   m_Name: PlayerCarlous
   m_TagString: carlous
@@ -1773,6 +1774,156 @@ CapsuleCollider2D:
   m_Offset: {x: -0.22069168, y: 0.6471472}
   m_Size: {x: 2.2022018, y: 4.7127285}
   m_Direction: 0
+--- !u!114 &4644944591617584386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524102872281988144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 5eed4ea76025a41a798c5ca875c8d9ad,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79338279-d9ee-43c2-9043-c9ee02c12279
+    m_ActionName: Gameplay/Move[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66423509-4994-48dd-a522-869ed0e2b90f
+    m_ActionName: Gameplay/LeftArmShoot[/Keyboard/z,/DualShock4GamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e2cb39e-456d-4ad2-a5d3-4daf436cf5e7
+    m_ActionName: Gameplay/RightArmShoot[/Keyboard/x,/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c646a421-0b3c-4c77-ae04-371780fafc85
+    m_ActionName: Gameplay/Parry[/Keyboard/c,/DualShock4GamepadHID/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 015e6c9a-a6f8-4748-ad28-f95c9132a3af
+    m_ActionName: Gameplay/LocalMoveP1[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DualShock4GamepadHID/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3673431458648850800}
+        m_MethodName: OnLocalMovP2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8807846235583776794}
+        m_MethodName: OnLocalMovP2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 272f7407-691b-4802-af9e-7d3333e1378d
+    m_ActionName: Gameplay/LocalMoveP2[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/DualShock4GamepadHID/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3295bb49-2308-4807-ac9b-1a9aba349007
+    m_ActionName: Gameplay/LocalRightShootP1[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 998bdad4-6e52-4712-83a3-008bfe2483f9
+    m_ActionName: Gameplay/LocalLeftShootP1[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8417610263929139283}
+        m_MethodName: LocalRightShootP2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 683b0f0b-e316-4c14-929b-f4b2d786b19a
+    m_ActionName: Gameplay/LocalRightShootP2[/Keyboard/n]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8417610263929139283}
+        m_MethodName: LocalLeftShootP2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fb3d8bbc-07df-4c0a-bac8-1c1862ff0ae7
+    m_ActionName: Gameplay/LocalLeftShootP2[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c20d73bb-1091-410f-a669-714d00e66964
+    m_ActionName: Gameplay/LocalParryP1[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3673431458648850800}
+        m_MethodName: LocalParryP2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 935cf0e2-6fe5-4cee-930a-509152dfa98f
+    m_ActionName: Gameplay/LocalParryP2[/Keyboard/comma]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e518d00d-0729-4c1b-9e52-0c935a5cc96f
+    m_ActionName: MainMenu/Move[/Keyboard/downArrow,/Keyboard/upArrow,/DualShock4GamepadHID/dpad/down,/DualShock4GamepadHID/dpad/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 72781113-aa56-4c82-a2de-c63794c14f18
+    m_ActionName: MainMenu/Select[/Keyboard/enter,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e6bb6c10-ce67-4348-8eea-4c1708cbdaaa
+    m_ActionName: StaticScene/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID/dpad/down,/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID/dpad/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a82fcc27-c016-41ee-a4b8-e9317f858e78
+    m_ActionName: StaticScene/Select[/Keyboard/enter,/DualShock4GamepadHID/buttonSouth]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Carlos
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6163102823278672749
 GameObject:
   m_ObjectHideFlags: 0

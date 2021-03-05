@@ -8,6 +8,7 @@ using System;
 using Bolt.Matchmaking;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 public class GameController : GlobalEventListener
 {
@@ -69,7 +70,7 @@ public class GameController : GlobalEventListener
 
     private float slowTimer = 0f;
 
-   
+    public bool isLocal = false;
 
     private void getInstances()
     {
@@ -81,7 +82,7 @@ public class GameController : GlobalEventListener
         targetGroup.AddMember(DouglasInstance.transform, 1f, 4f);
         targetGroup.AddMember(CarlousInstance.transform, 1f, 4f);
     }
-
+    
     public void createGame()
     {
         //gameEnded = false;
@@ -111,8 +112,18 @@ public class GameController : GlobalEventListener
         playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
         playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
 
+        if (isLocal)
+        {
 
-        if(!BoltNetwork.IsClient)
+            DouglasInstance = BoltNetwork.Instantiate(playerPrefab, new Vector2(
+              this.transform.position.x + (battleOffset * -1.5f), this.transform.position.y), Quaternion.identity);
+
+            CarlousInstance = BoltNetwork.Instantiate(playerPrefab2, new Vector2(
+                this.transform.position.x + (battleOffset * 1.5f), this.transform.position.y), Quaternion.identity);
+
+
+        }
+        else if(!BoltNetwork.IsClient)
         {
             DouglasInstance = BoltNetwork.Instantiate(playerPrefab, new Vector2(
                 this.transform.position.x + (battleOffset * -1.5f), this.transform.position.y), Quaternion.identity);
@@ -185,7 +196,14 @@ public class GameController : GlobalEventListener
     private void Start()
     {
         controls.StaticScene.Disable();
-        roomName.GetComponent<Text>().text = PlayerPrefs.GetString("roomName");
+        if (isLocal)
+        {
+            createGame();
+        }
+        else
+        {
+            roomName.GetComponent<Text>().text = PlayerPrefs.GetString("roomName");
+        }
     }
 
     [Obsolete]
@@ -232,17 +250,27 @@ public class GameController : GlobalEventListener
             //BoltNetwork.Destroy(limb);
             Destroy(limb);
         }
-
-        if (BoltNetwork.IsServer)
+        if (isLocal)
         {
-            if(DouglasInstance != null)
+            if (DouglasInstance != null)
                 BoltNetwork.Destroy(DouglasInstance);
+            if (CarlousInstance != null)
+                BoltNetwork.Destroy(CarlousInstance);
         }
         else
         {
-            if(CarlousInstance != null)
-                BoltNetwork.Destroy(CarlousInstance);
+            if (BoltNetwork.IsServer)
+            {
+                if (DouglasInstance != null)
+                    BoltNetwork.Destroy(DouglasInstance);
+            }
+            else
+            {
+                if (CarlousInstance != null)
+                    BoltNetwork.Destroy(CarlousInstance);
+            }
         }
+        
 
         gameState = GameState.restart;
         slowTimer = 0f;
@@ -270,14 +298,22 @@ public class GameController : GlobalEventListener
 
     public void Rematch()
     {
-        if (!BoltNetwork.IsClient)
+        if (isLocal)
         {
-            P1Rematch.Create().Send();
+            RestartGame();
         }
         else
         {
-            P2Rematch.Create().Send();
+            if (!BoltNetwork.IsClient)
+            {
+                P1Rematch.Create().Send();
+            }
+            else
+            {
+                P2Rematch.Create().Send();
+            }
         }
+
     }
 
     public override void OnEvent(P1Rematch evnt)
@@ -310,7 +346,15 @@ public class GameController : GlobalEventListener
 
     public void LeaveButton()
     {
-        Leave.Create().Send();
+        if (isLocal)
+        {
+            SceneManager.LoadScene("initialScreen");
+        }
+        else
+        {
+            Leave.Create().Send();
+        }
+      
     }
 
     // EVENT FOR LEAVE THE GAME 
@@ -372,7 +416,7 @@ public class GameController : GlobalEventListener
         if (gameState == GameState.play)
         {
 
-            if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1) // Criar um gamestate loading
+            if(BoltMatchmaking.CurrentSession.ConnectionsCurrent == 1 && !isLocal) // Criar um gamestate loading
             {
                 LeaveButton();
             }
@@ -466,34 +510,38 @@ public class GameController : GlobalEventListener
         }
         else
         {
-            if (BoltNetwork.IsClient)
+            if (!isLocal)
             {
-                if (hostWon)
+                if (BoltNetwork.IsClient)
                 {
-                    youlose.SetActive(true);
-                    audioControl.PlaySound(SFXType.Lose);
+                    if (hostWon)
+                    {
+                        youlose.SetActive(true);
+                        audioControl.PlaySound(SFXType.Lose);
+                    }
+                    else
+                    {
+                        youwin.SetActive(true);
+                        audioControl.PlaySound(SFXType.Win);
+                    }
                 }
                 else
                 {
-                    youwin.SetActive(true);
-                    audioControl.PlaySound(SFXType.Win);
+                    if (hostWon)
+                    {
+                        youwin.SetActive(true);
+                        audioControl.PlaySound(SFXType.Win);
+                    }
+                    else
+                    {
+                        youlose.SetActive(true);
+                        audioControl.PlaySound(SFXType.Lose);
+                    }
                 }
             }
-            else
-            {
-                if (hostWon)
-                {
-                    youwin.SetActive(true);
-                    audioControl.PlaySound(SFXType.Win);
-                }
-                else
-                {
-                    youlose.SetActive(true);
-                    audioControl.PlaySound(SFXType.Lose);
-                }
-            }
+            
         }
-
+        
         if (hostWon)
             hostScore++;
         else

@@ -49,6 +49,70 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""LocalMoveP1"",
+                    ""type"": ""Button"",
+                    ""id"": ""015e6c9a-a6f8-4748-ad28-f95c9132a3af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LocalMoveP2"",
+                    ""type"": ""Button"",
+                    ""id"": ""272f7407-691b-4802-af9e-7d3333e1378d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LocalRightShootP1"",
+                    ""type"": ""Button"",
+                    ""id"": ""3295bb49-2308-4807-ac9b-1a9aba349007"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LocalLeftShootP1"",
+                    ""type"": ""Button"",
+                    ""id"": ""998bdad4-6e52-4712-83a3-008bfe2483f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LocalRightShootP2"",
+                    ""type"": ""Button"",
+                    ""id"": ""683b0f0b-e316-4c14-929b-f4b2d786b19a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LocalLeftShootP2"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb3d8bbc-07df-4c0a-bac8-1c1862ff0ae7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LocalParryP1"",
+                    ""type"": ""Button"",
+                    ""id"": ""c20d73bb-1091-410f-a669-714d00e66964"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LocalParryP2"",
+                    ""type"": ""Button"",
+                    ""id"": ""935cf0e2-6fe5-4cee-930a-509152dfa98f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -236,6 +300,270 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Parry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""80941685-5e5b-468a-bc5f-7d04fe97ce9e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LocalMoveP1"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""495a93d0-dafc-4390-ae11-71c25d99203b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalMoveP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3feb38a2-a11d-49ab-8768-05a836dad3d9"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalMoveP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""4e6ccfb4-7eb6-4e90-9abc-d073aa16efd7"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalMoveP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1ac0fb2a-1290-4571-85b5-13ee2f114b3a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalMoveP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d430e72-f774-42aa-b0d9-dcbab5073adf"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalMoveP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""keyarrows"",
+                    ""id"": ""06e6ac10-08b3-4ee1-bc2b-1aa8cec2fe28"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LocalMoveP2"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""29c93859-bacc-4b0c-947c-4f55a2885a6c"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalMoveP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""169f0507-0f25-4ac5-a275-f87fdef74033"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalMoveP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""830404aa-53a7-4a93-b300-add22f40a075"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalMoveP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f97632ff-0a9b-41ca-9d80-b8054c541aac"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalMoveP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6bacca32-fe79-416d-9dff-79bdffae3df6"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalRightShootP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8d077cf-607b-426d-a0ab-1ae8214450b4"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalRightShootP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7072c42-ab22-4d76-a167-2936752ca000"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalLeftShootP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d92eef8-b9cd-49fb-8d13-2d3dd86dd5b0"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalLeftShootP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67dbe95e-20b9-4146-b578-db0ec9303220"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalRightShootP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6429a449-3a86-4f26-ac3b-23d5d0cff8be"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalLeftShootP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b08f38fe-f5b3-4c68-8876-eb0e64f105df"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalParryP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fd1bebe-4448-4c3b-8167-34ac57f0f6f5"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Douglas"",
+                    ""action"": ""LocalParryP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f947c1c-d059-4eb1-b2cc-672314c302df"",
+                    ""path"": ""<Keyboard>/comma"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalParryP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f3f39a8-c963-4dfc-8dc4-b1ece053e826"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalMoveP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84353a73-fdbd-441d-b5be-022952cedcc5"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalRightShootP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""514f49f2-5f99-4628-b014-4d7101e33fd0"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalLeftShootP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c41d310-10b9-4094-9b46-d6e81cf074fc"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Carlos"",
+                    ""action"": ""LocalParryP2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -510,7 +838,62 @@ public class @InputMaster : IInputActionCollection, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Carlos"",
+            ""bindingGroup"": ""Carlos"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Douglas"",
+            ""bindingGroup"": ""Douglas"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
@@ -518,6 +901,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Gameplay_LeftArmShoot = m_Gameplay.FindAction("LeftArmShoot", throwIfNotFound: true);
         m_Gameplay_RightArmShoot = m_Gameplay.FindAction("RightArmShoot", throwIfNotFound: true);
         m_Gameplay_Parry = m_Gameplay.FindAction("Parry", throwIfNotFound: true);
+        m_Gameplay_LocalMoveP1 = m_Gameplay.FindAction("LocalMoveP1", throwIfNotFound: true);
+        m_Gameplay_LocalMoveP2 = m_Gameplay.FindAction("LocalMoveP2", throwIfNotFound: true);
+        m_Gameplay_LocalRightShootP1 = m_Gameplay.FindAction("LocalRightShootP1", throwIfNotFound: true);
+        m_Gameplay_LocalLeftShootP1 = m_Gameplay.FindAction("LocalLeftShootP1", throwIfNotFound: true);
+        m_Gameplay_LocalRightShootP2 = m_Gameplay.FindAction("LocalRightShootP2", throwIfNotFound: true);
+        m_Gameplay_LocalLeftShootP2 = m_Gameplay.FindAction("LocalLeftShootP2", throwIfNotFound: true);
+        m_Gameplay_LocalParryP1 = m_Gameplay.FindAction("LocalParryP1", throwIfNotFound: true);
+        m_Gameplay_LocalParryP2 = m_Gameplay.FindAction("LocalParryP2", throwIfNotFound: true);
         // MainMenu
         m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
         m_MainMenu_Move = m_MainMenu.FindAction("Move", throwIfNotFound: true);
@@ -579,6 +970,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_LeftArmShoot;
     private readonly InputAction m_Gameplay_RightArmShoot;
     private readonly InputAction m_Gameplay_Parry;
+    private readonly InputAction m_Gameplay_LocalMoveP1;
+    private readonly InputAction m_Gameplay_LocalMoveP2;
+    private readonly InputAction m_Gameplay_LocalRightShootP1;
+    private readonly InputAction m_Gameplay_LocalLeftShootP1;
+    private readonly InputAction m_Gameplay_LocalRightShootP2;
+    private readonly InputAction m_Gameplay_LocalLeftShootP2;
+    private readonly InputAction m_Gameplay_LocalParryP1;
+    private readonly InputAction m_Gameplay_LocalParryP2;
     public struct GameplayActions
     {
         private @InputMaster m_Wrapper;
@@ -587,6 +986,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @LeftArmShoot => m_Wrapper.m_Gameplay_LeftArmShoot;
         public InputAction @RightArmShoot => m_Wrapper.m_Gameplay_RightArmShoot;
         public InputAction @Parry => m_Wrapper.m_Gameplay_Parry;
+        public InputAction @LocalMoveP1 => m_Wrapper.m_Gameplay_LocalMoveP1;
+        public InputAction @LocalMoveP2 => m_Wrapper.m_Gameplay_LocalMoveP2;
+        public InputAction @LocalRightShootP1 => m_Wrapper.m_Gameplay_LocalRightShootP1;
+        public InputAction @LocalLeftShootP1 => m_Wrapper.m_Gameplay_LocalLeftShootP1;
+        public InputAction @LocalRightShootP2 => m_Wrapper.m_Gameplay_LocalRightShootP2;
+        public InputAction @LocalLeftShootP2 => m_Wrapper.m_Gameplay_LocalLeftShootP2;
+        public InputAction @LocalParryP1 => m_Wrapper.m_Gameplay_LocalParryP1;
+        public InputAction @LocalParryP2 => m_Wrapper.m_Gameplay_LocalParryP2;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -608,6 +1015,30 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Parry.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnParry;
                 @Parry.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnParry;
                 @Parry.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnParry;
+                @LocalMoveP1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalMoveP1;
+                @LocalMoveP1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalMoveP1;
+                @LocalMoveP1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalMoveP1;
+                @LocalMoveP2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalMoveP2;
+                @LocalMoveP2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalMoveP2;
+                @LocalMoveP2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalMoveP2;
+                @LocalRightShootP1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalRightShootP1;
+                @LocalRightShootP1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalRightShootP1;
+                @LocalRightShootP1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalRightShootP1;
+                @LocalLeftShootP1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalLeftShootP1;
+                @LocalLeftShootP1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalLeftShootP1;
+                @LocalLeftShootP1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalLeftShootP1;
+                @LocalRightShootP2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalRightShootP2;
+                @LocalRightShootP2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalRightShootP2;
+                @LocalRightShootP2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalRightShootP2;
+                @LocalLeftShootP2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalLeftShootP2;
+                @LocalLeftShootP2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalLeftShootP2;
+                @LocalLeftShootP2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalLeftShootP2;
+                @LocalParryP1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalParryP1;
+                @LocalParryP1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalParryP1;
+                @LocalParryP1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalParryP1;
+                @LocalParryP2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalParryP2;
+                @LocalParryP2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalParryP2;
+                @LocalParryP2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLocalParryP2;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -624,6 +1055,30 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Parry.started += instance.OnParry;
                 @Parry.performed += instance.OnParry;
                 @Parry.canceled += instance.OnParry;
+                @LocalMoveP1.started += instance.OnLocalMoveP1;
+                @LocalMoveP1.performed += instance.OnLocalMoveP1;
+                @LocalMoveP1.canceled += instance.OnLocalMoveP1;
+                @LocalMoveP2.started += instance.OnLocalMoveP2;
+                @LocalMoveP2.performed += instance.OnLocalMoveP2;
+                @LocalMoveP2.canceled += instance.OnLocalMoveP2;
+                @LocalRightShootP1.started += instance.OnLocalRightShootP1;
+                @LocalRightShootP1.performed += instance.OnLocalRightShootP1;
+                @LocalRightShootP1.canceled += instance.OnLocalRightShootP1;
+                @LocalLeftShootP1.started += instance.OnLocalLeftShootP1;
+                @LocalLeftShootP1.performed += instance.OnLocalLeftShootP1;
+                @LocalLeftShootP1.canceled += instance.OnLocalLeftShootP1;
+                @LocalRightShootP2.started += instance.OnLocalRightShootP2;
+                @LocalRightShootP2.performed += instance.OnLocalRightShootP2;
+                @LocalRightShootP2.canceled += instance.OnLocalRightShootP2;
+                @LocalLeftShootP2.started += instance.OnLocalLeftShootP2;
+                @LocalLeftShootP2.performed += instance.OnLocalLeftShootP2;
+                @LocalLeftShootP2.canceled += instance.OnLocalLeftShootP2;
+                @LocalParryP1.started += instance.OnLocalParryP1;
+                @LocalParryP1.performed += instance.OnLocalParryP1;
+                @LocalParryP1.canceled += instance.OnLocalParryP1;
+                @LocalParryP2.started += instance.OnLocalParryP2;
+                @LocalParryP2.performed += instance.OnLocalParryP2;
+                @LocalParryP2.canceled += instance.OnLocalParryP2;
             }
         }
     }
@@ -710,12 +1165,56 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public StaticSceneActions @StaticScene => new StaticSceneActions(this);
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
+    private int m_CarlosSchemeIndex = -1;
+    public InputControlScheme CarlosScheme
+    {
+        get
+        {
+            if (m_CarlosSchemeIndex == -1) m_CarlosSchemeIndex = asset.FindControlSchemeIndex("Carlos");
+            return asset.controlSchemes[m_CarlosSchemeIndex];
+        }
+    }
+    private int m_DouglasSchemeIndex = -1;
+    public InputControlScheme DouglasScheme
+    {
+        get
+        {
+            if (m_DouglasSchemeIndex == -1) m_DouglasSchemeIndex = asset.FindControlSchemeIndex("Douglas");
+            return asset.controlSchemes[m_DouglasSchemeIndex];
+        }
+    }
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLeftArmShoot(InputAction.CallbackContext context);
         void OnRightArmShoot(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
+        void OnLocalMoveP1(InputAction.CallbackContext context);
+        void OnLocalMoveP2(InputAction.CallbackContext context);
+        void OnLocalRightShootP1(InputAction.CallbackContext context);
+        void OnLocalLeftShootP1(InputAction.CallbackContext context);
+        void OnLocalRightShootP2(InputAction.CallbackContext context);
+        void OnLocalLeftShootP2(InputAction.CallbackContext context);
+        void OnLocalParryP1(InputAction.CallbackContext context);
+        void OnLocalParryP2(InputAction.CallbackContext context);
     }
     public interface IMainMenuActions
     {

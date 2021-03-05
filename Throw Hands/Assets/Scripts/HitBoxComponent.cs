@@ -8,7 +8,7 @@ public class HitBoxComponent : Bolt.EntityBehaviour<ICustomPlayerState>
     public PlayerStatus player;
     public PlayerType myLimbs;
     public Rigidbody2D myRgbody;
-    public float impactForce = 30.0f;
+    public float impactForce = 10.0f;
     public GameObject playerObject;
 
     private void Start()

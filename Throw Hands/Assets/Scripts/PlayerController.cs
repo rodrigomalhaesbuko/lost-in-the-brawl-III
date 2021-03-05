@@ -15,6 +15,8 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     public Collider2D groundCollider;
     public Animator playerAnimator;
     public GameObject shoes;
+    private bool _isLocal = false;
+    private bool _controlsWorking = false;
     private bool parrying;
     private bool enableParry = true;
     private bool enableParryAnimation = true;
@@ -26,25 +28,191 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
 
     Vector2 move;
 
-    private void Awake()
+
+    private void Start()
     {
-        controls = new InputMaster();
-
-        controls.Gameplay.Move.performed += ctx =>
+        InputSystem.onDeviceChange += InputSystemOnDeviceChange;
+        PlayerInput player = gameObject.GetComponent<PlayerInput>();
+        player.enabled = false;
+        if (_isLocal)
         {
-            move = ctx.ReadValue<Vector2>();
-        };
+            player.enabled = true;
+            if (Gamepad.all.Count == 1)
+            {
+                if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas)
+                {
+                    player.SwitchCurrentControlScheme(player.defaultControlScheme, Gamepad.all[0], Keyboard.current);
+                }
+                else
+                {
+                    player.SwitchCurrentControlScheme(player.defaultControlScheme, Keyboard.current);
+                }
+            }
+            else if (Gamepad.all.Count == 2)
+            {
+                if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Carlous)
+                {
+                    player.SwitchCurrentControlScheme(player.defaultControlScheme, Gamepad.all[1], Keyboard.current);
+                }
+                else
+                {
+                    player.SwitchCurrentControlScheme(player.defaultControlScheme, Keyboard.current);
+                }
+            }
+            else
+            {
+                player.SwitchCurrentControlScheme(player.defaultControlScheme, Keyboard.current);
+            }
+        }
 
-        controls.Gameplay.Parry.started += ctx => {
+        
+    }
+
+    public void OnLocalMovP1(InputAction.CallbackContext ctx)
+    {
+        if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas && _isLocal)
+            move = ctx.ReadValue<Vector2>();
+    }
+
+    public void OnLocalMovP2(InputAction.CallbackContext ctx)
+    {
+        if (gameObject.GetComponent<PlayerStatus>().playerType != PlayerType.Douglas && _isLocal)
+            move = ctx.ReadValue<Vector2>();
+    }
+
+
+    public void LocalParryP1(InputAction.CallbackContext ctx)
+    {
+        if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas && _isLocal)
             if (enableParry)
             {
                 enableParry = false;
                 parrying = true;
                 //StartCoroutine(PrepareParry());   
             }
-        };
+    }
 
-        controls.Gameplay.Parry.canceled += ctx => { enableParry = true; };
+    public void LocalParryP2(InputAction.CallbackContext ctx)
+    {
+        if (gameObject.GetComponent<PlayerStatus>().playerType != PlayerType.Douglas && _isLocal)
+            if (enableParry)
+            {
+                enableParry = false;
+                parrying = true;
+                //StartCoroutine(PrepareParry());   
+            }
+    }
+
+    private void InputSystemOnDeviceChange(InputDevice device, InputDeviceChange deviceChange)
+    {
+        switch (deviceChange)
+        {
+            case InputDeviceChange.Added:
+                Debug.Log("A new device has been added! Device is: " + device.displayName);
+
+                //TODO: Change pairing from Keyboard to Xbox and dont allow/disable any other schemes
+
+
+                break;
+            case InputDeviceChange.Removed:
+                Debug.Log(device.displayName + "has been removed!");
+
+                break;
+            case InputDeviceChange.Disconnected:
+                Debug.Log(device.displayName + "has been disconnected!");
+
+                break;
+            case InputDeviceChange.Reconnected:
+                break;
+            case InputDeviceChange.Enabled:
+                break;
+            case InputDeviceChange.Disabled:
+                break;
+            case InputDeviceChange.UsageChanged:
+                break;
+            case InputDeviceChange.ConfigurationChanged:
+                break;
+            case InputDeviceChange.Destroyed:
+                break;
+        }
+    }
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+
+        _isLocal = gameObject.GetComponent<PlayerStatus>().GameController.GetComponent<GameController>().isLocal;
+        if (gameObject.GetComponent<PlayerStatus>().GameController.GetComponent<GameController>().isLocal)
+        {
+            if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas)
+            {
+                //controls.Gameplay.LocalMoveP1.ApplyBindingOverridesOnMatchingControls(Gamepad.all[0]);
+                //controls.Gameplay.LocalMoveP1.performed += ctx =>
+                //{
+                //    move = ctx.ReadValue<Vector2>();
+                //};
+
+                controls.Gameplay.LocalMoveP1.canceled += ctx =>
+                {
+                    move = Vector2.zero;
+                };
+
+                //controls.Gameplay.LocalParryP1.started += ctx => {
+                //    if (enableParry)
+                //    {
+                //        enableParry = false;
+                //        parrying = true;
+                //        //StartCoroutine(PrepareParry());   
+                //    }
+                //};
+
+                controls.Gameplay.LocalParryP1.canceled += ctx => { enableParry = true; };
+            }
+            else
+            {
+                //controls.Gameplay.LocalMoveP2.performed += ctx =>
+                //{
+                //    move = ctx.ReadValue<Vector2>();
+                //};
+
+                controls.Gameplay.LocalMoveP2.canceled += ctx =>
+                {
+                    move = Vector2.zero;
+                };
+
+                //controls.Gameplay.LocalParryP2.started += ctx =>
+                //{
+                //    if (enableParry)
+                //    {
+                //        enableParry = false;
+                //        parrying = true;
+                //        //StartCoroutine(PrepareParry());   
+                //    }
+                //};
+
+                controls.Gameplay.LocalParryP2.canceled += ctx => { enableParry = true; };
+            }
+        }
+        else
+        {
+            controls.Gameplay.Move.performed += ctx =>
+            {
+                move = ctx.ReadValue<Vector2>();
+            };
+
+            controls.Gameplay.Parry.started += ctx => {
+                if (enableParry)
+                {
+                    enableParry = false;
+                    parrying = true;
+                    //StartCoroutine(PrepareParry());   
+                }
+            };
+
+            controls.Gameplay.Parry.canceled += ctx => { enableParry = true; };
+        }
+
+
     }
 
     //void start para o bolt
@@ -232,11 +400,13 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         move = Vector2.zero;
         controls.Gameplay.Disable();
+        gameObject.GetComponent<PlayerInput>().enabled = false;
     }
 
     public void enableControls()
     {
         controls.Gameplay.Enable();
+        gameObject.GetComponent<PlayerInput>().enabled = true;
     }
 
     //private void OnEnable()

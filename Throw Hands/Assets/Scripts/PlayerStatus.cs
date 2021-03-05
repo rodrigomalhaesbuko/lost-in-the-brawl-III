@@ -9,7 +9,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     public int localHealth = 5;
     public GameObject lifeHost;
     public GameObject lifeClient;
-    public float hatForce = 4f;
+    public float hatForce = 8f;
 
     public GameObject GameController;
     public bool isFlipped = false;
@@ -122,16 +122,50 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void TakeDamage()
     {
-        if (BoltNetwork.IsClient)
+        if (GameController.GetComponent<GameController>().isLocal)
         {
-            Debug.Log("CLIENTE TOMOU DANO");
-            state.EnemyHealth = state.EnemyHealth - 1;
+            localHealth -= 1;
+            if(playerType == PlayerType.Douglas)
+            {
+                if (localHealth < 5 && localHealth >= 0)
+                {
+                    for (int i = localHealth; i < 5; i++)
+                        lifeHost.transform.GetChild(i).GetComponent<Image>().color = redColor;
+                }
+
+                if (localHealth <= 0)
+                {
+                    GameController.GetComponent<GameController>().endGame(false, false);
+                }
+            }
+            else
+            {
+                if (localHealth < 5 && localHealth >= 0)
+                {
+                    for (int i = localHealth; i < 5; i++)
+                        lifeClient.transform.GetChild(i).GetComponent<Image>().color = redColor;
+                }
+
+                if (localHealth <= 0)
+                {
+                    GameController.GetComponent<GameController>().endGame(true, false);
+                }
+            }
         }
         else
         {
-            Debug.Log("HOST TOMOU DANO");
-            state.Health = state.Health - 1;
+            if (BoltNetwork.IsClient)
+            {
+                Debug.Log("CLIENTE TOMOU DANO");
+                state.EnemyHealth = state.EnemyHealth - 1;
+            }
+            else
+            {
+                Debug.Log("HOST TOMOU DANO");
+                state.Health = state.Health - 1;
+            }
         }
+        
 
         audioControl.PlaySound(SFXType.Damage);
         Debug.Log("CLIENTE" + " " + "VIDA" + " " + state.EnemyHealth.ToString());

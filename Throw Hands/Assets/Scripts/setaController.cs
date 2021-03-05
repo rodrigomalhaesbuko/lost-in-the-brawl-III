@@ -4,10 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Bolt;
+using System;
+using Bolt.Matchmaking;
+using UdpKit;
 
 public class setaController : MonoBehaviour
 {
     InputMaster controls;
+    public bool isLocal;
+    public GameObject loading;
     int pos = 0;
 
     float posx = -790f;
@@ -18,14 +24,25 @@ public class setaController : MonoBehaviour
     const int dist = 50;
     float vel = dist * 1.5f;
 
+
+    [SerializeField] private GameObject AlertBox;
+    [SerializeField] private GameObject Disclaimer;
+    public LocalGameLoader localGameLoader;
+
     void Awake()
     {
         controls = new InputMaster();
+        controls.MainMenu.Enable();
         controls.MainMenu.Move.performed += ctx => Move( ctx.ReadValueAsButton() );
 
         controls.MainMenu.Select.performed += _ => go();
 
         //controls.MainMenu.Move.performed += _ => Debug.Log("Mexeu");
+    }
+
+    private void Start()
+    {
+        loading.SetActive(false);
     }
 
     private void Move(bool m)
@@ -45,12 +62,25 @@ public class setaController : MonoBehaviour
         
     }
 
+
     void go()
     {
         if(pos == 0)
         {
             //create/join room
-            SceneManager.LoadScene("SampleScene");
+           
+            if (isLocal)
+            {
+                loading.SetActive(true);
+                localGameLoader.LoadLocalGame();
+                controls.MainMenu.Disable();
+                StartCoroutine(CannotConectCreateRoom());
+            }
+            else
+            {
+                controls.MainMenu.Disable();
+                SceneManager.LoadScene("SampleScene");
+            }
         }
 
         if(pos == 1)
@@ -72,8 +102,32 @@ public class setaController : MonoBehaviour
             
 
         }
-        Debug.Log("bla");
 
+    }
+
+    IEnumerator CannotConectCreateRoom()
+    {
+
+        yield return new WaitForSecondsRealtime(100.0f);
+
+        BoltLauncher.Shutdown();
+        OpenAlertBox();
+
+    }
+
+
+    public void OpenAlertBox()
+    {
+        Disclaimer.GetComponent<Text>().text = "In order to play this game you need to be connect with the internet";
+        AlertBox.SetActive(true);
+    }
+
+    public void CloseAlertBox()
+    {
+        controls.MainMenu.Enable();
+        pos = 0;
+        AlertBox.SetActive(false);
+        loading.SetActive(false);
     }
 
     public void Update()
@@ -102,4 +156,6 @@ public class setaController : MonoBehaviour
     {
         controls.MainMenu.Disable();
     }
+
+
 }

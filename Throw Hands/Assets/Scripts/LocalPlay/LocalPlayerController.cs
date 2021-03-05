@@ -57,54 +57,55 @@ public class LocalPlayerController : MonoBehaviour
 
     public void Update()
     {
+        CheckInputs();
         if (move.x == 0.0f)
         {
-            Animator.SetBool("IsWalking", false);
+            playerAnimator.SetBool("IsWalking", false);
             //Debug.Log("Ta andando");
         }
         else
         {
-            state.Animator.SetBool("IsWalking", true);
+            playerAnimator.SetBool("IsWalking", true);
             //Debug.Log("Nao Ta andando");
         }
 
         if (IsGrounded())
         {
-            if (state.MoveY >= 0.5f)
+            if (move.y >= 0.5f)
             {
                 if (!alreadyJumped)
                 {
                     alreadyJumped = true;
-                    state.Animator.SetBool("Jump", true);
+                    playerAnimator.SetBool("Jump", true);
                     Jump();
                 }
             }
             else
             {
-                state.Animator.SetBool("Jump", false);
+                playerAnimator.SetBool("Jump", false);
                 alreadyJumped = false;
             }
         }
 
-        if (state.MoveY < -0.5f)
+        if (move.y < -0.5f)
         {
             isDucking = true;
-            state.Animator.SetBool("Duck", true);
+            playerAnimator.SetBool("Duck", true);
         }
         else
         {
             isDucking = false;
-            state.Animator.SetBool("Duck", false);
+            playerAnimator.SetBool("Duck", false);
         }
 
-        if (state.Parrying)
+        if (parrying)
         {
             if (enableParryAnimation)
             {
-                if ((state.LeftArmEnable || state.RightArmEnable) && !isDucking)
+                if (!isDucking)
                 {
                     enableParryAnimation = false;
-                    state.Animator.SetTrigger("ParryT");
+                    playerAnimator.SetTrigger("ParryT");
                     StartCoroutine(ParryAnimation());
                 }
                 else
@@ -159,9 +160,6 @@ public class LocalPlayerController : MonoBehaviour
         ////rb.apply move * speed * Time.deltaTim
         //transform.position += move * speed * BoltNetwork.FrameDeltaTime;
         Vector2 m = move * speed * BoltNetwork.FrameDeltaTime;
-        state.MoveX = move.x;
-        state.MoveY = move.y;
-        state.Parrying = parrying;
 
         //Debug.Log(BoltMatchmaking.CurrentSession.ConnectionsCurrent);
 
@@ -205,10 +203,10 @@ public class LocalPlayerController : MonoBehaviour
         controls.Gameplay.Enable();
     }
 
-    //private void OnEnable()
-    //{
-    //    controls.Gameplay.Enable();
-    //}
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
 
     private void OnDisable()
     {
