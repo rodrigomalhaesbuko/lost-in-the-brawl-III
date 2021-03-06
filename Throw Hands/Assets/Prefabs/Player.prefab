@@ -526,6 +526,7 @@ MonoBehaviour:
   GameController: {fileID: 0}
   isFlipped: 0
   playerType: 1
+  body: {fileID: 8143094533500932224}
 --- !u!114 &2334636835849245404
 MonoBehaviour:
   m_ObjectHideFlags: 0

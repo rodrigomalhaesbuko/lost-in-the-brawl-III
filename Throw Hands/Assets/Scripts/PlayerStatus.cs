@@ -15,6 +15,7 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
     public bool isFlipped = false;
 
     public PlayerType playerType;
+    public GameObject body;
 
     private Color greenColor;
     private Color redColor;
@@ -49,6 +50,8 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         if (state.Health <= 0)
         {
             //Debug.Log("GameOver Player 1 ganhou");
+            state.Animator.SetTrigger("Death");
+            body.SetActive(false);
             GameController.GetComponent<GameController>().endGame(false, false);
         }
 
@@ -65,6 +68,8 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
         if (state.EnemyHealth <= 0)
         {
             //Debug.Log("GameOver Player 2 ganhou");
+            state.Animator.SetTrigger("Death");
+            body.SetActive(false);
             GameController.GetComponent<GameController>().endGame(true, false);
         }
     }
@@ -135,6 +140,8 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
                 if (localHealth <= 0)
                 {
+                    gameObject.GetComponent<PlayerController>().playerAnimator.SetTrigger("Death");
+                    body.SetActive(false);
                     GameController.GetComponent<GameController>().endGame(false, false);
                 }
             }
@@ -148,6 +155,8 @@ public class PlayerStatus : Bolt.EntityBehaviour<ICustomPlayerState>
 
                 if (localHealth <= 0)
                 {
+                    gameObject.GetComponent<PlayerController>().playerAnimator.SetTrigger("Death");
+                    body.SetActive(false);
                     GameController.GetComponent<GameController>().endGame(true, false);
                 }
             }

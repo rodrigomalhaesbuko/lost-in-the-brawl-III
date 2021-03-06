@@ -539,6 +539,11 @@ public class GameController : GlobalEventListener
                     }
                 }
             }
+            else
+            {
+                youwin.SetActive(true);
+                audioControl.PlaySound(SFXType.Win);
+            }
             
         }
         

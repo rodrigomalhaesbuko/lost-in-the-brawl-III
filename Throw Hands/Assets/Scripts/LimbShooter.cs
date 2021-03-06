@@ -42,52 +42,61 @@ public class LimbShooter : Bolt.EntityBehaviour<ICustomPlayerState>
     public void LocalLeftShootP1(InputAction.CallbackContext ctx)
     {
         Debug.Log("LEFT BOLA P1");
-        if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas)
-            if (!rightArmShootTrigger)
-            {
-                leftArmShootTrigger = true;
-                ShootLeftArm();
-            }
-        leftArmShootTrigger = false;
+        if (ctx.performed)
+        {
+            if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas)
+                if (!rightArmShootTrigger)
+                {
+                    leftArmShootTrigger = true;
+                    ShootLeftArm();
+                }
+        }
     }
 
     public void LocalRightShootP1(InputAction.CallbackContext ctx)
     {
         Debug.Log("RIGHT BOLA P1");
-        if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas && _isLocal)
-            if (!leftArmShootTrigger)
-            {
-                rightArmShootTrigger = true;
-                ShootRightArm();
-            }
+        if (ctx.performed)
+        {
+            if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas && _isLocal)
+                if (!leftArmShootTrigger)
+                {
+                    rightArmShootTrigger = true;
+                    ShootRightArm();
+                }
+        }
 
-        rightArmShootTrigger = false;
     }
 
 
     public void LocalLeftShootP2(InputAction.CallbackContext ctx)
     {
         Debug.Log("LEFTARM BOLA P2");
-        if (gameObject.GetComponent<PlayerStatus>().playerType != PlayerType.Douglas && _isLocal)
-            if (!rightArmShootTrigger)
-            {
-                leftArmShootTrigger = true;
-                ShootLeftArm();
-            }
-        leftArmShootTrigger = false;
+        if (ctx.performed)
+        {
+            if (gameObject.GetComponent<PlayerStatus>().playerType != PlayerType.Douglas && _isLocal)
+                if (!rightArmShootTrigger)
+                {
+                    leftArmShootTrigger = true;
+                    ShootLeftArm();
+                }
+        }
+
     }
 
     public void LocalRightShootP2(InputAction.CallbackContext ctx)
     {
         Debug.Log("RIGHT BOLA P2");
-        if (gameObject.GetComponent<PlayerStatus>().playerType != PlayerType.Douglas && _isLocal)
-            if (!leftArmShootTrigger)
-            {
-                rightArmShootTrigger = true;
-                ShootRightArm();
-            }
+        if (ctx.performed)
+        {
+            if (gameObject.GetComponent<PlayerStatus>().playerType != PlayerType.Douglas && _isLocal)
+                if (!leftArmShootTrigger)
+                {
+                    rightArmShootTrigger = true;
+                    ShootRightArm();
+                }
+        }
 
-        rightArmShootTrigger = false;
     }
 
     private void Awake()

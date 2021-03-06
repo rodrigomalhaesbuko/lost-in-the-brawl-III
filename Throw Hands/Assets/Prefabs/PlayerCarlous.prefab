@@ -1651,6 +1651,7 @@ MonoBehaviour:
   GameController: {fileID: 0}
   isFlipped: 0
   playerType: 0
+  body: {fileID: 9161975737316636865}
 --- !u!114 &8807846235583776794
 MonoBehaviour:
   m_ObjectHideFlags: 0

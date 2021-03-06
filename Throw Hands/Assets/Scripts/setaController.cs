@@ -12,8 +12,8 @@ using UdpKit;
 public class setaController : MonoBehaviour
 {
     InputMaster controls;
-    public bool isLocal;
     public GameObject loading;
+    public bool playmodes = false; 
     int pos = 0;
 
     float posx = -790f;
@@ -33,9 +33,19 @@ public class setaController : MonoBehaviour
     {
         controls = new InputMaster();
         controls.MainMenu.Enable();
-        controls.MainMenu.Move.performed += ctx => Move( ctx.ReadValueAsButton() );
+        if (playmodes)
+        {
+            controls.MainMenu.Move.performed += ctx => MovePlayModes(ctx.ReadValueAsButton());
 
-        controls.MainMenu.Select.performed += _ => go();
+            controls.MainMenu.Select.performed += _ => goPlayModes();
+        }
+        else
+        {
+            controls.MainMenu.Move.performed += ctx => Move(ctx.ReadValueAsButton());
+
+            controls.MainMenu.Select.performed += _ => go();
+        }
+
 
         //controls.MainMenu.Move.performed += _ => Debug.Log("Mexeu");
     }
@@ -62,25 +72,13 @@ public class setaController : MonoBehaviour
         
     }
 
-
     void go()
     {
         if(pos == 0)
         {
-            //create/join room
-           
-            if (isLocal)
-            {
-                loading.SetActive(true);
-                localGameLoader.LoadLocalGame();
-                controls.MainMenu.Disable();
-                StartCoroutine(CannotConectCreateRoom());
-            }
-            else
-            {
-                controls.MainMenu.Disable();
-                SceneManager.LoadScene("SampleScene");
-            }
+            //Go to Playmodes
+            controls.MainMenu.Disable();
+            SceneManager.LoadScene("PlayModes");
         }
 
         if(pos == 1)
@@ -101,6 +99,49 @@ public class setaController : MonoBehaviour
             Application.Quit();
             
 
+        }
+
+    }
+
+    private void MovePlayModes(bool m)
+    {
+        if (m)
+            pos--;
+        else
+            pos++;
+
+        if (pos > 2)
+            pos = 2;
+        else if (pos < 0)
+            pos = 0;
+
+
+        posy = 80 - 155 * pos;
+
+    }
+
+    void goPlayModes()
+    {
+        if (pos == 0)
+        {
+            //create/join room
+
+            loading.SetActive(true);
+            localGameLoader.LoadLocalGame();
+            controls.MainMenu.Disable();
+            StartCoroutine(CannotConectCreateRoom());  
+        }
+
+        if (pos == 1)
+        {
+            controls.MainMenu.Disable();
+            SceneManager.LoadScene("SampleScene");
+        }
+
+        if (pos == 2)
+        {
+            //initial screen 
+            SceneManager.LoadScene("initialScreen");
         }
 
     }
