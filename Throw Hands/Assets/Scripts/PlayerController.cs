@@ -50,14 +50,16 @@ public class PlayerController : Bolt.EntityBehaviour<ICustomPlayerState>
             }
             else if (Gamepad.all.Count == 2)
             {
+                if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Douglas)
+                {
+                    player.SwitchCurrentControlScheme(player.defaultControlScheme, Gamepad.all[0], Keyboard.current);
+                }
+
                 if (gameObject.GetComponent<PlayerStatus>().playerType == PlayerType.Carlous)
                 {
                     player.SwitchCurrentControlScheme(player.defaultControlScheme, Gamepad.all[1], Keyboard.current);
                 }
-                else
-                {
-                    player.SwitchCurrentControlScheme(player.defaultControlScheme, Keyboard.current);
-                }
+
             }
             else
             {
