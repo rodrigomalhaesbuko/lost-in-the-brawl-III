@@ -30,7 +30,7 @@ public class GameController : GlobalEventListener
 
     private bool gameStarted = false;
 
-    public float battleOffset = 5f;
+    public float battleOffset = 1f;
 
     public AudioSource bgm;
 
@@ -111,7 +111,7 @@ public class GameController : GlobalEventListener
         playerPrefab2.GetComponent<PlayerStatus>().lifeClient = lifeClient;
         playerPrefab2.GetComponent<PlayerStatus>().GameController = gameObject;
         playerPrefab2.GetComponent<PlayerStatus>().playerType = PlayerType.Carlous;
-
+        battleOffset = 4f;
         if (isLocal)
         {
 

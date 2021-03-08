@@ -656,8 +656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b7feeb994837a4f91f444b41c483b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocal: 1
   loading: {fileID: 753188622}
+  playmodes: 0
   AlertBox: {fileID: 416558573}
   Disclaimer: {fileID: 1926028680}
   localGameLoader: {fileID: 1331561382}
